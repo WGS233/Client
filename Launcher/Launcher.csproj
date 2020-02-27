@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="zlib.net">
       <HintPath>..\Shared\References\zlib.net.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>

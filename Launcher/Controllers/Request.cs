@@ -34,19 +34,19 @@ namespace Launcher
             string result = "";
 
             // get response data
-            using (MemoryStream ms = new MemoryStream())
+            using (Stream stream = response.GetResponseStream())
             {
-                using (ZOutputStream zip = new ZOutputStream(ms, zlibConst.Z_BEST_COMPRESSION))
+                using (MemoryStream ms = new MemoryStream())
                 {
-                    Stream responseStream = response.GetResponseStream();
-
-                    responseStream.CopyTo(zip);
-                    zip.CopyTo(ms);
-                    result = Encoding.UTF8.GetString(ms.ToArray());
+                    using (ZOutputStream zip = new ZOutputStream(ms, zlibConst.Z_BEST_COMPRESSION))
+                    {
+                        stream.CopyTo(zip);
+                        zip.CopyTo(ms);
+                        result = Encoding.UTF8.GetString(ms.ToArray());
+                    }
                 }
             }
-
-            response.Close();
+            
             return result;
         }
     }

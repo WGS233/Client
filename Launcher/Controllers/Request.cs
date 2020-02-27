@@ -24,10 +24,10 @@ namespace Launcher
             request.ContentLength = bytes.Length;
 
             // send request
-            Stream dataStream = request.GetRequestStream();
- 
-            dataStream.Write(bytes, 0, bytes.Length); 
-            dataStream.Close();
+            using (Stream stream = request.GetRequestStream())
+            {
+                stream.Write(bytes, 0, bytes.Length);
+            }
 
             // receive response
             WebResponse response = request.GetResponse();

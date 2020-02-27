@@ -27,6 +27,7 @@ namespace Launcher
                 accountId = Request.Send("/launcher/profile/login", "{ \"token\": " + Json.Serialize(token) + " }");
             }
             catch
+
             {
                 return -2;
             }
@@ -37,6 +38,7 @@ namespace Launcher
                 return -3;
             }
 
+            // detect if executable is found
             // set backend url
             Globals.ClientConfig.BackendUrl = Globals.LauncherConfig.BackendUrl;
             Json.Save<ClientConfig>(Globals.ClientConfigFile, Globals.ClientConfig);

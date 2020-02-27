@@ -24,30 +24,27 @@ namespace Launcher
             request.ContentLength = bytes.Length;
 
             // send request
-            using (Stream stream = request.GetRequestStream())
-            {
-                stream.Write(bytes, 0, bytes.Length);
-            }
+            Stream requestStream = request.GetRequestStream();
+            requestStream.Write(bytes, 0, bytes.Length);
+            requestStream.Close();
 
             // receive response
             WebResponse response = request.GetResponse();
-            string result = "";
 
             // get response data
-            using (Stream stream = response.GetResponseStream())
-            {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    using (ZOutputStream zip = new ZOutputStream(ms, zlibConst.Z_BEST_COMPRESSION))
-                    {
-                        stream.CopyTo(zip);
-                        zip.CopyTo(ms);
-                        result = Encoding.UTF8.GetString(ms.ToArray());
-                    }
-                }
-            }
-            
-            return result;
+            string output = null;
+            Stream responseStream = response.GetResponseStream();
+            MemoryStream ms = new MemoryStream();
+            ZOutputStream zip = new ZOutputStream(ms, zlibConst.Z_BEST_COMPRESSION);
+
+            responseStream.CopyTo(zip);
+            zip.CopyTo(ms);
+            output = Encoding.UTF8.GetString(ms.ToArray());
+
+            zip.Close();
+            ms.Close();
+            responseStream.Close();
+            return output;
         }
     }
 }

@@ -78,15 +78,19 @@ namespace Launcher
                     break;
 
                 case -1:
-                    MessageBox.Show("The launcher is not running from the Escape From Tarkov directory");
+                    MessageBox.Show("Cannot establish a connection to the server");
                     return;
 
                 case -2:
-                    MessageBox.Show("Launcher couldn't connect to the server");
+                    MessageBox.Show("Failed to receive data");
                     return;
 
                 case -3:
                     MessageBox.Show("Wrong email and/or password");
+                    return;
+
+                case -4:
+                    MessageBox.Show("The launcher is not running from the game directory");
                     return;
 
                 default:

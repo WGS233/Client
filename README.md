@@ -6,12 +6,12 @@ All client-related projects (Launcher, EmuLib, Assembly-CSharp)
 - Visual Studio 2017
 - .NET Framework 4.6.1
 
-# Projects:
+## Projects:
 - EmuLib: hooking additional functionality into Escape From Tarkov
 - Launcher: a lightweight game launcher for proper starting of Escape From Tarkov with EmuTarkov
 
 ## Setup
-The repository is are self-contained; no setup is required.
+The repository is self-contained; no setup is required.
 
 ## Build
 1. VS2017 -> Build -> Rebuild project
@@ -21,3 +21,4 @@ The repository is are self-contained; no setup is required.
 ## Remarks
 - Some referrences are shared across projects. These are located in `Shared/References'.
 - EmuLib only works with the obfuscated assembly-csharp provided in `EmuLib/References` as it requires patches and a specialized obfuscation regex for proper hooking.
+- Launcher depends on EmuLib for HttpUtils.

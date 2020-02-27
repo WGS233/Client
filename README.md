@@ -11,7 +11,7 @@ All client-related projects (Launcher, EmuLib, Assembly-CSharp)
 - Launcher: a lightweight game launcher for proper starting of Escape From Tarkov with EmuTarkov
 
 ## Setup
-The repository is are self-contained; no setup is required.
+The repository is self-contained; no setup is required.
 
 ## Build
 1. VS2017 -> Build -> Rebuild project
@@ -21,3 +21,4 @@ The repository is are self-contained; no setup is required.
 ## Remarks
 - Some referrences are shared across projects. These are located in `Shared/References'.
 - EmuLib only works with a cleaned assembly-csharp.dll with edits as the project relies on the obfuscated DLL for proper hooking.
+- Launcher depends on EmuLib for HttpUtils.

@@ -19,6 +19,6 @@ The repository is self-contained; no setup is required.
 3. Copy `Launcher/bin/<target>/EmuTarkov-Launcher.exe` into `<gamedir>`
 
 ## Remarks
-- Some referrences are shared across projects. These are located in `Shared/References'.
+- Some referrences are shared across projects. These are located in `Shared/References`.
 - EmuLib only works with a cleaned assembly-csharp.dll with edits as the project relies on the obfuscated DLL for proper hooking.
 - Launcher depends on EmuLib for HttpUtils.

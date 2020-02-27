@@ -25,7 +25,7 @@ namespace Launcher
                 return -1;
             }
 
-            if (accountId == null)
+            if (accountId == null || accountId == "")
             {
                 return -2;
             }

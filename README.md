@@ -6,7 +6,7 @@ All client-related projects (Launcher, EmuLib, Assembly-CSharp)
 - Visual Studio 2017
 - .NET Framework 4.6.1
 
-# Projects:
+## Projects:
 - EmuLib: hooking additional functionality into Escape From Tarkov
 - Launcher: a lightweight game launcher for proper starting of Escape From Tarkov with EmuTarkov
 

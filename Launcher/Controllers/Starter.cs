@@ -10,12 +10,6 @@ namespace Launcher
     {
         public static int StartGame()
         {
-            // detect if executable is found
-            if (!System.IO.File.Exists(Globals.ClientExecutable))
-            {
-                return -1;
-            }
-
             // generate token
             string token = GenerateToken(Globals.LauncherConfig.Email, Globals.LauncherConfig.Password);
 
@@ -27,11 +21,15 @@ namespace Launcher
                 accountId = Request.Send("/launcher/profile/login", "{ \"token\": " + Json.Serialize(token) + " }");
             }
             catch
+            {
+                return -1;
+            }
 
+            if (accountId == null)
             {
                 return -2;
             }
-            
+
             // account is not found
             if (accountId == "0")
             {
@@ -39,6 +37,11 @@ namespace Launcher
             }
 
             // detect if executable is found
+            if (!System.IO.File.Exists(Globals.ClientExecutable))
+            {
+                return -4;
+            }
+
             // set backend url
             Globals.ClientConfig.BackendUrl = Globals.LauncherConfig.BackendUrl;
             Json.Save<ClientConfig>(Globals.ClientConfigFile, Globals.ClientConfig);

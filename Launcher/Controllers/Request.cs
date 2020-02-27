@@ -17,9 +17,9 @@ namespace Launcher
 
             // create request  
             WebRequest request = WebRequest.Create(Globals.LauncherConfig.BackendUrl + url);
-            byte[] bytes = SimpleZlib.CompressToBytes(data, 9);
+            byte[] bytes = SimpleZlib.CompressToBytes(data, zlibConst.Z_BEST_COMPRESSION);
 
-            request.Method = "PUT";
+            request.Method = "POST";
             request.ContentType = "application/json";
             request.ContentLength = bytes.Length;
 
@@ -36,7 +36,7 @@ namespace Launcher
             // get response data
             using (MemoryStream ms = new MemoryStream())
             {
-                using (ZOutputStream zip = new ZOutputStream(ms))
+                using (ZOutputStream zip = new ZOutputStream(ms, zlibConst.Z_BEST_COMPRESSION))
                 {
                     Stream responseStream = response.GetResponseStream();
 

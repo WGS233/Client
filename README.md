@@ -20,4 +20,4 @@ The repository is are self-contained; no setup is required.
 
 ## Remarks
 - Some referrences are shared across projects. These are located in `Shared/References'.
-- EmuLib only works with a cleaned assembly-csharp.dll with edits as the project relies on the obfuscated DLL for proper hooking.
+- EmuLib only works with the obfuscated assembly-csharp provided in `EmuLib/References` as it requires patches and a specialized obfuscation regex for proper hooking.

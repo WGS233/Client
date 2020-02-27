@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Text;
 using ComponentAce.Compression.Libs.zlib;
@@ -23,28 +24,31 @@ namespace Launcher
             request.ContentType = "application/json";
             request.ContentLength = bytes.Length;
 
-            // send request
-            Stream requestStream = request.GetRequestStream();
-            requestStream.Write(bytes, 0, bytes.Length);
-            requestStream.Close();
+			// send request
+			using (Stream requestStream = request.GetRequestStream())
+			{
+				requestStream.Write(bytes, 0, bytes.Length);
+			}
 
             // receive response
             WebResponse response = request.GetResponse();
 
             // get response data
-            string output = null;
-            Stream responseStream = response.GetResponseStream();
-            MemoryStream ms = new MemoryStream();
-            ZOutputStream zip = new ZOutputStream(ms, zlibConst.Z_BEST_COMPRESSION);
-
-            responseStream.CopyTo(zip);
-            zip.CopyTo(ms);
-            output = Encoding.UTF8.GetString(ms.ToArray());
-
-            zip.Close();
-            ms.Close();
-            responseStream.Close();
-            return output;
+			using (Stream responseStream = response.GetResponseStream())
+			{
+				using (MemoryStream input = new MemoryStream())
+				{
+					using (MemoryStream ms = new MemoryStream())
+					{
+						using (DeflateStream zip = new DeflateStream(input, CompressionMode.Decompress))
+						{
+							responseStream.CopyTo(input);
+							zip.CopyTo(ms);
+							return Encoding.UTF8.GetString(ms.ToArray());
+						}
+					}
+				}
+			}
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Launcher
             ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
             // create request  
-            WebRequest request = WebRequest.Create(Globals.LauncherConfig.BackendUrl + url);
+            WebRequest request = WebRequest.Create(new Uri(Globals.LauncherConfig.BackendUrl + url));
             byte[] bytes = SimpleZlib.CompressToBytes(data, zlibConst.Z_BEST_COMPRESSION);
 
             request.Method = "POST";
@@ -42,7 +42,7 @@ namespace Launcher
 
                     responseStream.CopyTo(zip);
                     zip.CopyTo(ms);
-                    result = System.Text.Encoding.UTF8.GetString(ms.ToArray());
+                    result = Encoding.UTF8.GetString(ms.ToArray());
                 }
             }
 

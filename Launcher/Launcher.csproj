@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Monitor.cs" />
+    <Compile Include="Controllers\Request.cs" />
     <Compile Include="Controllers\Starter.cs" />
     <Compile Include="Models\ClientConfig.cs" />
     <Compile Include="Controllers\Globals.cs" />
@@ -101,13 +102,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\EmuLib\EmuLib.csproj">
-      <Project>{ef53584c-bfc2-42d6-9d81-97745f480438}</Project>
-      <Name>EmuLib</Name>
-      <Private>False</Private>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

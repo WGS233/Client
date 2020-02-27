@@ -2,8 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using ComponentAce.Compression.Libs.zlib;
-using EmuLib.Utils.HTTP;
+
 
 namespace Launcher
 {
@@ -23,24 +22,15 @@ namespace Launcher
             // get profile ID
             string accountId = "0";
 
-            try
-            {
-                new HttpUtils.Create(null, Globals.LauncherConfig.BackendUrl).Post("/launcher/profile/login", token, true, (data) => {
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        using (ZOutputStream zip = new ZOutputStream(ms))
-                        {
-                            zip.CopyTo(ms);
-                            accountId = System.Text.Encoding.UTF8.GetString(ms.ToArray());
-                        }
-                    }
-                });
-            }
-            catch
-            {
+            //try
+            //{
+                accountId = Request.Send("/launcher/profile/login", token);
+            //}
+            //catch
+            //{
                 return -2;
-            }
-
+            //}
+            
             // account is not found
             if (accountId == "0")
             {

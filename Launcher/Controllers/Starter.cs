@@ -22,14 +22,14 @@ namespace Launcher
             // get profile ID
             string accountId = "0";
 
-            //try
-            //{
-                accountId = Request.Send("/launcher/profile/login", token);
-            //}
-            //catch
-            //{
+            try
+            {
+                accountId = Request.Send("/launcher/profile/login", "{ \"token\": " + Json.Serialize(token) + " }");
+            }
+            catch
+            {
                 return -2;
-            //}
+            }
             
             // account is not found
             if (accountId == "0")

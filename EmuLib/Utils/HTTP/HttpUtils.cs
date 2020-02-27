@@ -24,12 +24,6 @@ namespace EmuLib.Utils.HTTP
                 _host = ConfigUtils.GetConfig()?.BackendUrl;
             }
 
-            public Create(string phpSession = null, string backendUrl = null)
-            {
-                _phpSession = phpSession;
-                _host = backendUrl;
-            }
-
             public void Get(string url, Action<byte[]> onFinish = null)
             {
                 var webRequest = (HttpWebRequest) WebRequest.Create(_host + url);

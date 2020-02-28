@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.IO.Compression;
 using System.Net;
-using System.Text;
 using ComponentAce.Compression.Libs.zlib;
 
 namespace Launcher
@@ -36,19 +34,12 @@ namespace Launcher
             // get response data
 			using (Stream responseStream = response.GetResponseStream())
 			{
-				using (MemoryStream input = new MemoryStream())
-				{
-					using (MemoryStream ms = new MemoryStream())
-					{
-						using (DeflateStream zip = new DeflateStream(input, CompressionMode.Decompress))
-						{
-							responseStream.CopyTo(input);
-							zip.CopyTo(ms);
-							return Encoding.UTF8.GetString(ms.ToArray());
-						}
-					}
-				}
-			}
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    responseStream.CopyTo(ms);
+                    return SimpleZlib.Decompress(ms.ToArray(), null);
+                }
+            }
         }
     }
 }

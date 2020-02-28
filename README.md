@@ -23,4 +23,3 @@ The repository is self-contained; no setup is required.
 ## Remarks
 - Some referrences are shared across projects. These are located in `Shared/References`.
 - EmuLib only works with the obfuscated assembly-csharp provided in `EmuLib/References` as it requires patches and a specialized obfuscation regex for proper hooking.
-- Launcher depends on EmuLib for HttpUtils.

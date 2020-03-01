@@ -17,8 +17,9 @@ The repository is self-contained; no setup is required.
 1. Open visual Studio 2017
 2. Toolbar -> File -> Project/Solution -> Open Client.sln
 3. Toolbar -> Build -> Rebuild Solution
-4. Copy `EmuLib/bin/<target>/emulib.dll` into `<gamedir>/EscapeFromTarkov_Data/Managed/`
-5. Copy `Launcher/bin/<target>/EmuTarkov-Launcher.exe` into `<gamedir>`
+4. Copy `EmuLib/bin/<target>/EmuLib.dll` into `<gamedir>/EscapeFromTarkov_Data/Managed/`
+5. Copy `EmuLib/bin/<target>/Assembly-CSharp.dll` into `<gamedir>/EscapeFromTarkov_Data/Managed/`
+6. Copy `Launcher/bin/<target>/EmuTarkov-Launcher.exe` into `<gamedir>`
 
 ## Remarks
 - Some referrences are shared across projects. These are located in `Shared/References`.

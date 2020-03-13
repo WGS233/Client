@@ -5,7 +5,7 @@ using EmuLib.Utils.Camera;
 using EmuLib.Utils.Reflection;
 using UnityEngine;
 using EmuLib.MaociDebugger;
-using GClass_Config = GClass261;
+using GClass_Config = GClass266;
 
 namespace EmuLib
 {

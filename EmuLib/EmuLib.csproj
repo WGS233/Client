@@ -35,7 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Assembly-CSharp">
+    <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Comfort">
@@ -107,6 +108,9 @@
   <ItemGroup>
     <Folder Include="MaociDebugger\enum\" />
     <Folder Include="MaociDebugger\functions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assembly-CSharp.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

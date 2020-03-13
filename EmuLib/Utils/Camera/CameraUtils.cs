@@ -7,12 +7,12 @@ using EFT.InventoryLogic;
 using UnityEngine;
 using static EmuLib.Utils.Reflection.PrivateValueAccessor;
 using Object = UnityEngine.Object;
-using HealthControllerInterface = GInterface134;
-using HealthEffectInterface = GInterface106;
-using BodyPartStruct = GStruct184;
-using PlayerStatesInterface = GInterface106;
-using StimulatorBuffEventInterface = GInterface105;
-using HealthEffects = GClass1305;
+using HealthControllerInterface = GInterface139;
+using HealthEffectInterface = GInterface107;
+using BodyPartStruct = GStruct185;
+using PlayerStatesInterface = GInterface107;
+using StimulatorBuffEventInterface = GInterface106;
+using HealthEffects = GClass1302;
 
 namespace EmuLib.Utils.Camera
 {
@@ -154,6 +154,21 @@ namespace EmuLib.Utils.Camera
         {
         }
 
+        public void SetEncumbered(bool encumbered)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetOverEncumbered(bool encumbered)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddFatigue()
+        {
+            throw new NotImplementedException();
+        }
+
         public bool IsAlive
         {
             get { return true; }
@@ -192,6 +207,10 @@ namespace EmuLib.Utils.Camera
         {
             get { return new HealthEffects(); }
         }
+
+        public float FallSafeHeight { set => throw new NotImplementedException(); }
+
+        public int UpdateTime => throw new NotImplementedException();
 
         public event Action<HealthEffectInterface> EffectAddedEvent;
         public event Action<HealthEffectInterface> EffectStartedEvent;

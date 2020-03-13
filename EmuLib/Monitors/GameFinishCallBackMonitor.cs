@@ -29,7 +29,7 @@ namespace EmuLib.Monitors
 
         private static void OnGameFinish(Result<ExitStatus, TimeSpan, GClass_GameFinish> result)
         {
-            GInterface22 backend = ClientAppUtils.GetBackendSession();
+            GInterface23 backend = ClientAppUtils.GetBackendSession();
             MainApplication mainApplication = MainAppUtils.GetMainApp();
             if (backend?.Profile == null || mainApplication == null)
             {

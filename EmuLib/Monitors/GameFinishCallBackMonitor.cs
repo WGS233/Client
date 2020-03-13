@@ -6,6 +6,7 @@ using EmuLib.Utils.Profile;
 using EmuLib.Utils.Reflection;
 using UnityEngine;
 using GClass_GameFinish = GClass1221;
+using SessionInterface = GInterface23;
 
 namespace EmuLib.Monitors
 {
@@ -29,7 +30,7 @@ namespace EmuLib.Monitors
 
         private static void OnGameFinish(Result<ExitStatus, TimeSpan, GClass_GameFinish> result)
         {
-            GInterface22 backend = ClientAppUtils.GetBackendSession();
+            SessionInterface backend = ClientAppUtils.GetBackendSession();
             MainApplication mainApplication = MainAppUtils.GetMainApp();
             if (backend?.Profile == null || mainApplication == null)
             {

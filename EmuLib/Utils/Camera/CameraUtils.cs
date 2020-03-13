@@ -201,7 +201,29 @@ namespace EmuLib.Utils.Camera
             get { return float.MaxValue; }
         }
 
-        public EFT.Player Player => EmuInstance.Player;
+		public void SetEncumbered(bool encumbered)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void SetOverEncumbered(bool encumbered)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void AddFatigue()
+		{
+			throw new NotImplementedException();
+		}
+
+		public float FallSafeHeight
+		{
+			set => throw new NotImplementedException();
+		}
+
+		public int UpdateTime => throw new NotImplementedException();
+
+		public EFT.Player Player => EmuInstance.Player;
 
         public HealthEffects BodyPartEffects
         {

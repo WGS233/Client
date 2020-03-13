@@ -96,7 +96,6 @@
     <Compile Include="Utils\HTTP\DumpUtils.cs" />
     <Compile Include="Utils\HTTP\HttpUtils.cs" />
     <Compile Include="Utils\Player\HealthStateUtils.cs" />
-    <Compile Include="Utils\Player\PlayerUtils.cs" />
     <Compile Include="Utils\Profile\ProfileSaveUtil.cs" />
     <Compile Include="Utils\Reflection\ClientAppUtils.cs" />
     <Compile Include="Utils\Reflection\ConfigUtils.cs" />

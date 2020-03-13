@@ -1,6 +1,7 @@
 ﻿using Comfort.Common;
 using EFT;
 using UnityEngine;
+using SessionInterface = GInterface23;
 
 namespace EmuLib.Utils.Reflection
 {
@@ -15,9 +16,9 @@ namespace EmuLib.Utils.Reflection
             return null;
         }
 
-        public static GInterface22 GetBackendSession()
+        public static SessionInterface GetBackendSession()
         {
-            GInterface22 session = GetClientApp()?.GetClientBackEndSession();
+			SessionInterface session = GetClientApp()?.GetClientBackEndSession();
             if (session != null) return session;
 
             Debug.LogError("ClientAppUtils GetBackendSession() method. BackEndSession is null");
@@ -26,7 +27,7 @@ namespace EmuLib.Utils.Reflection
 
         public static string GetSessionId()
         {
-            GInterface22 backend = GetBackendSession();
+			SessionInterface backend = GetBackendSession();
             return backend?.Profile == null ? "-1" : backend.GetPhpSessionId();
         }
     }

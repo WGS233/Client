@@ -5,7 +5,7 @@ using EFT;
 using EmuLib.Utils.Profile;
 using EmuLib.Utils.Reflection;
 using UnityEngine;
-using GClass_GameFinish = GClass1224;
+using GClass_GameFinish = GClass1221;
 
 namespace EmuLib.Monitors
 {

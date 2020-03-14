@@ -13,6 +13,7 @@ using BodyPartStruct = GStruct185;
 using PlayerStatesInterface = GInterface107;
 using StimulatorBuffEventInterface = GInterface106;
 using HealthEffects = GClass1302;
+using 
 
 namespace EmuLib.Utils.Camera
 {
@@ -156,17 +157,18 @@ namespace EmuLib.Utils.Camera
 
         public void SetEncumbered(bool encumbered)
         {
-            throw new NotImplementedException();
+        
         }
 
         public void SetOverEncumbered(bool encumbered)
         {
-            throw new NotImplementedException();
+         
         }
 
         public void AddFatigue()
         {
-            throw new NotImplementedException();
+
+            //Does nothing???
         }
 
         public bool IsAlive
@@ -201,38 +203,29 @@ namespace EmuLib.Utils.Camera
             get { return float.MaxValue; }
         }
 
-		public void SetEncumbered(bool encumbered)
-		{
-			throw new NotImplementedException();
-		}
+        float_5 = GClass1262.GClass788_0.Falling.SafeHeight;
+        public void FallSafeHeight(float value)
+        {
+            set
 
-		public void SetOverEncumbered(bool encumbered)
-		{
-			throw new NotImplementedException();
-		}
+        {
+                this.float_5 = value;
+            }
+        }
 
-		public void AddFatigue()
-		{
-			throw new NotImplementedException();
-		}
+        public int UpdateTime
+        {
+            get
+                { return int.MaxValue; }
+            }
 
-		public float FallSafeHeight
-		{
-			set => throw new NotImplementedException();
-		}
 
-		public int UpdateTime => throw new NotImplementedException();
-
-		public EFT.Player Player => EmuInstance.Player;
+        public EFT.Player Player => EmuInstance.Player;
 
         public HealthEffects BodyPartEffects
         {
             get { return new HealthEffects(); }
         }
-
-        public float FallSafeHeight { set => throw new NotImplementedException(); }
-
-        public int UpdateTime => throw new NotImplementedException();
 
         public event Action<HealthEffectInterface> EffectAddedEvent;
         public event Action<HealthEffectInterface> EffectStartedEvent;

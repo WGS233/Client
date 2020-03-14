@@ -13,7 +13,6 @@ using BodyPartStruct = GStruct185;
 using PlayerStatesInterface = GInterface107;
 using StimulatorBuffEventInterface = GInterface106;
 using HealthEffects = GClass1302;
-using 
 
 namespace EmuLib.Utils.Camera
 {
@@ -155,14 +154,13 @@ namespace EmuLib.Utils.Camera
         {
         }
 
-        public void SetEncumbered(bool encumbered)
-        {
-        
-        }
-
         public void SetOverEncumbered(bool encumbered)
         {
          
+        }
+        public void SetEncumbered(bool encumbered)
+        {
+
         }
 
         public void AddFatigue()
@@ -182,6 +180,8 @@ namespace EmuLib.Utils.Camera
         {
             get { return new BodyPartStruct() {Current = float.MaxValue, Maximum = float.MaxValue}; }
         }
+        //Don't really know what to do with FallSafeHeight so meh hopefully this works
+        public float FallSafeHeight { get; set; }
 
         public float HealthRate
         {
@@ -201,16 +201,6 @@ namespace EmuLib.Utils.Camera
         public float DamageCoeff
         {
             get { return float.MaxValue; }
-        }
-
-        float_5 = GClass1262.GClass788_0.Falling.SafeHeight;
-        public void FallSafeHeight(float value)
-        {
-            set
-
-        {
-                this.float_5 = value;
-            }
         }
 
         public int UpdateTime

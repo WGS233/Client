@@ -12,7 +12,7 @@ namespace EmuLib.MaociDebugger
 {
     class MaociDebuggerMain : MonoBehaviour
     {
-        private static bool MaociDebugger = false;
+        private static bool MaociDebugger = true;
         private static GameWorld mGameWorld = null;
         private static insPlayers instance_Players = null;
         private static List<Player>.Enumerator tP_list;
@@ -24,7 +24,7 @@ namespace EmuLib.MaociDebugger
         
         void Awake()
         {
-            MaociDebugger = File.Exists(Path.GetPathRoot(Environment.SystemDirectory) + "maoci");
+            //MaociDebugger = true; until we can fix it
             if (!MaociDebugger) return;
             instance_Players = gameObject.AddComponent<insPlayers>(); // all players things instance
         }

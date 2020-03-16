@@ -143,12 +143,12 @@ namespace EmuLib.Utils.Camera
 			return null;
 		}
 
-		public void ApplyItem(Item item, EBodyPart bodyPart, float? amount = null) {}
-		public void CancelApplyingItem() {}
-		public void ManualUpdate(float delatTime) {}
-		public void PropagateAllEffects() {}
-		public void SetOverEncumbered(bool encumbered) {}
-		public void SetEncumbered(bool encumbered) {}
+		public void ApplyItem(Item item, EBodyPart bodyPart, float? amount = null) { }
+		public void CancelApplyingItem() { }
+		public void ManualUpdate(float delatTime) { }
+		public void PropagateAllEffects() { }
+		public void SetOverEncumbered(bool encumbered) { }
+		public void SetEncumbered(bool encumbered) { }
 
 		public void AddFatigue()
 		{
@@ -192,10 +192,10 @@ namespace EmuLib.Utils.Camera
 
 		public int UpdateTime
 		{
-			get { return int.MaxValue; }
+			get { return GClass768.UtcNowUnixInt; }
 		}
 
-        public EFT.Player Player => EmuInstance.Player;
+		public EFT.Player Player => EmuInstance.Player;
 
 		public HealthEffects BodyPartEffects
 		{

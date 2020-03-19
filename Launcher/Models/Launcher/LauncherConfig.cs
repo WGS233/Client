@@ -4,6 +4,7 @@ namespace Launcher
 {
 	public class LauncherConfig
 	{
+		public string[] Servers;
 		public string Email;
 		public string Password;
 		public string GamePath;
@@ -12,10 +13,10 @@ namespace Launcher
 
 		public LauncherConfig()
 		{
-			Email = "user@jet.com";
+			Servers[0] = "https://127.0.0.1";
+			Email = "user@emutarkov.com";
 			Password = "password";
 			GamePath = Environment.CurrentDirectory;
-			BackendUrl = "https://127.0.0.1";
 			MinimizeToTray = true;
 		}
 	}

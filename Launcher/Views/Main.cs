@@ -58,6 +58,7 @@ namespace Launcher
 		{
 			// set and save input
 			Globals.LauncherConfig.BackendUrl = UrlInput.Text;
+			RequestHandler.ChangeBackendUrl(UrlInput.Text);
 			Json.Save<LauncherConfig>(Globals.LauncherConfigFile, Globals.LauncherConfig);
 		}
 

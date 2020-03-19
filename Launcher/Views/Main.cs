@@ -22,13 +22,31 @@ namespace Launcher
 			Globals.LauncherConfig = Json.Load<LauncherConfig>(Globals.LauncherConfigFile);
 			Globals.ClientConfig = Json.Load<ClientConfig>(Globals.ClientConfigFile);
 
-			// set input
-			EmailInput.Text = Globals.LauncherConfig.Email;
-			PasswordInput.Text = Globals.LauncherConfig.Password;
-			UrlInput.Text = Globals.LauncherConfig.BackendUrl;
+			// set remote end point
+			RequestHandler.ChangeBackendUrl();
 
 			// setup monitor
 			monitor = new ProcessMonitor("EscapeFromTarkov", 1000, null, GameExitCallback);
+
+			// show initial screen
+			ShowLoginView();
+		}
+
+		private void ShowLoginView()
+		{
+			// enable input
+			LoginEmail.Visible = true;
+			LoginPassword.Visible = true;
+
+			// set input
+			LoginEmail.Text = Globals.LauncherConfig.Email;
+			LoginPassword.Text = Globals.LauncherConfig.Password;
+		}
+
+		private void HideLoginView()
+		{
+			LoginEmail.Visible = false;
+			LoginPassword.Visible = false;
 		}
 
 		private void GameExitCallback(ProcessMonitor monitor)
@@ -40,25 +58,17 @@ namespace Launcher
 			this.Show();
 		}
 
-		private void EmailInput_TextChanged(object sender, EventArgs e)
+		private void LoginEmail_TextChanged(object sender, EventArgs e)
 		{
 			// set and save input
-			Globals.LauncherConfig.Email = EmailInput.Text;
+			Globals.LauncherConfig.Email = LoginEmail.Text;
 			Json.Save<LauncherConfig>(Globals.LauncherConfigFile, Globals.LauncherConfig);
 		}
 
-		private void PasswordInput_TextChanged(object sender, EventArgs e)
+		private void LoginPassword_TextChanged(object sender, EventArgs e)
 		{
 			// set and save input
-			Globals.LauncherConfig.Password = PasswordInput.Text;
-			Json.Save<LauncherConfig>(Globals.LauncherConfigFile, Globals.LauncherConfig);
-		}
-
-		private void UrlInput_TextChanged(object sender, EventArgs e)
-		{
-			// set and save input
-			Globals.LauncherConfig.BackendUrl = UrlInput.Text;
-			RequestHandler.ChangeBackendUrl(UrlInput.Text);
+			Globals.LauncherConfig.Password = LoginPassword.Text;
 			Json.Save<LauncherConfig>(Globals.LauncherConfigFile, Globals.LauncherConfig);
 		}
 

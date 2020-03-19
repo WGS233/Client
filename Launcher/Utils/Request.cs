@@ -7,11 +7,11 @@ namespace Launcher
 {
 	public class Request
 	{
-		public string BackendUrl;
+		public string url;
 
 		public Request()
 		{
-			this.BackendUrl = "https://127.0.0.1/";
+			this.url = "https://127.0.0.1/";
 		}
 
         public string Send(string url, string data)
@@ -21,8 +21,8 @@ namespace Launcher
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
-            // create request  
-            WebRequest request = WebRequest.Create(new Uri(BackendUrl + url));
+			// create request  
+			WebRequest request = WebRequest.Create(new Uri(this.url + url));
             byte[] bytes = SimpleZlib.CompressToBytes(data, zlibConst.Z_BEST_COMPRESSION);
 
             request.Method = "POST";

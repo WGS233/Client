@@ -36,7 +36,7 @@ namespace Launcher
             }
 
             // set backend url
-            Globals.ClientConfig.BackendUrl = Globals.LauncherConfig.BackendUrl;
+            Globals.ClientConfig.BackendUrl = RequestHandler.GetBackendUrl();
             Json.Save<ClientConfig>(Globals.ClientConfigFile, Globals.ClientConfig);
 
 			// start game

@@ -4,9 +4,14 @@
 	{
 		private static Request request = new Request();
 
-		public static void ChangeBackendUrl(string url)
+		public static string GetBackendUrl()
 		{
-			request.BackendUrl = url;
+			return request.url;
+		}
+
+		public static void ChangeBackendUrl()
+		{
+			request.url = Globals.LauncherConfig.Servers[Globals.LauncherConfig.Backend];
 		}
 
 		public static string Login(LoginRequestData data)

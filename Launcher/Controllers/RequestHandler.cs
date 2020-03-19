@@ -6,7 +6,7 @@
 
 		public static void ChangeBackendUrl(string url)
 		{
-			request.ChangeBackendUrl(url);
+			request.BackendUrl = url;
 		}
 
 		public static string Login(LoginRequestData data)

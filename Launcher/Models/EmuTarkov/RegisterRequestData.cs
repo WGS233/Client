@@ -2,9 +2,9 @@
 {
 	public struct RegisterRequestData
 	{
-		string email;
-		string password;
-		string edition;
+		public string email;
+		public string password;
+		public string edition;
 
 		public RegisterRequestData(string email, string password, string edition)
 		{

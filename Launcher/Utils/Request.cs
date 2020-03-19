@@ -5,18 +5,17 @@ using ComponentAce.Compression.Libs.zlib;
 
 namespace Launcher
 {
-    public class Request
-    {
-		private string backendUrl;
+	public class Request
+	{
+		public string BackendUrl
+		{
+			get { return BackendUrl; }
+			set { BackendUrl = new Uri(value).ToString(); }
+		}
 
 		public Request()
 		{
-			backendUrl = "https://127.0.0.1/";
-		}
-
-		public void ChangeBackendUrl(string backendUrl)
-		{
-			this.backendUrl = new Uri(backendUrl).ToString();
+			this.BackendUrl = "https://127.0.0.1/";
 		}
 
         public string Send(string url, string data)
@@ -27,7 +26,7 @@ namespace Launcher
             ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
             // create request  
-            WebRequest request = WebRequest.Create(new Uri(backendUrl + url));
+            WebRequest request = WebRequest.Create(new Uri(BackendUrl + url));
             byte[] bytes = SimpleZlib.CompressToBytes(data, zlibConst.Z_BEST_COMPRESSION);
 
             request.Method = "POST";

@@ -2,8 +2,8 @@
 {
 	public struct LoginRequestData
 	{
-		string email;
-		string password;
+		public string email;
+		public string password;
 
 		public LoginRequestData(string email, string password)
 		{

@@ -9,12 +9,13 @@ namespace Launcher
     {
         public static int LaunchGame()
         {
-            // get profile ID
-            string accountId = "0";
+			LoginRequestData loginData = new LoginRequestData(Globals.LauncherConfig.Email, Globals.LauncherConfig.Password)
+			string accountId = "0";
 
-            try
-            {
-				accountId = RequestHandler.Login(new LoginRequestData(Globals.LauncherConfig.Email, Globals.LauncherConfig.Password));
+			// get profile ID
+			try
+			{
+				accountId = RequestHandler.Login(loginData);
 
 				if (accountId == "0")
 				{
@@ -51,10 +52,10 @@ namespace Launcher
             return 1;
         }
 
-        private static string GenerateToken(string email, string password)
+        private static string GenerateToken(LoginRequestData data)
         {
             // generate stringified token
-            LoginToken token = new LoginToken(email, password);
+            LoginToken token = new LoginToken(data.email, data.password);
             string serialized = Json.Serialize(token);
             string result = Convert.ToBase64String(Encoding.UTF8.GetBytes(serialized));
 

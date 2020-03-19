@@ -2,9 +2,9 @@
 {
 	public struct ChangeRequestData
 	{
-		string email;
-		string password;
-		string change;
+		public string email;
+		public string password;
+		public string change;
 
 		public ChangeRequestData(string email, string password, string change)
 		{

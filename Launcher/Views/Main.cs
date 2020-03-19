@@ -28,10 +28,10 @@ namespace Launcher
 			UrlInput.Text = Globals.LauncherConfig.BackendUrl;
 
 			// setup monitor
-			monitor = new ProcessMonitor("EscapeFromTarkov", MonitorCallback);
+			monitor = new ProcessMonitor("EscapeFromTarkov", 1000, null, GameExitCallback);
 		}
 
-		private void MonitorCallback(ProcessMonitor monitor)
+		private void GameExitCallback(ProcessMonitor monitor)
 		{
 			// stop monitoring
 			monitor.Stop();

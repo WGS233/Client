@@ -39,12 +39,9 @@ namespace Launcher
             Globals.ClientConfig.BackendUrl = Globals.LauncherConfig.BackendUrl;
             Json.Save<ClientConfig>(Globals.ClientConfigFile, Globals.ClientConfig);
 
-			// generate token
-			string token = GenerateToken(Globals.LauncherConfig.Email, Globals.LauncherConfig.Password);
-
 			// start game
 			ProcessStartInfo clientProcess = new ProcessStartInfo(Globals.ClientExecutable);
-            clientProcess.Arguments = "-bC5vLmcuaS5u=" + token + " -token=" + accountId + " -screenmode=fullscreen -window-mode=borderless";
+            clientProcess.Arguments = "-bC5vLmcuaS5u=" + GenerateToken(loginData) + " -token=" + accountId + " -screenmode=fullscreen -window-mode=borderless";
             clientProcess.UseShellExecute = false;
             clientProcess.WorkingDirectory = Environment.CurrentDirectory;
 

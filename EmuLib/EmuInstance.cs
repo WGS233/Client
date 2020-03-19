@@ -4,7 +4,7 @@ using EmuLib.Monitors;
 using EmuLib.Utils.Camera;
 using EmuLib.Utils.Reflection;
 using UnityEngine;
-using EmuLib.MaociDebugger;
+using EmuLibDebugger;
 using GClass_Config = GClass266;
 
 namespace EmuLib
@@ -14,12 +14,12 @@ namespace EmuLib
         private const float MonitorPeriod = 1f;
         private float _monitorNextTime;
         public static Player Player;
-        private static MaociDebuggerMain m_maociDebugger;
+        private static EmuLibDebuggerMain EmuLibDebugger;
         public void Start()
         {
 
             //start from creating maociDebugger
-            m_maociDebugger = gameObject.AddComponent<MaociDebuggerMain>(); // you dont need to use variable but it looks better :/
+            EmuLibDebugger = gameObject.AddComponent<EmuLibDebuggerMain>(); // you dont need to use variable but it looks better :/
 
             if (!Singleton<EmuInstance>.Instantiated)
                 Singleton<EmuInstance>.Create(this);

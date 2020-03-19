@@ -23,16 +23,24 @@ namespace Launcher
 
 			// create request  
 			WebRequest request = WebRequest.Create(new Uri(this.url + url));
-            byte[] bytes = SimpleZlib.CompressToBytes(data, zlibConst.Z_BEST_COMPRESSION);
 
-            request.Method = "POST";
-            request.ContentType = "application/json";
-            request.ContentLength = bytes.Length;
-
-			// send request
-			using (Stream requestStream = request.GetRequestStream())
+			if (data != null || data != "")
 			{
-				requestStream.Write(bytes, 0, bytes.Length);
+				byte[] bytes = SimpleZlib.CompressToBytes(data, zlibConst.Z_BEST_COMPRESSION);
+
+				request.Method = "POST";
+				request.ContentType = "application/json";
+				request.ContentLength = bytes.Length;
+
+				// send request
+				using (Stream requestStream = request.GetRequestStream())
+				{
+					requestStream.Write(bytes, 0, bytes.Length);
+				}
+			}
+			else
+			{
+				request.Method = "GET";
 			}
 
             // receive response

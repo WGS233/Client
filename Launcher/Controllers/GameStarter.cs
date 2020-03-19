@@ -7,15 +7,28 @@ namespace Launcher
 {
     public static class GameStarter
     {
-        public static int LaunchGame()
+		// --- FOR TESTING ONLY
+		private static ServerManager serverManager = new ServerManager();
+		// ---
+
+		public static int LaunchGame()
         {
+			// --- FOR TESTING ONLY
+			Server server = new Server();//serverManager.GetServer(Globals.LauncherConfig.Backend);
+
+			if (server == null)
+			{
+				return -100;
+			}
+			// ---
+
 			LoginRequestData loginData = new LoginRequestData(Globals.LauncherConfig.Email, Globals.LauncherConfig.Password);
 			string accountId = "0";
 
 			// get profile ID
 			try
 			{
-				accountId = RequestHandler.Login(loginData);
+				accountId = RequestHandler.RequestLogin(loginData);
 
 				if (accountId == "0")
 				{
@@ -36,7 +49,7 @@ namespace Launcher
             }
 
             // set backend url
-            Globals.ClientConfig.BackendUrl = RequestHandler.GetBackendUrl();
+            Globals.ClientConfig.BackendUrl = server.BackendUrl;
             Json.Save<ClientConfig>(Globals.ClientConfigFile, Globals.ClientConfig);
 
 			// start game

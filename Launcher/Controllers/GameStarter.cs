@@ -3,12 +3,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 
-
 namespace Launcher
 {
-    public static class Starter
+    public static class GameStarter
     {
-        public static int StartGame()
+        public static int LaunchGame()
         {
             // generate token
             string token = GenerateToken(Globals.LauncherConfig.Email, Globals.LauncherConfig.Password);
@@ -22,24 +21,20 @@ namespace Launcher
             }
             catch
             {
+				// cannot connect to remote end point
                 return -1;
             }
 
-            if (accountId == null || accountId == "")
-            {
-                return -2;
-            }
-
-            // account is not found
             if (accountId == "0")
             {
-                return -3;
+				// account is not found
+				return -2;
             }
 
-            // detect if executable is found
             if (!System.IO.File.Exists(Globals.ClientExecutable))
             {
-                return -4;
+				// executable to start is not found
+                return -3;
             }
 
             // set backend url
@@ -48,7 +43,7 @@ namespace Launcher
 
             // start game
             ProcessStartInfo clientProcess = new ProcessStartInfo(Globals.ClientExecutable);
-            clientProcess.Arguments = "-bC5vLmcuaS5u=" + token + " -token=" + accountId + " -screenmode=fullscreen";
+            clientProcess.Arguments = "-bC5vLmcuaS5u=" + token + " -token=" + accountId + " -screenmode=fullscreen -window-mode=borderless";
             clientProcess.UseShellExecute = false;
             clientProcess.WorkingDirectory = Environment.CurrentDirectory;
 

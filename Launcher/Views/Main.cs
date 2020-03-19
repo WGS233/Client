@@ -8,7 +8,7 @@ namespace Launcher
 {
 	public partial class Main : Form
 	{
-		private Monitor monitor;
+		private ProcessMonitor monitor;
 
 		public Main()
 		{
@@ -28,10 +28,10 @@ namespace Launcher
 			UrlInput.Text = Globals.LauncherConfig.BackendUrl;
 
 			// setup monitor
-			monitor = new Monitor("EscapeFromTarkov", MonitorCallback);
+			monitor = new ProcessMonitor("EscapeFromTarkov", MonitorCallback);
 		}
 
-		private void MonitorCallback(Monitor monitor)
+		private void MonitorCallback(ProcessMonitor monitor)
 		{
 			// stop monitoring
 			monitor.Stop();
@@ -63,7 +63,7 @@ namespace Launcher
 
 		private void StartGame_Click(object sender, EventArgs e)
 		{
-            int status = Starter.StartGame();
+            int status = GameStarter.LaunchGame();
 
             switch (status)
             {
@@ -82,14 +82,10 @@ namespace Launcher
                     return;
 
                 case -2:
-                    MessageBox.Show("Failed to receive data");
-                    return;
-
-                case -3:
                     MessageBox.Show("Wrong email and/or password");
                     return;
 
-                case -4:
+                case -3:
                     MessageBox.Show("The launcher is not running from the game directory");
                     return;
 

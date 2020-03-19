@@ -4,13 +4,13 @@ using System.Timers;
 
 namespace Launcher
 {
-	public class Monitor
+	public class ProcessMonitor
 	{
 		private System.Timers.Timer monitor;
 		private string processName;
-		private Action<Monitor> callback;
+		private Action<ProcessMonitor> callback;
 
-		public Monitor(string processName, Action<Monitor> callback)
+		public ProcessMonitor(string processName, Action<ProcessMonitor> callback)
 		{
 			monitor = new System.Timers.Timer(1000);
 			monitor.Elapsed += OnPollEvent;

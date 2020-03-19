@@ -54,12 +54,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\Monitor.cs" />
-    <Compile Include="Controllers\Request.cs" />
-    <Compile Include="Controllers\Starter.cs" />
+    <Compile Include="Utils\AssemblyLoader.cs" />
+    <Compile Include="Utils\ProcessMonitor.cs" />
+    <Compile Include="Utils\Request.cs" />
+    <Compile Include="Controllers\GameStarter.cs" />
     <Compile Include="Models\ClientConfig.cs" />
-    <Compile Include="Controllers\Globals.cs" />
-    <Compile Include="Controllers\Json.cs" />
+    <Compile Include="Models\Globals.cs" />
+    <Compile Include="Utils\Json.cs" />
     <Compile Include="Models\LauncherConfig.cs" />
     <Compile Include="Models\LoginToken.cs" />
     <Compile Include="Views\Main.cs">

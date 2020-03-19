@@ -9,28 +9,25 @@ namespace Launcher
     {
         public static int LaunchGame()
         {
-            // generate token
-            string token = GenerateToken(Globals.LauncherConfig.Email, Globals.LauncherConfig.Password);
-
             // get profile ID
             string accountId = "0";
 
             try
             {
-                accountId = Request.Send("/launcher/profile/login", "{ \"token\": " + Json.Serialize(token) + " }");
-            }
+				accountId = RequestHandler.Login(new LoginRequestData(Globals.LauncherConfig.Email, Globals.LauncherConfig.Password));
+
+				if (accountId == "0")
+				{
+					// account is not found
+					return -2;
+				}
+			}
             catch
             {
 				// cannot connect to remote end point
                 return -1;
             }
-
-            if (accountId == "0")
-            {
-				// account is not found
-				return -2;
-            }
-
+			
             if (!System.IO.File.Exists(Globals.ClientExecutable))
             {
 				// executable to start is not found
@@ -41,8 +38,11 @@ namespace Launcher
             Globals.ClientConfig.BackendUrl = Globals.LauncherConfig.BackendUrl;
             Json.Save<ClientConfig>(Globals.ClientConfigFile, Globals.ClientConfig);
 
-            // start game
-            ProcessStartInfo clientProcess = new ProcessStartInfo(Globals.ClientExecutable);
+			// generate token
+			string token = GenerateToken(Globals.LauncherConfig.Email, Globals.LauncherConfig.Password);
+
+			// start game
+			ProcessStartInfo clientProcess = new ProcessStartInfo(Globals.ClientExecutable);
             clientProcess.Arguments = "-bC5vLmcuaS5u=" + token + " -token=" + accountId + " -screenmode=fullscreen -window-mode=borderless";
             clientProcess.UseShellExecute = false;
             clientProcess.WorkingDirectory = Environment.CurrentDirectory;

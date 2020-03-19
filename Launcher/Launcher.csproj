@@ -99,7 +99,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\bg-1.png" />
+    <EmbeddedResource Include="Resources\bg.png" />
     <EmbeddedResource Include="Resources\bg-alpha.png" />
   </ItemGroup>
   <ItemGroup>

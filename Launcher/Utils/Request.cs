@@ -7,11 +7,7 @@ namespace Launcher
 {
 	public class Request
 	{
-		public string BackendUrl
-		{
-			get { return BackendUrl; }
-			set { BackendUrl = new Uri(value).ToString(); }
-		}
+		public string BackendUrl;
 
 		public Request()
 		{

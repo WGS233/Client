@@ -14,6 +14,16 @@
 			request.url = Globals.LauncherConfig.Servers[Globals.LauncherConfig.Backend];
 		}
 
+		public static string Connect()
+		{
+			return request.Send("/launcher/server/connect", null);
+		}
+
+		public static string Editions()
+		{
+			return request.Send("/launcher/server/editions", null);
+		}
+
 		public static string Login(LoginRequestData data)
 		{
 			return request.Send("/launcher/profile/login", Json.Serialize(data));

@@ -10,6 +10,11 @@ namespace Launcher
 			return JsonConvert.SerializeObject(data);
 		}
 
+		public static T Deserialize<T>(string json)
+		{
+			return JsonConvert.DeserializeObject<T>(json);
+		}
+
 		public static void Save<T>(string filepath, T data)
 		{
 			string json = Serialize<T>(data);
@@ -25,7 +30,7 @@ namespace Launcher
 			}
 
 			string json = File.ReadAllText(filepath);
-			return JsonConvert.DeserializeObject<T>(json);
+			return Deserialize<T>(json);
 		}
 	}
 }

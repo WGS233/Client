@@ -11,7 +11,7 @@ namespace Launcher
 		[STAThread]
 		private static void Main()
 		{
-			AssemblyLoader assemblyLoader = new AssemblyLoader("EscapeFromTarkov_Data/Managed/");
+			new AssemblyLoader("EscapeFromTarkov_Data/Managed/");
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new Main());

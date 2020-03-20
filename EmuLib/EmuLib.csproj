@@ -49,10 +49,6 @@
       <HintPath>References\PlayerEnums.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
       <HintPath>References\UnityEngine.dll</HintPath>
     </Reference>
@@ -87,20 +83,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmuInstance.cs" />
-    <Compile Include="MaociDebugger\Cons.cs" />
-    <Compile Include="MaociDebugger\Constants.cs" />
-    <Compile Include="MaociDebugger\Door.cs" />
-    <Compile Include="MaociDebugger\Drawing.cs" />
-    <Compile Include="MaociDebugger\E5P.cs" />
-    <Compile Include="MaociDebugger\ErrorHandler.cs" />
-    <Compile Include="MaociDebugger\FastMath.cs" />
-    <Compile Include="MaociDebugger\FUNC.cs" />
-    <Compile Include="MaociDebugger\FUNC_Additional_Drawing.cs" />
     <Compile Include="MaociDebugger\insGameWorld.cs" />
     <Compile Include="MaociDebugger\insPlayers.cs" />
     <Compile Include="MaociDebugger\MainInstance.cs" />
-    <Compile Include="MaociDebugger\PlayerCounters.cs" />
-    <Compile Include="MaociDebugger\Types.cs" />
+    <Compile Include="MaociDebugger\objectClasses\PlayerCounters.cs" />
     <Compile Include="Monitors\CreatePlayerOwnerMonitor.cs" />
     <Compile Include="Monitors\GameFinishCallBackMonitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -121,7 +107,6 @@
   <ItemGroup>
     <Folder Include="MaociDebugger\enum\" />
     <Folder Include="MaociDebugger\functions\" />
-    <Folder Include="MaociDebugger\objectClasses\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assembly-CSharp.dll" />

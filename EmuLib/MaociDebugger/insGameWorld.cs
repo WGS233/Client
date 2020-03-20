@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace EmuLibDebugger
+namespace EmuLib.MaociDebugger
 {
     class insGameWorld : MonoBehaviour
     {

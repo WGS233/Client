@@ -1,6 +1,6 @@
 ﻿using EFT;
+using EmuLib.MaociDebugger.objectClasses;
 using EmuLib.Utils.Drawing;
-using EmuLibDebugger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace EmuLibDebugger
+namespace EmuLib.MaociDebugger
 {
     class insPlayers : MonoBehaviour
     {

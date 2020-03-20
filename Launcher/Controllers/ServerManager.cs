@@ -14,16 +14,10 @@ namespace Launcher
 
 		public Server GetServer(int index)
 		{
-			if (availableServers.Count == 0)
-			{
-				// create local server
-				availableServers.Add(new Server());
-			}
-
 			if (index < 0 || index > availableServers.Count)
 			{
 				// value out of range
-				return availableServers[0];
+				return null;
 			}
 
 			return availableServers[index];

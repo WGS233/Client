@@ -7,43 +7,39 @@ namespace Launcher
 {
     public class GameStarter
     {
+		private const string clientExecutable = "EscapeFromTarkov.exe";
+
 		public int LaunchGame(Server server, LoginRequestData loginData)
         {
 			string accountId = "";
 
-			// get profile ID
 			try
 			{
 				accountId = RequestHandler.RequestLogin(loginData);
 
+				if (string.IsNullOrWhiteSpace(accountId))
+					return 0;
+
 				if (accountId == "0")
-				{
-					// account is not found
 					return -1;
-				}
 			}
             catch
             {
-				// cannot connect to remote end point
                 return -2;
             }
 			
-            if (!File.Exists("EscapeFromTarkov.exe"))
+            if (!File.Exists(clientExecutable))
             {
-				// executable to start is not found
                 return -3;
             }
 
-			// set launch location
 			string filepath = Environment.CurrentDirectory;
 
-			// set backend url
 			ClientConfig clientConfig = JsonHandler.LoadClientConfig();
 			clientConfig.BackendUrl = server.backendUrl;
 			JsonHandler.SaveClientConfig(clientConfig);
 
-			// start game
-			ProcessStartInfo clientProcess = new ProcessStartInfo("EscapeFromTarkov.exe");
+			ProcessStartInfo clientProcess = new ProcessStartInfo(clientExecutable);
             clientProcess.Arguments = "-bC5vLmcuaS5u=" + GenerateToken(loginData) + " -token=" + accountId + " -screenmode=fullscreen -window-mode=borderless";
             clientProcess.UseShellExecute = false;
 			clientProcess.WorkingDirectory = filepath;

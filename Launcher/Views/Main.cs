@@ -19,29 +19,22 @@ namespace Launcher
 
 		private void InitializeLauncher()
 		{
-			// load configs
 			launcherConfig = JsonHandler.LoadLauncherConfig();
 
-			// setup controllers
-			monitor = new ProcessMonitor("EscapeFromTarkov", 1000, null, GameExitCallback);
+			monitor = new ProcessMonitor("EscapeFromTarkov", 1000, aliveCallback: null, exitCallback: GameExitCallback);
 			serverManager = new ServerManager(launcherConfig.Servers);
 			gameStarter = new GameStarter();
 
-			// set remote end point
 			selectedServer = serverManager.GetServer(0);
 			RequestHandler.ChangeBackendUrl(selectedServer.backendUrl);
 
-			// show initial screen
 			ShowLoginView();
 		}
 
 		private void ShowLoginView()
 		{
-			// enable input
 			LoginEmail.Visible = true;
 			LoginPassword.Visible = true;
-
-			// set input
 			LoginEmail.Text = launcherConfig.Email;
 			LoginPassword.Text = launcherConfig.Password;
 		}
@@ -54,23 +47,18 @@ namespace Launcher
 
 		private void GameExitCallback(ProcessMonitor monitor)
 		{
-			// stop monitoring
 			monitor.Stop();
-
-			// show window
 			Show();
 		}
 
 		private void LoginEmail_TextChanged(object sender, EventArgs e)
 		{
-			// set and save input
 			launcherConfig.Email = LoginEmail.Text;
 			JsonHandler.SaveLauncherConfig(launcherConfig);
 		}
 
 		private void LoginPassword_TextChanged(object sender, EventArgs e)
 		{
-			// set and save input
 			launcherConfig.Password = LoginPassword.Text;
 			JsonHandler.SaveLauncherConfig(launcherConfig);
 		}

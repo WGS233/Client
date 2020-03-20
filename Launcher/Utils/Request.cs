@@ -16,12 +16,10 @@ namespace Launcher
 
         public string Send(string url, string data)
         {
-            // set https protocol
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
-			// create request  
 			WebRequest request = WebRequest.Create(new Uri(RemoteEndPoint + url));
 
 			if (data != null || data != "")
@@ -32,7 +30,6 @@ namespace Launcher
 				request.ContentType = "application/json";
 				request.ContentLength = bytes.Length;
 
-				// send request
 				using (Stream requestStream = request.GetRequestStream())
 				{
 					requestStream.Write(bytes, 0, bytes.Length);
@@ -43,10 +40,8 @@ namespace Launcher
 				request.Method = "GET";
 			}
 
-            // receive response
             WebResponse response = request.GetResponse();
 
-            // get response data
 			using (Stream responseStream = response.GetResponseStream())
 			{
                 using (MemoryStream ms = new MemoryStream())

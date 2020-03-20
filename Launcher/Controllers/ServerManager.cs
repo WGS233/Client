@@ -16,7 +16,6 @@ namespace Launcher
 		{
 			if (index < 0 || index > availableServers.Count)
 			{
-				// value out of range
 				return null;
 			}
 
@@ -27,25 +26,21 @@ namespace Launcher
 		{
 			string json = "";
 
-			// get server information
 			try
 			{
 				RequestHandler.ChangeBackendUrl(backendUrl);
 				json = RequestHandler.RequestConnect();
 
-				if (json == "" || json == null)
+				if (string.IsNullOrWhiteSpace(json))
 				{
-					// data is corrupted
 					return false;
 				}
 			}
 			catch
 			{
-				// connection to remote end point failed
 				return false;
 			}
 
-			// add server
 			availableServers.Add(Json.Deserialize<Server>(json));
 			return true;
 		}

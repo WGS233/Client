@@ -27,7 +27,9 @@ namespace EmuLib.Utils.Reflection
 
         public static string GetSessionId()
         {
+
 			SessionInterface backend = GetBackendSession();
+
             return backend?.Profile == null ? "-1" : backend.GetPhpSessionId();
         }
     }

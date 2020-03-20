@@ -10,7 +10,7 @@
 		{
 			backendUrl = "https://127.0.0.1";
 			name = "Local EmuTarkov Server";
-			editions = new string[] { "std", "lb", "pte", "eod" };
+			editions = new string[] { "std", "lbd", "pte", "eod" };
 		}
 	}
 }

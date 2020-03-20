@@ -5,11 +5,11 @@ namespace Launcher
 {
 	public partial class Main : Form
 	{
+		private LauncherConfig launcherConfig;
 		private ProcessMonitor monitor;
 		private ServerManager serverManager;
 		private GameStarter gameStarter;
 		private Server selectedServer;
-		private LauncherConfig launcherConfig;
 
 		public Main()
 		{
@@ -20,7 +20,6 @@ namespace Launcher
 		private void InitializeLauncher()
 		{
 			launcherConfig = JsonHandler.LoadLauncherConfig();
-
 			monitor = new ProcessMonitor("EscapeFromTarkov", 1000, aliveCallback: null, exitCallback: GameExitCallback);
 			serverManager = new ServerManager(launcherConfig.Servers);
 			gameStarter = new GameStarter();

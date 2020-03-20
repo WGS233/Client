@@ -4,7 +4,7 @@ namespace Launcher
 {
 	public class ServerManager
 	{
-		private List<Server> availableServers;
+		public List<Server> availableServers { get; private set; }
 
 		public ServerManager(string[] servers)
 		{

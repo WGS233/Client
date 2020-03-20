@@ -1,27 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
 using System.Text;
 
 namespace Launcher
 {
-    public static class GameStarter
+    public class GameStarter
     {
-		// --- FOR TESTING ONLY
-		private static ServerManager serverManager = new ServerManager();
-		// ---
-
-		public static int LaunchGame()
+		public int LaunchGame(Server server)
         {
-			// --- FOR TESTING ONLY
-			Server server = new Server();//serverManager.GetServer(Globals.LauncherConfig.Backend);
-
-			if (server == null)
-			{
-				return -100;
-			}
-			// ---
-
 			LoginRequestData loginData = new LoginRequestData(Globals.LauncherConfig.Email, Globals.LauncherConfig.Password);
 			string accountId = "0";
 
@@ -33,13 +19,13 @@ namespace Launcher
 				if (accountId == "0")
 				{
 					// account is not found
-					return -2;
+					return -1;
 				}
 			}
             catch
             {
 				// cannot connect to remote end point
-                return -1;
+                return -2;
             }
 			
             if (!System.IO.File.Exists(Globals.ClientExecutable))
@@ -49,7 +35,7 @@ namespace Launcher
             }
 
             // set backend url
-            Globals.ClientConfig.BackendUrl = server.BackendUrl;
+            Globals.ClientConfig.BackendUrl = server.backendUrl;
             Json.Save<ClientConfig>(Globals.ClientConfigFile, Globals.ClientConfig);
 
 			// start game
@@ -59,10 +45,10 @@ namespace Launcher
             clientProcess.WorkingDirectory = Environment.CurrentDirectory;
 
             Process.Start(clientProcess);
-            return 1;
+			return 1;
         }
 
-        private static string GenerateToken(LoginRequestData data)
+        private string GenerateToken(LoginRequestData data)
         {
             // generate stringified token
             LoginToken token = new LoginToken(data.email, data.password);

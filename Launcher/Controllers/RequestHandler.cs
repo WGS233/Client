@@ -9,19 +9,14 @@
 			return request.url;
 		}
 
-		public static void ChangeBackendUrl()
+		public static void ChangeBackendUrl(string backendUrl)
 		{
-			request.url = Globals.LauncherConfig.Servers[Globals.LauncherConfig.Backend];
+			request.url = backendUrl;
 		}
 
 		public static string RequestConnect()
 		{
-			return request.Send("/launcher/server/connect", "{}");
-		}
-
-		public static string RequestEditions()
-		{
-			return request.Send("/launcher/server/editions", "{}");
+			return request.Send("/launcher/server/connect", "");
 		}
 
 		public static string RequestLogin(LoginRequestData data)

@@ -11,7 +11,7 @@ namespace Launcher
 
 		public Request()
 		{
-			this.url = "https://127.0.0.1/";
+			this.url = "https://127.0.0.1";
 		}
 
         public string Send(string url, string data)

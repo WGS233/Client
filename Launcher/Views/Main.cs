@@ -9,6 +9,9 @@ namespace Launcher
 	public partial class Main : Form
 	{
 		private ProcessMonitor monitor;
+		private ServerManager serverManager;
+		private GameStarter gameStarter;
+		private Server selectedServer;
 
 		public Main()
 		{
@@ -22,11 +25,14 @@ namespace Launcher
 			Globals.LauncherConfig = Json.Load<LauncherConfig>(Globals.LauncherConfigFile);
 			Globals.ClientConfig = Json.Load<ClientConfig>(Globals.ClientConfigFile);
 
-			// set remote end point
-			RequestHandler.ChangeBackendUrl();
-
-			// setup monitor
+			// setup controllers
 			monitor = new ProcessMonitor("EscapeFromTarkov", 1000, null, GameExitCallback);
+			serverManager = new ServerManager();
+			gameStarter = new GameStarter();
+
+			// set remote end point
+			selectedServer = serverManager.GetServer(0);
+			RequestHandler.ChangeBackendUrl(selectedServer.backendUrl);
 
 			// show initial screen
 			ShowLoginView();
@@ -74,7 +80,7 @@ namespace Launcher
 
 		private void StartGame_Click(object sender, EventArgs e)
 		{
-            int status = GameStarter.LaunchGame();
+            int status = gameStarter.LaunchGame(selectedServer);
 
             switch (status)
             {
@@ -88,7 +94,7 @@ namespace Launcher
                     }
                     break;
 
-                case -1:
+				case -1:
                     MessageBox.Show("Cannot establish a connection to the server");
                     return;
 

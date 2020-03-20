@@ -2,15 +2,15 @@
 {
 	public class Server
 	{
-		public string BackendUrl;
-		public string Name;
-		public string[] Editions;
+		public string backendUrl;
+		public string name;
+		public string[] editions;
 
 		public Server()
 		{
-			BackendUrl = "https://127.0.0.1";
-			Name = "Local EmuTarkov Server";
-			Editions = new string[] { "std", "lb", "pte", "eod" };
+			backendUrl = "https://127.0.0.1";
+			name = "Local EmuTarkov Server";
+			editions = new string[] { "std", "lb", "pte", "eod" };
 		}
 	}
 }

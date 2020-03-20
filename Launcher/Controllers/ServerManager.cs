@@ -14,50 +14,53 @@ namespace Launcher
 
 		public Server GetServer(int index)
 		{
+			if (availableServers.Count == 0)
+			{
+				// create local server
+				availableServers.Add(new Server());
+			}
+
 			if (index < 0 || index > availableServers.Count)
 			{
-				return null;
+				// value out of range
+				return availableServers[0];
 			}
 
 			return availableServers[index];
 		}
 
-		public bool LoadServer(int index)
+		public bool LoadServer(string backendUrl)
 		{
-			Server server = new Server();
-
 			// ping server
-			Globals.LauncherConfig.Backend = index;
-			string output = RequestHandler.RequestConnect();
-			
-			if (output == "FAILED" || output == "" || output == null)
+			string output = "";
+
+			try
+			{
+				RequestHandler.ChangeBackendUrl(backendUrl);
+				output = RequestHandler.RequestConnect();
+			}
+			catch
 			{
 				// connection to remote end point failed
 				return false;
 			}
-
-			// set server data
-			server.BackendUrl = RequestHandler.GetBackendUrl();
-			server.Name = output;
-
-			// get server editions
-			output = RequestHandler.RequestEditions();
-			server.Editions = Json.Deserialize<string[]>(output);
-
-			if (server.Editions == null || server.Editions.Length == 0)
+			
+			if (output == "" || output == null)
 			{
+				// data is corrupted
 				return false;
 			}
 
-			availableServers.Add(server);
+			// add server
+			availableServers.Add(Json.Deserialize<Server>(output));
 			return true;
 		}
 
 		public void LoadServers()
 		{
-			for (int i = 0; i < Globals.LauncherConfig.Servers.Length; i++)
+			foreach (string backendUrl in Globals.LauncherConfig.Servers)
 			{
-				LoadServer(i);
+				LoadServer(backendUrl);
 			}
 		}
 	}

@@ -19,7 +19,7 @@ namespace Launcher
 
 		public static void SaveLauncherConfig(LauncherConfig data)
 		{
-			Json.Save<LauncherConfig>(Path.Combine(filepath, "launcher.config.json"), data);
+			Json.Save(Path.Combine(filepath, "launcher.config.json"), data);
 		}
 
 		public static ClientConfig LoadClientConfig()
@@ -29,7 +29,7 @@ namespace Launcher
 
 		public static void SaveClientConfig(ClientConfig data)
 		{
-			Json.Save<ClientConfig>(Path.Combine(filepath, "client.config.json"), data);
+			Json.Save(Path.Combine(filepath, "client.config.json"), data);
 		}
 	}
 }

@@ -58,7 +58,7 @@ namespace Launcher
 			monitor.Stop();
 
 			// show window
-			this.Show();
+			Show();
 		}
 
 		private void LoginEmail_TextChanged(object sender, EventArgs e)
@@ -88,7 +88,7 @@ namespace Launcher
                     if (launcherConfig.MinimizeToTray)
                     {
                         TrayIcon.Visible = true;
-                        this.Hide();
+                        Hide();
                     }
                     break;
 
@@ -112,13 +112,13 @@ namespace Launcher
 
 		private void TrayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
-			this.Show();
-			this.WindowState = FormWindowState.Normal;
+			Show();
+			WindowState = FormWindowState.Normal;
 		}
 
 		private void Main_Resize(object sender, EventArgs e)
 		{
-			if (this.WindowState == FormWindowState.Normal)
+			if (WindowState == FormWindowState.Normal)
 			{
 				TrayIcon.Visible = false;
 			}

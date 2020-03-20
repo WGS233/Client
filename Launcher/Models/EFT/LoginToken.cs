@@ -1,6 +1,6 @@
 ﻿namespace Launcher
 {
-	public class LoginToken
+	public struct LoginToken
 	{
 		public string email;
 		public string password;

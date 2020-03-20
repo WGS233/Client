@@ -6,14 +6,14 @@ namespace Launcher
 {
 	public class ProcessMonitor
 	{
-		private System.Timers.Timer monitor;
+		private Timer monitor;
 		private string processName;
 		private Action<ProcessMonitor> aliveCallback;
 		private Action<ProcessMonitor> exitCallback;
 
 		public ProcessMonitor(string processName, double interval, Action<ProcessMonitor> aliveCallback, Action<ProcessMonitor> exitCallback)
 		{
-			monitor = new System.Timers.Timer(interval);
+			monitor = new Timer(interval);
 			monitor.Elapsed += OnPollEvent;
 			monitor.AutoReset = true;
 
@@ -32,7 +32,7 @@ namespace Launcher
 			monitor.Enabled = false;
 		}
 
-		private void OnPollEvent(Object source, ElapsedEventArgs e)
+		private void OnPollEvent(object source, ElapsedEventArgs e)
 		{
 			Process[] clientProcess = Process.GetProcessesByName(processName);
 

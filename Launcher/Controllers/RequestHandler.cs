@@ -6,12 +6,12 @@
 
 		public static string GetBackendUrl()
 		{
-			return request.url;
+			return request.RemoteEndPoint;
 		}
 
 		public static void ChangeBackendUrl(string backendUrl)
 		{
-			request.url = backendUrl;
+			request.RemoteEndPoint = backendUrl;
 		}
 
 		public static string RequestConnect()

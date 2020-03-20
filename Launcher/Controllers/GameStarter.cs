@@ -47,20 +47,16 @@ namespace Launcher
             clientProcess.Arguments = "-bC5vLmcuaS5u=" + GenerateToken(loginData) + " -token=" + accountId + " -screenmode=fullscreen -window-mode=borderless";
             clientProcess.UseShellExecute = false;
 			clientProcess.WorkingDirectory = filepath;
-
             Process.Start(clientProcess);
+
 			return 1;
         }
 
         private string GenerateToken(LoginRequestData data)
         {
-            // generate stringified token
             LoginToken token = new LoginToken(data.email, data.password);
             string serialized = Json.Serialize(token);
-            string result = Convert.ToBase64String(Encoding.UTF8.GetBytes(serialized));
-
-            // add closing signature to the token
-            return result + "=";
+            return Convert.ToBase64String(Encoding.UTF8.GetBytes(serialized)) + "=";
         }
     }
 }

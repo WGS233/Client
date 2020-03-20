@@ -7,11 +7,11 @@ namespace Launcher
 {
 	public class Request
 	{
-		public string url;
+		public string RemoteEndPoint;
 
 		public Request()
 		{
-			this.url = "https://127.0.0.1";
+			RemoteEndPoint = "https://127.0.0.1";
 		}
 
         public string Send(string url, string data)
@@ -22,7 +22,7 @@ namespace Launcher
             ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
 			// create request  
-			WebRequest request = WebRequest.Create(new Uri(this.url + url));
+			WebRequest request = WebRequest.Create(new Uri(RemoteEndPoint + url));
 
 			if (data != null || data != "")
 			{

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Text;
-using System.Timers;
 using System.Windows.Forms;
 
 namespace Launcher
@@ -9,6 +6,10 @@ namespace Launcher
 	public partial class Main : Form
 	{
 		private ProcessMonitor monitor;
+		private ServerManager serverManager;
+		private GameStarter gameStarter;
+		private Server selectedServer;
+		private LauncherConfig launcherConfig;
 
 		public Main()
 		{
@@ -19,14 +20,16 @@ namespace Launcher
 		private void InitializeLauncher()
 		{
 			// load configs
-			Globals.LauncherConfig = Json.Load<LauncherConfig>(Globals.LauncherConfigFile);
-			Globals.ClientConfig = Json.Load<ClientConfig>(Globals.ClientConfigFile);
+			launcherConfig = JsonHandler.LoadLauncherConfig();
+
+			// setup controllers
+			monitor = new ProcessMonitor("EscapeFromTarkov", 1000, null, GameExitCallback);
+			serverManager = new ServerManager(launcherConfig.Servers);
+			gameStarter = new GameStarter();
 
 			// set remote end point
-			RequestHandler.ChangeBackendUrl();
-
-			// setup monitor
-			monitor = new ProcessMonitor("EscapeFromTarkov", 1000, null, GameExitCallback);
+			selectedServer = serverManager.GetServer(0);
+			RequestHandler.ChangeBackendUrl(selectedServer.backendUrl);
 
 			// show initial screen
 			ShowLoginView();
@@ -39,8 +42,8 @@ namespace Launcher
 			LoginPassword.Visible = true;
 
 			// set input
-			LoginEmail.Text = Globals.LauncherConfig.Email;
-			LoginPassword.Text = Globals.LauncherConfig.Password;
+			LoginEmail.Text = launcherConfig.Email;
+			LoginPassword.Text = launcherConfig.Password;
 		}
 
 		private void HideLoginView()
@@ -55,48 +58,49 @@ namespace Launcher
 			monitor.Stop();
 
 			// show window
-			this.Show();
+			Show();
 		}
 
 		private void LoginEmail_TextChanged(object sender, EventArgs e)
 		{
 			// set and save input
-			Globals.LauncherConfig.Email = LoginEmail.Text;
-			Json.Save<LauncherConfig>(Globals.LauncherConfigFile, Globals.LauncherConfig);
+			launcherConfig.Email = LoginEmail.Text;
+			JsonHandler.SaveLauncherConfig(launcherConfig);
 		}
 
 		private void LoginPassword_TextChanged(object sender, EventArgs e)
 		{
 			// set and save input
-			Globals.LauncherConfig.Password = LoginPassword.Text;
-			Json.Save<LauncherConfig>(Globals.LauncherConfigFile, Globals.LauncherConfig);
+			launcherConfig.Password = LoginPassword.Text;
+			JsonHandler.SaveLauncherConfig(launcherConfig);
 		}
 
 		private void StartGame_Click(object sender, EventArgs e)
 		{
-            int status = GameStarter.LaunchGame();
+			LoginRequestData loginData = new LoginRequestData(launcherConfig.Email, launcherConfig.Password);
+			int status = gameStarter.LaunchGame(selectedServer, loginData);
 
             switch (status)
             {
                 case 1:
                     monitor.Start();
 
-                    if (Globals.LauncherConfig.MinimizeToTray)
+                    if (launcherConfig.MinimizeToTray)
                     {
                         TrayIcon.Visible = true;
-                        this.Hide();
+                        Hide();
                     }
                     break;
 
                 case -1:
-                    MessageBox.Show("Cannot establish a connection to the server");
-                    return;
-
-                case -2:
                     MessageBox.Show("Wrong email and/or password");
                     return;
 
-                case -3:
+				case -2:
+					MessageBox.Show("Cannot establish a connection to the server");
+					return;
+
+				case -3:
                     MessageBox.Show("The launcher is not running from the game directory");
                     return;
 
@@ -108,13 +112,13 @@ namespace Launcher
 
 		private void TrayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
-			this.Show();
-			this.WindowState = FormWindowState.Normal;
+			Show();
+			WindowState = FormWindowState.Normal;
 		}
 
 		private void Main_Resize(object sender, EventArgs e)
 		{
-			if (this.WindowState == FormWindowState.Normal)
+			if (WindowState == FormWindowState.Normal)
 			{
 				TrayIcon.Visible = false;
 			}

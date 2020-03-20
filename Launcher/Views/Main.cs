@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Text;
-using System.Timers;
 using System.Windows.Forms;
 
 namespace Launcher
@@ -12,6 +9,7 @@ namespace Launcher
 		private ServerManager serverManager;
 		private GameStarter gameStarter;
 		private Server selectedServer;
+		private LauncherConfig launcherConfig;
 
 		public Main()
 		{
@@ -22,12 +20,11 @@ namespace Launcher
 		private void InitializeLauncher()
 		{
 			// load configs
-			Globals.LauncherConfig = Json.Load<LauncherConfig>(Globals.LauncherConfigFile);
-			Globals.ClientConfig = Json.Load<ClientConfig>(Globals.ClientConfigFile);
+			launcherConfig = JsonHandler.LoadLauncherConfig();
 
 			// setup controllers
 			monitor = new ProcessMonitor("EscapeFromTarkov", 1000, null, GameExitCallback);
-			serverManager = new ServerManager();
+			serverManager = new ServerManager(launcherConfig.Servers);
 			gameStarter = new GameStarter();
 
 			// set remote end point
@@ -45,8 +42,8 @@ namespace Launcher
 			LoginPassword.Visible = true;
 
 			// set input
-			LoginEmail.Text = Globals.LauncherConfig.Email;
-			LoginPassword.Text = Globals.LauncherConfig.Password;
+			LoginEmail.Text = launcherConfig.Email;
+			LoginPassword.Text = launcherConfig.Password;
 		}
 
 		private void HideLoginView()
@@ -67,27 +64,28 @@ namespace Launcher
 		private void LoginEmail_TextChanged(object sender, EventArgs e)
 		{
 			// set and save input
-			Globals.LauncherConfig.Email = LoginEmail.Text;
-			Json.Save<LauncherConfig>(Globals.LauncherConfigFile, Globals.LauncherConfig);
+			launcherConfig.Email = LoginEmail.Text;
+			JsonHandler.SaveLauncherConfig(launcherConfig);
 		}
 
 		private void LoginPassword_TextChanged(object sender, EventArgs e)
 		{
 			// set and save input
-			Globals.LauncherConfig.Password = LoginPassword.Text;
-			Json.Save<LauncherConfig>(Globals.LauncherConfigFile, Globals.LauncherConfig);
+			launcherConfig.Password = LoginPassword.Text;
+			JsonHandler.SaveLauncherConfig(launcherConfig);
 		}
 
 		private void StartGame_Click(object sender, EventArgs e)
 		{
-            int status = gameStarter.LaunchGame(selectedServer);
+			LoginRequestData loginData = new LoginRequestData(launcherConfig.Email, launcherConfig.Password);
+			int status = gameStarter.LaunchGame(selectedServer, loginData);
 
             switch (status)
             {
                 case 1:
                     monitor.Start();
 
-                    if (Globals.LauncherConfig.MinimizeToTray)
+                    if (launcherConfig.MinimizeToTray)
                     {
                         TrayIcon.Visible = true;
                         this.Hide();

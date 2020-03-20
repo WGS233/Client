@@ -6,10 +6,10 @@ namespace Launcher
 	{
 		private List<Server> availableServers;
 
-		public ServerManager()
+		public ServerManager(string[] servers)
 		{
 			availableServers = new List<Server>();
-			LoadServers();
+			LoadServers(servers);
 		}
 
 		public Server GetServer(int index)
@@ -56,9 +56,9 @@ namespace Launcher
 			return true;
 		}
 
-		public void LoadServers()
+		public void LoadServers(string[] servers)
 		{
-			foreach (string backendUrl in Globals.LauncherConfig.Servers)
+			foreach (string backendUrl in servers)
 			{
 				LoadServer(backendUrl);
 			}

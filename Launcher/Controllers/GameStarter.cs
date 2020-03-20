@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Diagnostics;
 using System.Text;
 
@@ -6,9 +7,8 @@ namespace Launcher
 {
     public class GameStarter
     {
-		public int LaunchGame(Server server)
+		public int LaunchGame(Server server, LoginRequestData loginData)
         {
-			LoginRequestData loginData = new LoginRequestData(Globals.LauncherConfig.Email, Globals.LauncherConfig.Password);
 			string accountId = "";
 
 			// get profile ID
@@ -28,21 +28,25 @@ namespace Launcher
                 return -2;
             }
 			
-            if (!System.IO.File.Exists(Globals.ClientExecutable))
+            if (!File.Exists("EscapeFromTarkov.exe"))
             {
 				// executable to start is not found
                 return -3;
             }
 
-            // set backend url
-            Globals.ClientConfig.BackendUrl = server.backendUrl;
-            Json.Save<ClientConfig>(Globals.ClientConfigFile, Globals.ClientConfig);
+			// set launch location
+			string filepath = Environment.CurrentDirectory;
+
+			// set backend url
+			ClientConfig clientConfig = JsonHandler.LoadClientConfig();
+			clientConfig.BackendUrl = server.backendUrl;
+			JsonHandler.SaveClientConfig(clientConfig);
 
 			// start game
-			ProcessStartInfo clientProcess = new ProcessStartInfo(Globals.ClientExecutable);
+			ProcessStartInfo clientProcess = new ProcessStartInfo("EscapeFromTarkov.exe");
             clientProcess.Arguments = "-bC5vLmcuaS5u=" + GenerateToken(loginData) + " -token=" + accountId + " -screenmode=fullscreen -window-mode=borderless";
             clientProcess.UseShellExecute = false;
-            clientProcess.WorkingDirectory = Environment.CurrentDirectory;
+			clientProcess.WorkingDirectory = filepath;
 
             Process.Start(clientProcess);
 			return 1;

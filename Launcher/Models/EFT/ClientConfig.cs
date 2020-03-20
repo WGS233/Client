@@ -35,6 +35,6 @@
 			ResetSettings = false;
 			SaveResults = true;
 			FixedFrameRate = 60;
-	}
+		}
 	}
 }

@@ -83,17 +83,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmuInstance.cs" />
-    <Compile Include="MaociDebugger\insGameWorld.cs" />
-    <Compile Include="MaociDebugger\insPlayers.cs" />
-    <Compile Include="MaociDebugger\MainInstance.cs" />
-    <Compile Include="MaociDebugger\objectClasses\PlayerCounters.cs" />
     <Compile Include="Monitors\CreatePlayerOwnerMonitor.cs" />
     <Compile Include="Monitors\GameFinishCallBackMonitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Camera\Free.cs" />
     <Compile Include="Utils\Camera\CameraUtils.cs" />
     <Compile Include="Utils\Drawing\GUIDraw.cs" />
-    <Compile Include="Utils\HTTP\DumpUtils.cs" />
     <Compile Include="Utils\HTTP\HttpUtils.cs" />
     <Compile Include="Utils\Player\HealthStateUtils.cs" />
     <Compile Include="Utils\Profile\ProfileSaveUtil.cs" />
@@ -104,13 +99,7 @@
     <Compile Include="Utils\Reflection\PrivateValueAccessor.cs" />
     <Compile Include="Utils\Reflection\LocalGameUtils.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MaociDebugger\enum\" />
-    <Folder Include="MaociDebugger\functions\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Assembly-CSharp.dll" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

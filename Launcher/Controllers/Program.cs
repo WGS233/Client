@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace Launcher
@@ -14,24 +11,10 @@ namespace Launcher
 		[STAThread]
 		private static void Main()
 		{
-			AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(AssemblyResolveEvent);
+			AssemblyLoader assemblyLoader = new AssemblyLoader("EscapeFromTarkov_Data/Managed/");
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new Main());
-		}
-
-		private static Assembly AssemblyResolveEvent(object sender, ResolveEventArgs args)
-		{
-			string assembly = new AssemblyName(args.Name).Name;
-			string filename = Path.Combine(Environment.CurrentDirectory, "EscapeFromTarkov_Data/Managed/" + assembly + ".dll");
-
-            // resources are embedded inside assembly
-            if (filename.Contains("resources"))
-            {
-                return null;
-            }
-
-			return Assembly.LoadFrom(filename);
 		}
 	}
 }

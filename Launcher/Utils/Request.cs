@@ -5,17 +5,24 @@ using ComponentAce.Compression.Libs.zlib;
 
 namespace Launcher
 {
-    public static class Request
-    {
-        public static string Send(string url, string data)
+	public class Request
+	{
+		public string url;
+
+		public Request()
+		{
+			this.url = "https://127.0.0.1/";
+		}
+
+        public string Send(string url, string data)
         {
             // set https protocol
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
-            // create request  
-            WebRequest request = WebRequest.Create(new Uri(Globals.LauncherConfig.BackendUrl + url));
+			// create request  
+			WebRequest request = WebRequest.Create(new Uri(this.url + url));
             byte[] bytes = SimpleZlib.CompressToBytes(data, zlibConst.Z_BEST_COMPRESSION);
 
             request.Method = "POST";

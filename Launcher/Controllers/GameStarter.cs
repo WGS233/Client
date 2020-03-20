@@ -9,7 +9,7 @@ namespace Launcher
 		public int LaunchGame(Server server)
         {
 			LoginRequestData loginData = new LoginRequestData(Globals.LauncherConfig.Email, Globals.LauncherConfig.Password);
-			string accountId = "0";
+			string accountId = "";
 
 			// get profile ID
 			try

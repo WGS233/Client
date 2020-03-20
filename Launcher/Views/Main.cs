@@ -94,15 +94,15 @@ namespace Launcher
                     }
                     break;
 
-				case -1:
-                    MessageBox.Show("Cannot establish a connection to the server");
-                    return;
-
-                case -2:
+                case -1:
                     MessageBox.Show("Wrong email and/or password");
                     return;
 
-                case -3:
+				case -2:
+					MessageBox.Show("Cannot establish a connection to the server");
+					return;
+
+				case -3:
                     MessageBox.Show("The launcher is not running from the game directory");
                     return;
 

@@ -25,28 +25,28 @@ namespace Launcher
 
 		public bool LoadServer(string backendUrl)
 		{
-			// ping server
-			string output = "";
+			string json = "";
 
+			// get server information
 			try
 			{
 				RequestHandler.ChangeBackendUrl(backendUrl);
-				output = RequestHandler.RequestConnect();
+				json = RequestHandler.RequestConnect();
+
+				if (json == "" || json == null)
+				{
+					// data is corrupted
+					return false;
+				}
 			}
 			catch
 			{
 				// connection to remote end point failed
 				return false;
 			}
-			
-			if (output == "" || output == null)
-			{
-				// data is corrupted
-				return false;
-			}
 
 			// add server
-			availableServers.Add(Json.Deserialize<Server>(output));
+			availableServers.Add(Json.Deserialize<Server>(json));
 			return true;
 		}
 

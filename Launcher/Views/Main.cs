@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Launcher
@@ -9,8 +8,8 @@ namespace Launcher
 		private LauncherConfig launcherConfig;
 		private ProcessMonitor monitor;
 		private ServerManager serverManager;
+		private AccountManager accountManager;
 		private GameStarter gameStarter;
-		private Server selectedServer;
 
 		public Main()
 		{
@@ -23,22 +22,32 @@ namespace Launcher
 			launcherConfig = JsonHandler.LoadLauncherConfig();
 			monitor = new ProcessMonitor("EscapeFromTarkov", 1000, aliveCallback: null, exitCallback: GameExitCallback);
 			serverManager = new ServerManager(launcherConfig.Servers);
+			accountManager = new AccountManager(launcherConfig);
 			gameStarter = new GameStarter();
 
-			selectedServer = serverManager.GetServer(0);
+			serverManager.SelectServer(0);
 
-			if (selectedServer == null)
+			if (serverManager.SelectedServer == null)
 			{
 				MessageBox.Show("No servers available");
 			}
 			else
 			{
-				RequestHandler.ChangeBackendUrl(selectedServer.backendUrl);
-
-				// ShowLoginView();
-				HideLoginView();
-				ShowRegisterView();
+				RequestHandler.ChangeBackendUrl(serverManager.SelectedServer.backendUrl);
 			}
+
+			//ShowLoginView();
+			ShowRegisterView();
+		}
+
+		private void ShowProfileView()
+		{
+			StartGame.Visible = true;
+		}
+
+		private void HideProfileView()
+		{
+			StartGame.Visible = false;
 		}
 
 		private void ShowLoginView()
@@ -48,6 +57,7 @@ namespace Launcher
 
 			LoginEmail.Visible = true;
 			LoginPassword.Visible = true;
+			LoginButton.Visible = true;
 
 			LoginEmail.Text = launcherConfig.Email;
 			LoginPassword.Text = launcherConfig.Password;
@@ -57,6 +67,7 @@ namespace Launcher
 		{
 			LoginEmailLabel.Visible = false;
 			LoginPasswordLabel.Visible = false;
+			LoginButton.Visible = false;
 
 			LoginEmail.Visible = false;
 			LoginPassword.Visible = false;
@@ -79,7 +90,7 @@ namespace Launcher
 			// refresh editions as user might switch servers
 			RegisterEdition.Items.Clear();
 
-			foreach (String edition in selectedServer.editions)
+			foreach (String edition in serverManager.SelectedServer.editions)
 			{
 				RegisterEdition.Items.Add(edition);
 			}
@@ -87,6 +98,7 @@ namespace Launcher
 			if (RegisterEdition.Items.Count == 0)
 			{
 				RegisterEdition.Items.Add("No edition available");
+				RegisterEdition.Enabled = false;
 				RegisterButton.Enabled = false;
 			}
 
@@ -107,7 +119,7 @@ namespace Launcher
 
 		private void ShowServerView()
 		{
-			foreach (Server server in serverManager.AvailableServers)
+			foreach (ServerInfo server in serverManager.AvailableServers)
 			{
 				// code here
 			}
@@ -131,10 +143,55 @@ namespace Launcher
 			JsonHandler.SaveLauncherConfig(launcherConfig);
 		}
 
+		private void LoginButton_Click(object sender, EventArgs e)
+		{
+			int status = accountManager.LoginAccount(LoginEmail.Text, LoginPassword.Text);
+
+			switch (status)
+			{
+				case 1:
+					HideLoginView();
+					ShowProfileView();
+					break;
+
+				case -1:
+					MessageBox.Show("Wrong email and/or password");
+					return;
+
+				case -2:
+					MessageBox.Show("Cannot establish a connection to the server");
+					return;
+			}
+		}
+
+		private void RegisterButton_Click(object sender, EventArgs e)
+		{
+			int status = accountManager.RegisterAccount(RegisterEmail.Text, RegisterPassword.Text, (string)RegisterEdition.SelectedItem);
+
+			switch (status)
+			{
+				case 1:
+					HideRegisterView();
+					ShowProfileView();
+					break;
+
+				case -1:
+					MessageBox.Show("Account already exists");
+					return;
+
+				case -2:
+					MessageBox.Show("Cannot establish a connection to the server");
+					return;
+
+				case -3:
+					MessageBox.Show("Wrong email and/or password");
+					return;
+			}
+		}
+
 		private void StartGame_Click(object sender, EventArgs e)
 		{
-			LoginRequestData loginData = new LoginRequestData(launcherConfig.Email, launcherConfig.Password);
-			int status = gameStarter.LaunchGame(selectedServer, loginData);
+			int status = gameStarter.LaunchGame(serverManager.SelectedServer, accountManager.SelectedAccount);
 
             switch (status)
             {
@@ -148,15 +205,7 @@ namespace Launcher
                     }
                     break;
 
-                case -1:
-                    MessageBox.Show("Wrong email and/or password");
-                    return;
-
-				case -2:
-					MessageBox.Show("Cannot establish a connection to the server");
-					return;
-
-				case -3:
+				case -1:
                     MessageBox.Show("The launcher is not running from the game directory");
                     return;
 

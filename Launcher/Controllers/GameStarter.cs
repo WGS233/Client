@@ -9,28 +9,11 @@ namespace Launcher
     {
 		private const string clientExecutable = "EscapeFromTarkov.exe";
 
-		public int LaunchGame(Server server, LoginRequestData loginData)
-        {
-			string accountId = "";
-
-			try
-			{
-				accountId = RequestHandler.RequestLogin(loginData);
-
-				if (string.IsNullOrWhiteSpace(accountId))
-					return 0;
-
-				if (accountId == "0")
-					return -1;
-			}
-            catch
-            {
-                return -2;
-            }
-			
+		public int LaunchGame(ServerInfo server, AccountInfo account)
+        {			
             if (!File.Exists(clientExecutable))
             {
-                return -3;
+                return -1;
             }
 
 			string filepath = Environment.CurrentDirectory;
@@ -40,7 +23,7 @@ namespace Launcher
 			JsonHandler.SaveClientConfig(clientConfig);
 
 			ProcessStartInfo clientProcess = new ProcessStartInfo(clientExecutable);
-            clientProcess.Arguments = "-bC5vLmcuaS5u=" + GenerateToken(loginData) + " -token=" + accountId + " -screenmode=fullscreen -window-mode=borderless";
+            clientProcess.Arguments = "-bC5vLmcuaS5u=" + GenerateToken(account) + " -token=" + account.id + " -screenmode=fullscreen -window-mode=borderless";
             clientProcess.UseShellExecute = false;
 			clientProcess.WorkingDirectory = filepath;
             Process.Start(clientProcess);
@@ -48,7 +31,7 @@ namespace Launcher
 			return 1;
         }
 
-        private string GenerateToken(LoginRequestData data)
+        private string GenerateToken(AccountInfo data)
         {
             LoginToken token = new LoginToken(data.email, data.password);
             string serialized = Json.Serialize(token);

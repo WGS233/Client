@@ -1,12 +1,12 @@
 ﻿namespace Launcher
 {
-	public class Server
+	public class ServerInfo
 	{
 		public string backendUrl;
 		public string name;
 		public string[] editions;
 
-		public Server()
+		public ServerInfo()
 		{
 			backendUrl = "https://127.0.0.1";
 			name = "Local EmuTarkov Server";

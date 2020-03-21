@@ -44,6 +44,7 @@
 			this.RegisterEmail = new System.Windows.Forms.TextBox();
 			this.RegisterEmailLabel = new System.Windows.Forms.Label();
 			this.RegisterButton = new System.Windows.Forms.Button();
+			this.LoginButton = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.Background)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -60,6 +61,7 @@
 			this.StartGame.TabIndex = 1;
 			this.StartGame.Text = "Start";
 			this.StartGame.UseVisualStyleBackColor = false;
+			this.StartGame.Visible = false;
 			this.StartGame.Click += new System.EventHandler(this.StartGame_Click);
 			// 
 			// LoginEmailLabel
@@ -73,6 +75,7 @@
 			this.LoginEmailLabel.Size = new System.Drawing.Size(48, 21);
 			this.LoginEmailLabel.TabIndex = 2;
 			this.LoginEmailLabel.Text = "Email";
+			this.LoginEmailLabel.Visible = false;
 			// 
 			// LoginEmail
 			// 
@@ -83,6 +86,7 @@
 			this.LoginEmail.Name = "LoginEmail";
 			this.LoginEmail.Size = new System.Drawing.Size(230, 29);
 			this.LoginEmail.TabIndex = 3;
+			this.LoginEmail.Visible = false;
 			this.LoginEmail.TextChanged += new System.EventHandler(this.LoginEmail_TextChanged);
 			// 
 			// LoginPassword
@@ -94,6 +98,7 @@
 			this.LoginPassword.Name = "LoginPassword";
 			this.LoginPassword.Size = new System.Drawing.Size(230, 29);
 			this.LoginPassword.TabIndex = 5;
+			this.LoginPassword.Visible = false;
 			this.LoginPassword.TextChanged += new System.EventHandler(this.LoginPassword_TextChanged);
 			// 
 			// LoginPasswordLabel
@@ -107,6 +112,7 @@
 			this.LoginPasswordLabel.Size = new System.Drawing.Size(76, 21);
 			this.LoginPasswordLabel.TabIndex = 4;
 			this.LoginPasswordLabel.Text = "Password";
+			this.LoginPasswordLabel.Visible = false;
 			// 
 			// TrayIcon
 			// 
@@ -216,12 +222,30 @@
 			this.RegisterButton.Text = "Register";
 			this.RegisterButton.UseVisualStyleBackColor = false;
 			this.RegisterButton.Visible = false;
+			this.RegisterButton.Click += new System.EventHandler(this.RegisterButton_Click);
+			// 
+			// LoginButton
+			// 
+			this.LoginButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.LoginButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+			this.LoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.LoginButton.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.LoginButton.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.LoginButton.Location = new System.Drawing.Point(405, 391);
+			this.LoginButton.Name = "LoginButton";
+			this.LoginButton.Size = new System.Drawing.Size(151, 38);
+			this.LoginButton.TabIndex = 13;
+			this.LoginButton.Text = "Login";
+			this.LoginButton.UseVisualStyleBackColor = false;
+			this.LoginButton.Visible = false;
+			this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
 			// 
 			// Main
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(720, 441);
+			this.Controls.Add(this.LoginButton);
 			this.Controls.Add(this.RegisterButton);
 			this.Controls.Add(this.RegisterPassword);
 			this.Controls.Add(this.RegisterPasswordLabel);
@@ -263,6 +287,7 @@
 		private System.Windows.Forms.TextBox RegisterEmail;
 		private System.Windows.Forms.Label RegisterEmailLabel;
 		private System.Windows.Forms.Button RegisterButton;
+		private System.Windows.Forms.Button LoginButton;
 	}
 }
 

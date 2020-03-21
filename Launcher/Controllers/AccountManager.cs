@@ -35,7 +35,6 @@
 			launcherConfig.Email = email;
 			launcherConfig.Password = password;
 			JsonHandler.SaveLauncherConfig(launcherConfig);
-
 			return 1;
 		}
 
@@ -95,7 +94,6 @@
 			launcherConfig.Email = "";
 			launcherConfig.Password = "";
 			JsonHandler.SaveLauncherConfig(launcherConfig);
-
 			return 1;
 		}
 
@@ -119,7 +117,6 @@
 			launcherConfig.Email = email;
 			SelectedAccount.email = email;
 			JsonHandler.SaveLauncherConfig(launcherConfig);
-
 			return 1;
 		}
 
@@ -143,7 +140,6 @@
 			SelectedAccount.password = password;
 			launcherConfig.Password = password;
 			JsonHandler.SaveLauncherConfig(launcherConfig);
-
 			return 1;
 		}
 

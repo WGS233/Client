@@ -16,8 +16,6 @@ namespace Launcher
                 return -1;
             }
 
-			string filepath = Environment.CurrentDirectory;
-
 			ClientConfig clientConfig = JsonHandler.LoadClientConfig();
 			clientConfig.BackendUrl = server.backendUrl;
 			JsonHandler.SaveClientConfig(clientConfig);
@@ -25,8 +23,8 @@ namespace Launcher
 			ProcessStartInfo clientProcess = new ProcessStartInfo(clientExecutable);
             clientProcess.Arguments = "-bC5vLmcuaS5u=" + GenerateToken(account) + " -token=" + account.id + " -screenmode=fullscreen -window-mode=borderless";
             clientProcess.UseShellExecute = false;
-			clientProcess.WorkingDirectory = filepath;
-            Process.Start(clientProcess);
+			clientProcess.WorkingDirectory = Environment.CurrentDirectory;
+			Process.Start(clientProcess);
 
 			return 1;
         }

@@ -25,35 +25,41 @@ namespace Launcher
 			accountManager = new Account(launcherConfig);
 			gameStarter = new GameStarter();
 
-			serverManager.SelectServer(0);
+			ShowServerSelectView();
+		}
 
-			if (serverManager.SelectedServer == null)
+		private void ShowServerSelectView()
+		{
+			ServerLabel.Visible = true;
+
+			ServerList.Visible = true;
+			ConnectButton.Visible = true;
+
+			// refresh editions as user might switch servers
+			ServerList.Items.Clear();
+
+			foreach (ServerInfo server in serverManager.AvailableServers)
 			{
-				MessageBox.Show("No servers available");
+				ServerList.Items.Add(server.name);
+			}
+
+			if (ServerList.Items.Count == 0)
+			{
+				ServerList.Enabled = false;
+				ConnectButton.Enabled = false;
 			}
 			else
 			{
-				RequestHandler.ChangeBackendUrl(serverManager.SelectedServer.backendUrl);
-			}
-
-			if (launcherConfig.Email != "" || launcherConfig.Password != "")
-			{
-				ShowLoginView();
-			}
-			else
-			{
-				ShowRegisterView();
+				ServerList.SelectedIndex = 0;
 			}
 		}
 
-		private void ShowProfileView()
+		private void HideServerSelectView()
 		{
-			StartGame.Visible = true;
-		}
+			ServerLabel.Visible = false;
 
-		private void HideProfileView()
-		{
-			StartGame.Visible = false;
+			ServerList.Visible = false;
+			ConnectButton.Visible = false;
 		}
 
 		private void ShowLoginView()
@@ -106,12 +112,13 @@ namespace Launcher
 
 			if (RegisterEdition.Items.Count == 0)
 			{
-				RegisterEdition.Items.Add("No edition available");
 				RegisterEdition.Enabled = false;
 				RegisterButton.Enabled = false;
 			}
-
-			RegisterEdition.SelectedIndex = 0;
+			else
+			{
+				RegisterEdition.SelectedIndex = 0;
+			}
 		}
 
 		private void HideRegisterView()
@@ -127,30 +134,29 @@ namespace Launcher
 			LoginInsteadButton.Visible = false;
 		}
 
-		private void ShowServerView()
+		private void ShowProfileView()
 		{
-			foreach (ServerInfo server in serverManager.AvailableServers)
+			StartGame.Visible = true;
+		}
+
+		private void HideProfileView()
+		{
+			StartGame.Visible = false;
+		}
+
+		private void ConnectButton_Click(object sender, EventArgs e)
+		{
+			serverManager.SelectServer(ServerList.SelectedIndex);
+			RequestHandler.ChangeBackendUrl(serverManager.SelectedServer.backendUrl);
+
+			if (launcherConfig.Email == "" || launcherConfig.Password == "")
 			{
-				// code here
+				ShowRegisterView();
+				return;
 			}
-		}
 
-		private void GameExitCallback(ProcessMonitor monitor)
-		{
-			monitor.Stop();
-			Show();
-		}
-
-		private void LoginEmail_TextChanged(object sender, EventArgs e)
-		{
-			launcherConfig.Email = LoginEmail.Text;
-			JsonHandler.SaveLauncherConfig(launcherConfig);
-		}
-
-		private void LoginPassword_TextChanged(object sender, EventArgs e)
-		{
-			launcherConfig.Password = LoginPassword.Text;
-			JsonHandler.SaveLauncherConfig(launcherConfig);
+			HideServerSelectView();
+			ShowLoginView();
 		}
 
 		private void LoginButton_Click(object sender, EventArgs e)
@@ -235,6 +241,12 @@ namespace Launcher
                     MessageBox.Show("Unexpected error");
                     return;
             }
+		}
+
+		private void GameExitCallback(ProcessMonitor monitor)
+		{
+			monitor.Stop();
+			Show();
 		}
 
 		private void TrayIcon_MouseDoubleClick(object sender, MouseEventArgs e)

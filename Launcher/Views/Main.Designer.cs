@@ -47,6 +47,9 @@
 			this.LoginButton = new System.Windows.Forms.Button();
 			this.RegisterInsteadButton = new System.Windows.Forms.Button();
 			this.LoginInsteadButton = new System.Windows.Forms.Button();
+			this.ConnectButton = new System.Windows.Forms.Button();
+			this.ServerList = new System.Windows.Forms.ComboBox();
+			this.ServerLabel = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.Background)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -89,7 +92,6 @@
 			this.LoginEmail.Size = new System.Drawing.Size(230, 29);
 			this.LoginEmail.TabIndex = 3;
 			this.LoginEmail.Visible = false;
-			this.LoginEmail.TextChanged += new System.EventHandler(this.LoginEmail_TextChanged);
 			// 
 			// LoginPassword
 			// 
@@ -101,7 +103,6 @@
 			this.LoginPassword.Size = new System.Drawing.Size(230, 29);
 			this.LoginPassword.TabIndex = 5;
 			this.LoginPassword.Visible = false;
-			this.LoginPassword.TextChanged += new System.EventHandler(this.LoginPassword_TextChanged);
 			// 
 			// LoginPasswordLabel
 			// 
@@ -128,7 +129,7 @@
 			this.Background.BackgroundImage = global::Launcher.Properties.Resources.bg_1;
 			this.Background.Image = global::Launcher.Properties.Resources.bg_alpha;
 			this.Background.InitialImage = null;
-			this.Background.Location = new System.Drawing.Point(0, -2);
+			this.Background.Location = new System.Drawing.Point(0, 0);
 			this.Background.Name = "Background";
 			this.Background.Size = new System.Drawing.Size(728, 451);
 			this.Background.TabIndex = 0;
@@ -148,6 +149,7 @@
 			this.RegisterEdition.Name = "RegisterEdition";
 			this.RegisterEdition.Size = new System.Drawing.Size(230, 29);
 			this.RegisterEdition.TabIndex = 6;
+			this.RegisterEdition.Text = "No editions available";
 			this.RegisterEdition.Visible = false;
 			// 
 			// RegisterEditionLabel
@@ -273,11 +275,60 @@
 			this.LoginInsteadButton.Visible = false;
 			this.LoginInsteadButton.Click += new System.EventHandler(this.LoginInsteadButton_Click);
 			// 
+			// ConnectButton
+			// 
+			this.ConnectButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.ConnectButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+			this.ConnectButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.ConnectButton.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ConnectButton.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.ConnectButton.Location = new System.Drawing.Point(405, 391);
+			this.ConnectButton.Name = "ConnectButton";
+			this.ConnectButton.Size = new System.Drawing.Size(151, 38);
+			this.ConnectButton.TabIndex = 16;
+			this.ConnectButton.Text = "Connect";
+			this.ConnectButton.UseVisualStyleBackColor = false;
+			this.ConnectButton.Visible = false;
+			this.ConnectButton.Click += new System.EventHandler(this.ConnectButton_Click);
+			// 
+			// ServerList
+			// 
+			this.ServerList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.ServerList.DropDownHeight = 107;
+			this.ServerList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.ServerList.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ServerList.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.ServerList.FormattingEnabled = true;
+			this.ServerList.IntegralHeight = false;
+			this.ServerList.ItemHeight = 21;
+			this.ServerList.Location = new System.Drawing.Point(387, 182);
+			this.ServerList.Name = "ServerList";
+			this.ServerList.Size = new System.Drawing.Size(230, 29);
+			this.ServerList.TabIndex = 17;
+			this.ServerList.Text = "No servers available";
+			this.ServerList.Visible = false;
+			// 
+			// ServerLabel
+			// 
+			this.ServerLabel.AutoSize = true;
+			this.ServerLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.ServerLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ServerLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.ServerLabel.Location = new System.Drawing.Point(326, 185);
+			this.ServerLabel.Name = "ServerLabel";
+			this.ServerLabel.Size = new System.Drawing.Size(55, 21);
+			this.ServerLabel.TabIndex = 18;
+			this.ServerLabel.Text = "Server";
+			this.ServerLabel.Visible = false;
+			// 
 			// Main
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(720, 441);
+			this.Controls.Add(this.ServerLabel);
+			this.Controls.Add(this.ServerList);
+			this.Controls.Add(this.ConnectButton);
 			this.Controls.Add(this.RegisterEdition);
 			this.Controls.Add(this.RegisterEditionLabel);
 			this.Controls.Add(this.RegisterEmailLabel);
@@ -325,6 +376,9 @@
 		private System.Windows.Forms.Button LoginButton;
 		private System.Windows.Forms.Button RegisterInsteadButton;
 		private System.Windows.Forms.Button LoginInsteadButton;
+		private System.Windows.Forms.Button ConnectButton;
+		private System.Windows.Forms.ComboBox ServerList;
+		private System.Windows.Forms.Label ServerLabel;
 	}
 }
 

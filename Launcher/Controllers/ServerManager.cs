@@ -16,13 +16,13 @@ namespace Launcher
 
 		public void SelectServer(int index)
 		{
-			if (index >= 0 || index < AvailableServers.Count)
+			if (index < 0 || index >= AvailableServers.Count)
 			{
-				SelectedServer = AvailableServers[index];
+				SelectedServer = null;
 				return;
 			}
 
-			SelectedServer = null;
+			SelectedServer = AvailableServers[index];
 		}
 
 		public void LoadServer(string backendUrl)

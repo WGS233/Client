@@ -45,6 +45,8 @@
 			this.RegisterEmailLabel = new System.Windows.Forms.Label();
 			this.RegisterButton = new System.Windows.Forms.Button();
 			this.LoginButton = new System.Windows.Forms.Button();
+			this.RegisterInsteadButton = new System.Windows.Forms.Button();
+			this.LoginInsteadButton = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.Background)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -136,6 +138,7 @@
 			// 
 			this.RegisterEdition.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
 			this.RegisterEdition.DropDownHeight = 107;
+			this.RegisterEdition.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.RegisterEdition.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.RegisterEdition.ForeColor = System.Drawing.Color.WhiteSmoke;
 			this.RegisterEdition.FormattingEnabled = true;
@@ -240,23 +243,55 @@
 			this.LoginButton.Visible = false;
 			this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
 			// 
+			// RegisterInsteadButton
+			// 
+			this.RegisterInsteadButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.RegisterInsteadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.RegisterInsteadButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.RegisterInsteadButton.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.RegisterInsteadButton.Location = new System.Drawing.Point(515, 231);
+			this.RegisterInsteadButton.Name = "RegisterInsteadButton";
+			this.RegisterInsteadButton.Size = new System.Drawing.Size(101, 23);
+			this.RegisterInsteadButton.TabIndex = 14;
+			this.RegisterInsteadButton.Text = "Register";
+			this.RegisterInsteadButton.UseVisualStyleBackColor = false;
+			this.RegisterInsteadButton.Visible = false;
+			this.RegisterInsteadButton.Click += new System.EventHandler(this.RegisterInsteadButton_Click);
+			// 
+			// LoginInsteadButton
+			// 
+			this.LoginInsteadButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.LoginInsteadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.LoginInsteadButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.LoginInsteadButton.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.LoginInsteadButton.Location = new System.Drawing.Point(516, 272);
+			this.LoginInsteadButton.Name = "LoginInsteadButton";
+			this.LoginInsteadButton.Size = new System.Drawing.Size(101, 23);
+			this.LoginInsteadButton.TabIndex = 15;
+			this.LoginInsteadButton.Text = "Login";
+			this.LoginInsteadButton.UseVisualStyleBackColor = false;
+			this.LoginInsteadButton.Visible = false;
+			this.LoginInsteadButton.Click += new System.EventHandler(this.LoginInsteadButton_Click);
+			// 
 			// Main
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(720, 441);
-			this.Controls.Add(this.LoginButton);
-			this.Controls.Add(this.RegisterButton);
-			this.Controls.Add(this.RegisterPassword);
-			this.Controls.Add(this.RegisterPasswordLabel);
-			this.Controls.Add(this.RegisterEmail);
-			this.Controls.Add(this.RegisterEmailLabel);
-			this.Controls.Add(this.RegisterEditionLabel);
 			this.Controls.Add(this.RegisterEdition);
-			this.Controls.Add(this.LoginPassword);
+			this.Controls.Add(this.RegisterEditionLabel);
+			this.Controls.Add(this.RegisterEmailLabel);
+			this.Controls.Add(this.RegisterEmail);
+			this.Controls.Add(this.RegisterPasswordLabel);
+			this.Controls.Add(this.RegisterPassword);
+			this.Controls.Add(this.RegisterButton);
+			this.Controls.Add(this.LoginInsteadButton);
+			this.Controls.Add(this.RegisterInsteadButton);
+			this.Controls.Add(this.LoginEmailLabel);
 			this.Controls.Add(this.LoginPasswordLabel);
 			this.Controls.Add(this.LoginEmail);
-			this.Controls.Add(this.LoginEmailLabel);
+			this.Controls.Add(this.LoginPassword);
+			this.Controls.Add(this.LoginButton);
 			this.Controls.Add(this.StartGame);
 			this.Controls.Add(this.Background);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -288,6 +323,8 @@
 		private System.Windows.Forms.Label RegisterEmailLabel;
 		private System.Windows.Forms.Button RegisterButton;
 		private System.Windows.Forms.Button LoginButton;
+		private System.Windows.Forms.Button RegisterInsteadButton;
+		private System.Windows.Forms.Button LoginInsteadButton;
 	}
 }
 

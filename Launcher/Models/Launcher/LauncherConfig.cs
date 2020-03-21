@@ -13,8 +13,8 @@ namespace Launcher
 		public LauncherConfig()
 		{
 			Servers = new string[1] { "https://127.0.0.1" };
-			Email = "user@emutarkov.com";
-			Password = "password";
+			Email = "";
+			Password = "";
 			GamePath = Environment.CurrentDirectory;
 			MinimizeToTray = true;
 		}

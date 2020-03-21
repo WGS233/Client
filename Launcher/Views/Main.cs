@@ -36,8 +36,14 @@ namespace Launcher
 				RequestHandler.ChangeBackendUrl(serverManager.SelectedServer.backendUrl);
 			}
 
-			//ShowLoginView();
-			ShowRegisterView();
+			if (launcherConfig.Email != "" || launcherConfig.Password != "")
+			{
+				ShowLoginView();
+			}
+			else
+			{
+				ShowRegisterView();
+			}
 		}
 
 		private void ShowProfileView()
@@ -58,6 +64,7 @@ namespace Launcher
 			LoginEmail.Visible = true;
 			LoginPassword.Visible = true;
 			LoginButton.Visible = true;
+			RegisterInsteadButton.Visible = true;
 
 			LoginEmail.Text = launcherConfig.Email;
 			LoginPassword.Text = launcherConfig.Password;
@@ -68,6 +75,7 @@ namespace Launcher
 			LoginEmailLabel.Visible = false;
 			LoginPasswordLabel.Visible = false;
 			LoginButton.Visible = false;
+			RegisterInsteadButton.Visible = false;
 
 			LoginEmail.Visible = false;
 			LoginPassword.Visible = false;
@@ -83,6 +91,7 @@ namespace Launcher
 			RegisterPassword.Visible = true;
 			RegisterEdition.Visible = true;
 			RegisterButton.Visible = true;
+			LoginInsteadButton.Visible = true;
 
 			RegisterEmail.Text = launcherConfig.Email;
 			RegisterPassword.Text = launcherConfig.Password;
@@ -115,6 +124,7 @@ namespace Launcher
 			RegisterPassword.Visible = false;
 			RegisterEdition.Visible = false;
 			RegisterButton.Visible = false;
+			LoginInsteadButton.Visible = false;
 		}
 
 		private void ShowServerView()
@@ -187,6 +197,18 @@ namespace Launcher
 					MessageBox.Show("Wrong email and/or password");
 					return;
 			}
+		}
+
+		private void RegisterInsteadButton_Click(object sender, EventArgs e)
+		{
+			HideLoginView();
+			ShowRegisterView();
+		}
+
+		private void LoginInsteadButton_Click(object sender, EventArgs e)
+		{
+			HideRegisterView();
+			ShowLoginView();
 		}
 
 		private void StartGame_Click(object sender, EventArgs e)

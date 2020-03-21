@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using EmuLib;
 
-namespace EFT.Trainer
+namespace EmuLib.Hooks
 {
 	public class Loader
 	{

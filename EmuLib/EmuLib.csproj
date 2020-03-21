@@ -98,7 +98,7 @@
     <Compile Include="Utils\Profile\ProfileSaveUtil.cs" />
     <Compile Include="Utils\Reflection\ClientAppUtils.cs" />
     <Compile Include="Utils\Reflection\ConfigUtils.cs" />
-    <Compile Include="Hooks\EFTTarget.cs" />
+    <Compile Include="Hooks\EmuLibTarget.cs" />
     <Compile Include="Hooks\Loader.cs" />
     <Compile Include="Utils\Reflection\MainAppUtils.cs" />
     <Compile Include="Utils\Reflection\PrivateMethodAccessor.cs" />

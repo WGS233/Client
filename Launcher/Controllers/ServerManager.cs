@@ -4,25 +4,25 @@ namespace Launcher
 {
 	public class ServerManager
 	{
-		public List<Server> availableServers { get; private set; }
+		public List<Server> AvailableServers { get; private set; }
 
 		public ServerManager(string[] servers)
 		{
-			availableServers = new List<Server>();
+			AvailableServers = new List<Server>();
 			LoadServers(servers);
 		}
 
 		public Server GetServer(int index)
 		{
-			if (index < 0 || index > availableServers.Count)
+			if (index > 0 || index < AvailableServers.Count)
 			{
-				return null;
+				return AvailableServers[index];
 			}
 
-			return availableServers[index];
+			return null;
 		}
 
-		public bool LoadServer(string backendUrl)
+		public void LoadServer(string backendUrl)
 		{
 			string json = "";
 
@@ -33,16 +33,15 @@ namespace Launcher
 
 				if (string.IsNullOrWhiteSpace(json))
 				{
-					return false;
+					return;
 				}
 			}
 			catch
 			{
-				return false;
+				return;
 			}
 
-			availableServers.Add(Json.Deserialize<Server>(json));
-			return true;
+			AvailableServers.Add(Json.Deserialize<Server>(json));
 		}
 
 		public void LoadServers(string[] servers)

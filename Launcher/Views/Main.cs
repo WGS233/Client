@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Launcher
@@ -25,23 +26,91 @@ namespace Launcher
 			gameStarter = new GameStarter();
 
 			selectedServer = serverManager.GetServer(0);
-			RequestHandler.ChangeBackendUrl(selectedServer.backendUrl);
 
-			ShowLoginView();
+			if (selectedServer == null)
+			{
+				MessageBox.Show("No servers available");
+			}
+			else
+			{
+				RequestHandler.ChangeBackendUrl(selectedServer.backendUrl);
+
+				// ShowLoginView();
+				HideLoginView();
+				ShowRegisterView();
+			}
 		}
 
 		private void ShowLoginView()
 		{
+			LoginEmailLabel.Visible = true;
+			LoginPasswordLabel.Visible = true;
+
 			LoginEmail.Visible = true;
 			LoginPassword.Visible = true;
+
 			LoginEmail.Text = launcherConfig.Email;
 			LoginPassword.Text = launcherConfig.Password;
 		}
 
 		private void HideLoginView()
 		{
+			LoginEmailLabel.Visible = false;
+			LoginPasswordLabel.Visible = false;
+
 			LoginEmail.Visible = false;
 			LoginPassword.Visible = false;
+		}
+
+		private void ShowRegisterView()
+		{
+			RegisterEmailLabel.Visible = true;
+			RegisterPasswordLabel.Visible = true;
+			RegisterEditionLabel.Visible = true;
+
+			RegisterEmail.Visible = true;
+			RegisterPassword.Visible = true;
+			RegisterEdition.Visible = true;
+			RegisterButton.Visible = true;
+
+			RegisterEmail.Text = launcherConfig.Email;
+			RegisterPassword.Text = launcherConfig.Password;
+
+			// refresh editions as user might switch servers
+			RegisterEdition.Items.Clear();
+
+			foreach (String edition in selectedServer.editions)
+			{
+				RegisterEdition.Items.Add(edition);
+			}
+
+			if (RegisterEdition.Items.Count == 0)
+			{
+				RegisterEdition.Items.Add("No edition available");
+				RegisterButton.Enabled = false;
+			}
+
+			RegisterEdition.SelectedIndex = 0;
+		}
+
+		private void HideRegisterView()
+		{
+			RegisterEmailLabel.Visible = false;
+			RegisterPasswordLabel.Visible = false;
+			RegisterEditionLabel.Visible = false;
+
+			RegisterEmail.Visible = false;
+			RegisterPassword.Visible = false;
+			RegisterEdition.Visible = false;
+			RegisterButton.Visible = false;
+		}
+
+		private void ShowServerView()
+		{
+			foreach (Server server in serverManager.AvailableServers)
+			{
+				// code here
+			}
 		}
 
 		private void GameExitCallback(ProcessMonitor monitor)

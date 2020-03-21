@@ -61,7 +61,7 @@
 			this.EmailLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
 			this.EmailLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.EmailLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
-			this.EmailLabel.Location = new System.Drawing.Point(333, 160);
+			this.EmailLabel.Location = new System.Drawing.Point(333, 148);
 			this.EmailLabel.Name = "EmailLabel";
 			this.EmailLabel.Size = new System.Drawing.Size(48, 21);
 			this.EmailLabel.TabIndex = 2;
@@ -72,7 +72,7 @@
 			this.LoginEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
 			this.LoginEmail.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.LoginEmail.ForeColor = System.Drawing.Color.WhiteSmoke;
-			this.LoginEmail.Location = new System.Drawing.Point(387, 157);
+			this.LoginEmail.Location = new System.Drawing.Point(387, 145);
 			this.LoginEmail.Name = "LoginEmail";
 			this.LoginEmail.Size = new System.Drawing.Size(230, 29);
 			this.LoginEmail.TabIndex = 3;
@@ -83,7 +83,7 @@
 			this.LoginPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
 			this.LoginPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.LoginPassword.ForeColor = System.Drawing.Color.WhiteSmoke;
-			this.LoginPassword.Location = new System.Drawing.Point(387, 202);
+			this.LoginPassword.Location = new System.Drawing.Point(387, 190);
 			this.LoginPassword.Name = "LoginPassword";
 			this.LoginPassword.Size = new System.Drawing.Size(230, 29);
 			this.LoginPassword.TabIndex = 5;
@@ -95,7 +95,7 @@
 			this.PasswordLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
 			this.PasswordLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.PasswordLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
-			this.PasswordLabel.Location = new System.Drawing.Point(305, 205);
+			this.PasswordLabel.Location = new System.Drawing.Point(305, 193);
 			this.PasswordLabel.Name = "PasswordLabel";
 			this.PasswordLabel.Size = new System.Drawing.Size(76, 21);
 			this.PasswordLabel.TabIndex = 4;

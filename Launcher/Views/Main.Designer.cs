@@ -48,8 +48,16 @@
 			this.RegisterInsteadButton = new System.Windows.Forms.Button();
 			this.LoginInsteadButton = new System.Windows.Forms.Button();
 			this.ConnectButton = new System.Windows.Forms.Button();
-			this.ServerList = new System.Windows.Forms.ComboBox();
+			this.BackToLoginButton = new System.Windows.Forms.Button();
+			this.BackToProfileView = new System.Windows.Forms.Button();
+			this.RefreshServerListButton = new System.Windows.Forms.Button();
 			this.ServerLabel = new System.Windows.Forms.Label();
+			this.ServerList = new System.Windows.Forms.ComboBox();
+			this.AddServerInsteadButton = new System.Windows.Forms.Button();
+			this.ViewServersInsteadButton = new System.Windows.Forms.Button();
+			this.UrlLabel = new System.Windows.Forms.Label();
+			this.AddServer = new System.Windows.Forms.TextBox();
+			this.AddServerButton = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.Background)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -251,7 +259,7 @@
 			this.RegisterInsteadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.RegisterInsteadButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.RegisterInsteadButton.ForeColor = System.Drawing.Color.WhiteSmoke;
-			this.RegisterInsteadButton.Location = new System.Drawing.Point(515, 231);
+			this.RegisterInsteadButton.Location = new System.Drawing.Point(387, 233);
 			this.RegisterInsteadButton.Name = "RegisterInsteadButton";
 			this.RegisterInsteadButton.Size = new System.Drawing.Size(101, 23);
 			this.RegisterInsteadButton.TabIndex = 14;
@@ -266,7 +274,7 @@
 			this.LoginInsteadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.LoginInsteadButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.LoginInsteadButton.ForeColor = System.Drawing.Color.WhiteSmoke;
-			this.LoginInsteadButton.Location = new System.Drawing.Point(516, 272);
+			this.LoginInsteadButton.Location = new System.Drawing.Point(387, 271);
 			this.LoginInsteadButton.Name = "LoginInsteadButton";
 			this.LoginInsteadButton.Size = new System.Drawing.Size(101, 23);
 			this.LoginInsteadButton.TabIndex = 15;
@@ -291,6 +299,64 @@
 			this.ConnectButton.Visible = false;
 			this.ConnectButton.Click += new System.EventHandler(this.ConnectButton_Click);
 			// 
+			// BackToLoginButton
+			// 
+			this.BackToLoginButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.BackToLoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.BackToLoginButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.BackToLoginButton.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.BackToLoginButton.Location = new System.Drawing.Point(221, 0);
+			this.BackToLoginButton.Name = "BackToLoginButton";
+			this.BackToLoginButton.Size = new System.Drawing.Size(101, 23);
+			this.BackToLoginButton.TabIndex = 20;
+			this.BackToLoginButton.Text = "Logout";
+			this.BackToLoginButton.UseVisualStyleBackColor = false;
+			this.BackToLoginButton.Visible = false;
+			this.BackToLoginButton.Click += new System.EventHandler(this.BackToLoginButton_Click);
+			// 
+			// BackToProfileView
+			// 
+			this.BackToProfileView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.BackToProfileView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.BackToProfileView.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.BackToProfileView.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.BackToProfileView.Location = new System.Drawing.Point(221, 0);
+			this.BackToProfileView.Name = "BackToProfileView";
+			this.BackToProfileView.Size = new System.Drawing.Size(101, 23);
+			this.BackToProfileView.TabIndex = 21;
+			this.BackToProfileView.Text = "Back";
+			this.BackToProfileView.UseVisualStyleBackColor = false;
+			this.BackToProfileView.Visible = false;
+			this.BackToProfileView.Click += new System.EventHandler(this.BackToProfileView_Click);
+			// 
+			// RefreshServerListButton
+			// 
+			this.RefreshServerListButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.RefreshServerListButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.RefreshServerListButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.RefreshServerListButton.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.RefreshServerListButton.Location = new System.Drawing.Point(516, 225);
+			this.RefreshServerListButton.Name = "RefreshServerListButton";
+			this.RefreshServerListButton.Size = new System.Drawing.Size(101, 23);
+			this.RefreshServerListButton.TabIndex = 23;
+			this.RefreshServerListButton.Text = "Refresh";
+			this.RefreshServerListButton.UseVisualStyleBackColor = false;
+			this.RefreshServerListButton.Visible = false;
+			this.RefreshServerListButton.Click += new System.EventHandler(this.RefreshServerListButton_Click);
+			// 
+			// ServerLabel
+			// 
+			this.ServerLabel.AutoSize = true;
+			this.ServerLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.ServerLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ServerLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.ServerLabel.Location = new System.Drawing.Point(326, 185);
+			this.ServerLabel.Name = "ServerLabel";
+			this.ServerLabel.Size = new System.Drawing.Size(55, 21);
+			this.ServerLabel.TabIndex = 18;
+			this.ServerLabel.Text = "Server";
+			this.ServerLabel.Visible = false;
+			// 
 			// ServerList
 			// 
 			this.ServerList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
@@ -308,27 +374,95 @@
 			this.ServerList.Text = "No servers available";
 			this.ServerList.Visible = false;
 			// 
-			// ServerLabel
+			// AddServerInsteadButton
 			// 
-			this.ServerLabel.AutoSize = true;
-			this.ServerLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-			this.ServerLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.ServerLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
-			this.ServerLabel.Location = new System.Drawing.Point(326, 185);
-			this.ServerLabel.Name = "ServerLabel";
-			this.ServerLabel.Size = new System.Drawing.Size(55, 21);
-			this.ServerLabel.TabIndex = 18;
-			this.ServerLabel.Text = "Server";
-			this.ServerLabel.Visible = false;
+			this.AddServerInsteadButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.AddServerInsteadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.AddServerInsteadButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.AddServerInsteadButton.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.AddServerInsteadButton.Location = new System.Drawing.Point(387, 225);
+			this.AddServerInsteadButton.Name = "AddServerInsteadButton";
+			this.AddServerInsteadButton.Size = new System.Drawing.Size(101, 23);
+			this.AddServerInsteadButton.TabIndex = 22;
+			this.AddServerInsteadButton.Text = "Add server";
+			this.AddServerInsteadButton.UseVisualStyleBackColor = false;
+			this.AddServerInsteadButton.Visible = false;
+			this.AddServerInsteadButton.Click += new System.EventHandler(this.AddServerInsteadButton_Click);
+			// 
+			// ViewServersInsteadButton
+			// 
+			this.ViewServersInsteadButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.ViewServersInsteadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.ViewServersInsteadButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ViewServersInsteadButton.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.ViewServersInsteadButton.Location = new System.Drawing.Point(387, 225);
+			this.ViewServersInsteadButton.Name = "ViewServersInsteadButton";
+			this.ViewServersInsteadButton.Size = new System.Drawing.Size(101, 23);
+			this.ViewServersInsteadButton.TabIndex = 26;
+			this.ViewServersInsteadButton.Text = "View servers";
+			this.ViewServersInsteadButton.UseVisualStyleBackColor = false;
+			this.ViewServersInsteadButton.Visible = false;
+			this.ViewServersInsteadButton.Click += new System.EventHandler(this.ViewServersInsteadButton_Click);
+			// 
+			// UrlLabel
+			// 
+			this.UrlLabel.AutoSize = true;
+			this.UrlLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.UrlLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.UrlLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.UrlLabel.Location = new System.Drawing.Point(350, 185);
+			this.UrlLabel.Name = "UrlLabel";
+			this.UrlLabel.Size = new System.Drawing.Size(31, 21);
+			this.UrlLabel.TabIndex = 25;
+			this.UrlLabel.Text = "Url";
+			this.UrlLabel.Visible = false;
+			// 
+			// AddServer
+			// 
+			this.AddServer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.AddServer.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.AddServer.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.AddServer.Location = new System.Drawing.Point(387, 182);
+			this.AddServer.Name = "AddServer";
+			this.AddServer.Size = new System.Drawing.Size(230, 29);
+			this.AddServer.TabIndex = 27;
+			this.AddServer.Text = "https://127.0.0.1";
+			this.AddServer.Visible = false;
+			// 
+			// AddServerButton
+			// 
+			this.AddServerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.AddServerButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+			this.AddServerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.AddServerButton.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.AddServerButton.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.AddServerButton.Location = new System.Drawing.Point(405, 391);
+			this.AddServerButton.Name = "AddServerButton";
+			this.AddServerButton.Size = new System.Drawing.Size(151, 38);
+			this.AddServerButton.TabIndex = 28;
+			this.AddServerButton.Text = "Add";
+			this.AddServerButton.UseVisualStyleBackColor = false;
+			this.AddServerButton.Visible = false;
+			this.AddServerButton.Click += new System.EventHandler(this.AddServerButton_Click);
 			// 
 			// Main
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(720, 441);
-			this.Controls.Add(this.ServerLabel);
+			this.Controls.Add(this.AddServerButton);
+			this.Controls.Add(this.AddServer);
+			this.Controls.Add(this.ViewServersInsteadButton);
+			this.Controls.Add(this.UrlLabel);
+			this.Controls.Add(this.RefreshServerListButton);
+			this.Controls.Add(this.AddServerInsteadButton);
 			this.Controls.Add(this.ServerList);
+			this.Controls.Add(this.ServerLabel);
 			this.Controls.Add(this.ConnectButton);
+			this.Controls.Add(this.BackToProfileView);
+			this.Controls.Add(this.BackToLoginButton);
+			this.Controls.Add(this.LoginPassword);
+			this.Controls.Add(this.RegisterInsteadButton);
 			this.Controls.Add(this.RegisterEdition);
 			this.Controls.Add(this.RegisterEditionLabel);
 			this.Controls.Add(this.RegisterEmailLabel);
@@ -337,11 +471,9 @@
 			this.Controls.Add(this.RegisterPassword);
 			this.Controls.Add(this.RegisterButton);
 			this.Controls.Add(this.LoginInsteadButton);
-			this.Controls.Add(this.RegisterInsteadButton);
 			this.Controls.Add(this.LoginEmailLabel);
 			this.Controls.Add(this.LoginPasswordLabel);
 			this.Controls.Add(this.LoginEmail);
-			this.Controls.Add(this.LoginPassword);
 			this.Controls.Add(this.LoginButton);
 			this.Controls.Add(this.StartGame);
 			this.Controls.Add(this.Background);
@@ -377,8 +509,16 @@
 		private System.Windows.Forms.Button RegisterInsteadButton;
 		private System.Windows.Forms.Button LoginInsteadButton;
 		private System.Windows.Forms.Button ConnectButton;
-		private System.Windows.Forms.ComboBox ServerList;
+		private System.Windows.Forms.Button BackToLoginButton;
+		private System.Windows.Forms.Button BackToProfileView;
+		private System.Windows.Forms.Button RefreshServerListButton;
 		private System.Windows.Forms.Label ServerLabel;
+		private System.Windows.Forms.ComboBox ServerList;
+		private System.Windows.Forms.Button AddServerInsteadButton;
+		private System.Windows.Forms.Button ViewServersInsteadButton;
+		private System.Windows.Forms.Label UrlLabel;
+		private System.Windows.Forms.TextBox AddServer;
+		private System.Windows.Forms.Button AddServerButton;
 	}
 }
 

@@ -7,11 +7,10 @@ namespace Launcher
 		public List<ServerInfo> AvailableServers { get; private set; }
 		public ServerInfo SelectedServer { get; private set; }
 
-		public ServerManager(string[] servers)
+		public ServerManager()
 		{
 			SelectedServer = null;
 			AvailableServers = new List<ServerInfo>();
-			LoadServers(servers);
 		}
 
 		public void SelectServer(int index)
@@ -44,6 +43,8 @@ namespace Launcher
 
 		public void LoadServers(string[] servers)
 		{
+			AvailableServers.Clear();
+
 			foreach (string backendUrl in servers)
 			{
 				LoadServer(backendUrl);

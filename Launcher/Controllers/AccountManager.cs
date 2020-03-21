@@ -14,7 +14,7 @@
 		public int Login(string email, string password)
 		{
 			LoginRequestData data = new LoginRequestData(email, password);
-			string id = "";
+			string id = "FAILED";
 			string json = "";
 
 			try
@@ -22,7 +22,7 @@
 				id = RequestHandler.RequestLogin(data);
 				json = RequestHandler.RequestAccount(data);
 
-				if (id == "")
+				if (id == "FAILED")
 					return -1;
 			}
             catch

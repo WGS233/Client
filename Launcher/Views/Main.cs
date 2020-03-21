@@ -21,9 +21,15 @@ namespace Launcher
 		{
 			launcherConfig = JsonHandler.LoadLauncherConfig();
 			monitor = new ProcessMonitor("EscapeFromTarkov", 1000, aliveCallback: null, exitCallback: GameExitCallback);
-			serverManager = new ServerManager(launcherConfig.Servers);
+			serverManager = new ServerManager();
 			accountManager = new Account(launcherConfig);
 			gameStarter = new GameStarter();
+
+			if (launcherConfig.Servers.Count == 0)
+			{
+				launcherConfig.Servers.Add("https://127.0.0.1");
+				JsonHandler.SaveLauncherConfig(launcherConfig);
+			}
 
 			ShowServerSelectView();
 		}
@@ -34,24 +40,10 @@ namespace Launcher
 
 			ServerList.Visible = true;
 			ConnectButton.Visible = true;
+			AddServerInsteadButton.Visible = true;
+			RefreshServerListButton.Visible = true;
 
-			// refresh editions as user might switch servers
-			ServerList.Items.Clear();
-
-			foreach (ServerInfo server in serverManager.AvailableServers)
-			{
-				ServerList.Items.Add(server.name);
-			}
-
-			if (ServerList.Items.Count == 0)
-			{
-				ServerList.Enabled = false;
-				ConnectButton.Enabled = false;
-			}
-			else
-			{
-				ServerList.SelectedIndex = 0;
-			}
+			RefreshServerList();
 		}
 
 		private void HideServerSelectView()
@@ -60,6 +52,26 @@ namespace Launcher
 
 			ServerList.Visible = false;
 			ConnectButton.Visible = false;
+			AddServerInsteadButton.Visible = false;
+			RefreshServerListButton.Visible = false;
+		}
+
+		private void ShowServerAddView()
+		{
+			UrlLabel.Visible = true;
+
+			AddServer.Visible = true;
+			AddServerButton.Visible = true;
+			ViewServersInsteadButton.Visible = true;
+		}
+
+		private void HideServerAddView()
+		{
+			UrlLabel.Visible = false;
+
+			AddServer.Visible = false;
+			AddServerButton.Visible = false;
+			ViewServersInsteadButton.Visible = false;
 		}
 
 		private void ShowLoginView()
@@ -99,26 +111,12 @@ namespace Launcher
 			RegisterButton.Visible = true;
 			LoginInsteadButton.Visible = true;
 
-			RegisterEmail.Text = launcherConfig.Email;
-			RegisterPassword.Text = launcherConfig.Password;
-
-			// refresh editions as user might switch servers
-			RegisterEdition.Items.Clear();
-
 			foreach (String edition in serverManager.SelectedServer.editions)
 			{
 				RegisterEdition.Items.Add(edition);
 			}
 
-			if (RegisterEdition.Items.Count == 0)
-			{
-				RegisterEdition.Enabled = false;
-				RegisterButton.Enabled = false;
-			}
-			else
-			{
-				RegisterEdition.SelectedIndex = 0;
-			}
+			RegisterEdition.SelectedIndex = 0;
 		}
 
 		private void HideRegisterView()
@@ -137,11 +135,13 @@ namespace Launcher
 		private void ShowProfileView()
 		{
 			StartGame.Visible = true;
+			BackToLoginButton.Visible = true;
 		}
 
 		private void HideProfileView()
 		{
 			StartGame.Visible = false;
+			BackToLoginButton.Visible = false;
 		}
 
 		private void ConnectButton_Click(object sender, EventArgs e)
@@ -155,8 +155,38 @@ namespace Launcher
 				ShowRegisterView();
 				return;
 			}
-			
+
 			ShowLoginView();
+		}
+
+		private void AddServerInsteadButton_Click(object sender, EventArgs e)
+		{
+			HideServerSelectView();
+			ShowServerAddView();
+		}
+
+		private void RefreshServerListButton_Click(object sender, EventArgs e)
+		{
+			RefreshServerList();
+		}
+
+		private void AddServerButton_Click(object sender, EventArgs e)
+		{
+			if (launcherConfig.Servers.Contains(AddServer.Text))
+			{
+				MessageBox.Show("Server already exists");
+				return;
+			}
+
+			launcherConfig.Servers.Add(AddServer.Text);
+			HideServerAddView();
+			ShowServerSelectView();
+		}
+
+		private void ViewServersInsteadButton_Click(object sender, EventArgs e)
+		{
+			HideServerAddView();
+			ShowServerSelectView();
 		}
 
 		private void LoginButton_Click(object sender, EventArgs e)
@@ -221,26 +251,61 @@ namespace Launcher
 		{
 			int status = gameStarter.LaunchGame(serverManager.SelectedServer, accountManager.SelectedAccount);
 
-            switch (status)
-            {
-                case 1:
-                    monitor.Start();
+			switch (status)
+			{
+				case 1:
+					monitor.Start();
 
-                    if (launcherConfig.MinimizeToTray)
-                    {
-                        TrayIcon.Visible = true;
-                        Hide();
-                    }
-                    break;
+					if (launcherConfig.MinimizeToTray)
+					{
+						TrayIcon.Visible = true;
+						Hide();
+					}
+					break;
 
 				case -1:
-                    MessageBox.Show("The launcher is not running from the game directory");
-                    return;
+					MessageBox.Show("The launcher is not running from the game directory");
+					return;
 
-                default:
-                    MessageBox.Show("Unexpected error");
-                    return;
-            }
+				default:
+					MessageBox.Show("Unexpected error");
+					return;
+			}
+		}
+
+		private void BackToLoginButton_Click(object sender, EventArgs e)
+		{
+			HideProfileView();
+			ShowLoginView();
+		}
+
+		private void BackToProfileView_Click(object sender, EventArgs e)
+		{
+			// code here
+		}
+
+		private void RefreshServerList()
+		{
+			serverManager.LoadServers(launcherConfig.Servers.ToArray());
+
+			ConnectButton.Enabled = true;
+			ServerList.Enabled = true;
+			ServerList.Items.Clear();
+
+			foreach (ServerInfo server in serverManager.AvailableServers)
+			{
+				ServerList.Items.Add(server.name);
+			}
+
+			if (ServerList.Items.Count > 0)
+			{
+				ServerList.SelectedIndex = 0;
+				return;
+			}
+
+			ConnectButton.Enabled = false;
+			ServerList.Enabled = false;
+			ServerList.Text = "No servers available";
 		}
 
 		private void GameExitCallback(ProcessMonitor monitor)

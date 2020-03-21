@@ -37,7 +37,6 @@ namespace Launcher
 		private void ShowServerSelectView()
 		{
 			ServerLabel.Visible = true;
-
 			ServerList.Visible = true;
 			ConnectButton.Visible = true;
 			AddServerInsteadButton.Visible = true;
@@ -49,7 +48,6 @@ namespace Launcher
 		private void HideServerSelectView()
 		{
 			ServerLabel.Visible = false;
-
 			ServerList.Visible = false;
 			ConnectButton.Visible = false;
 			AddServerInsteadButton.Visible = false;
@@ -59,7 +57,6 @@ namespace Launcher
 		private void ShowServerAddView()
 		{
 			UrlLabel.Visible = true;
-
 			AddServer.Visible = true;
 			AddServerButton.Visible = true;
 			ViewServersInsteadButton.Visible = true;
@@ -68,7 +65,6 @@ namespace Launcher
 		private void HideServerAddView()
 		{
 			UrlLabel.Visible = false;
-
 			AddServer.Visible = false;
 			AddServerButton.Visible = false;
 			ViewServersInsteadButton.Visible = false;
@@ -78,7 +74,6 @@ namespace Launcher
 		{
 			LoginEmailLabel.Visible = true;
 			LoginPasswordLabel.Visible = true;
-
 			LoginEmail.Visible = true;
 			LoginPassword.Visible = true;
 			LoginButton.Visible = true;
@@ -94,7 +89,6 @@ namespace Launcher
 			LoginPasswordLabel.Visible = false;
 			LoginButton.Visible = false;
 			RegisterInsteadButton.Visible = false;
-
 			LoginEmail.Visible = false;
 			LoginPassword.Visible = false;
 		}
@@ -104,7 +98,6 @@ namespace Launcher
 			RegisterEmailLabel.Visible = true;
 			RegisterPasswordLabel.Visible = true;
 			RegisterEditionLabel.Visible = true;
-
 			RegisterEmail.Visible = true;
 			RegisterPassword.Visible = true;
 			RegisterEdition.Visible = true;
@@ -124,7 +117,6 @@ namespace Launcher
 			RegisterEmailLabel.Visible = false;
 			RegisterPasswordLabel.Visible = false;
 			RegisterEditionLabel.Visible = false;
-
 			RegisterEmail.Visible = false;
 			RegisterPassword.Visible = false;
 			RegisterEdition.Visible = false;
@@ -265,10 +257,6 @@ namespace Launcher
 
 				case -1:
 					MessageBox.Show("The launcher is not running from the game directory");
-					return;
-
-				default:
-					MessageBox.Show("Unexpected error");
 					return;
 			}
 		}

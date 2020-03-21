@@ -47,7 +47,7 @@
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\NewEFT\EFT\EscapeFromTarkov_Data\Managed\NLog.dll</HintPath>
+      <HintPath>References\NLog.dll</HintPath>
     </Reference>
     <Reference Include="PlayerEnums">
       <HintPath>References\PlayerEnums.dll</HintPath>
@@ -73,9 +73,6 @@
     </Reference>
     <Reference Include="UnityEngine.PhysicsModule">
       <HintPath>References\UnityEngine.PhysicsModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>D:\NewEFT\EFT\EscapeFromTarkov_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>References\UnityEngine.UI.dll</HintPath>

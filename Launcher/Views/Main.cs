@@ -148,14 +148,14 @@ namespace Launcher
 		{
 			serverManager.SelectServer(ServerList.SelectedIndex);
 			RequestHandler.ChangeBackendUrl(serverManager.SelectedServer.backendUrl);
+			HideServerSelectView();
 
 			if (launcherConfig.Email == "" || launcherConfig.Password == "")
 			{
 				ShowRegisterView();
 				return;
 			}
-
-			HideServerSelectView();
+			
 			ShowLoginView();
 		}
 

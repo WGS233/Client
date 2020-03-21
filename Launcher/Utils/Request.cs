@@ -1,7 +1,7 @@
-﻿using System;
+﻿using ComponentAce.Compression.Libs.zlib;
+using System;
 using System.IO;
 using System.Net;
-using ComponentAce.Compression.Libs.zlib;
 
 namespace Launcher
 {
@@ -14,11 +14,11 @@ namespace Launcher
 			RemoteEndPoint = "https://127.0.0.1";
 		}
 
-        public string Send(string url, string data)
-        {
-            ServicePointManager.Expect100Continue = true;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-            ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+		public string Send(string url, string data)
+		{
+			ServicePointManager.Expect100Continue = true;
+			ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+			ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
 			WebRequest request = WebRequest.Create(new Uri(RemoteEndPoint + url));
 
@@ -40,16 +40,16 @@ namespace Launcher
 				request.Method = "GET";
 			}
 
-            WebResponse response = request.GetResponse();
+			WebResponse response = request.GetResponse();
 
 			using (Stream responseStream = response.GetResponseStream())
 			{
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    responseStream.CopyTo(ms);
-                    return SimpleZlib.Decompress(ms.ToArray(), null);
-                }
-            }
-        }
-    }
+				using (MemoryStream ms = new MemoryStream())
+				{
+					responseStream.CopyTo(ms);
+					return SimpleZlib.Decompress(ms.ToArray(), null);
+				}
+			}
+		}
+	}
 }

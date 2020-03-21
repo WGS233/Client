@@ -25,10 +25,10 @@
 				if (id == "FAILED")
 					return -1;
 			}
-            catch
-            {
-                return -2;
-            }
+			catch
+			{
+				return -2;
+			}
 
 			SelectedAccount = Json.Deserialize<AccountInfo>(json);
 
@@ -56,7 +56,7 @@
 			}
 
 			int loginStatus = Login(email, password);
-			
+
 			if (loginStatus != 1)
 			{
 				switch (loginStatus)

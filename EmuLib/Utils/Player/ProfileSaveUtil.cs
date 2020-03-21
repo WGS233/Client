@@ -7,10 +7,13 @@ namespace EmuLib.Utils.Player
 	{
 		public static void SaveProfileProgress(EFT.Profile profileData, ExitStatus exitStatus, string session, bool isPlayerScav)
 		{
-			SaveProfileRequest request = new SaveProfileRequest { exit = exitStatus.ToString().ToLower(), profile = profileData, isPlayerScav = isPlayerScav };
-			string requestData = request.ToJson();
+			SaveProfileRequest request = new SaveProfileRequest
+			{
+				exit = exitStatus.ToString().ToLower(),
+				profile = profileData, isPlayerScav = isPlayerScav
+			};
 
-			new HttpUtils.Create(session).Post("/OfflineRaidSave", requestData, true);
+			new HttpUtils.Create(session).Post("/OfflineRaidSave", request.ToJson(), true);
 		}
 	}
 

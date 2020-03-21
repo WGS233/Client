@@ -8,7 +8,7 @@ namespace EmuLib.Hooks
 		{
 			get
 			{
-				var result = GameObject.Find("Application (Main Client)");
+				GameObject result = GameObject.Find("Application (Main Client)");
 
 				if (result == null)
 				{

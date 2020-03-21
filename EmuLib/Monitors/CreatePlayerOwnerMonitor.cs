@@ -14,14 +14,27 @@ namespace EmuLib.Monitors
 
 		public static void CheckCreatePlayerOwnerCallBack(AbstractGame game)
 		{
-			if (Catched) return;
+			if (Catched)
+			{
+				return;
+			}
 
 			FieldInfo createPlayerOwnerInfo = LocalGameUtils.GetCreatePlayerOwnerFunc(game);
-			if (createPlayerOwnerInfo == null) return;
 
-			if (!(createPlayerOwnerInfo.GetValue(game) is Func<Player, HideoutPlayerOwner> createPlayerOwnerFunc)) return;
+			if (createPlayerOwnerInfo == null)
+			{
+				return;
+			}
 
-			if (createPlayerOwnerFunc.Method.Name == "CreateOwner") return;
+			if (!(createPlayerOwnerInfo.GetValue(game) is Func<Player, HideoutPlayerOwner> createPlayerOwnerFunc))
+			{
+				return;
+			}
+
+			if (createPlayerOwnerFunc.Method.Name == "CreateOwner")
+			{
+				return;
+			}
 
 			_createOwnerFunc = createPlayerOwnerFunc;
 			createPlayerOwnerInfo.SetValue(game, new Func<Player, HideoutPlayerOwner>(CreateOwner));

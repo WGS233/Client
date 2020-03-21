@@ -42,6 +42,7 @@ namespace EmuLib.Utils.Drawing
 				d.Crosshair2dVector.x = vector.x - 2f;
 				d.Crosshair2dVector.y = Screen.height - vector.y - 1f;
 				Dot.Draw(d.Crosshair2dVector, dColors.Black, 4f);
+
 				d.Crosshair2dVector.x += 1f;
 				d.Crosshair2dVector.y += 1f;
 				Dot.Draw(d.Crosshair2dVector, dColors.White, 2f);
@@ -49,13 +50,18 @@ namespace EmuLib.Utils.Drawing
 
 			public static void Draw(Vector2 Position, Color color, float thickness)
 			{
-				if (!d.lineTex) { d.lineTex = d.patternTexture; }
+				if (!d.lineTex)
+				{
+					d.lineTex = d.patternTexture;
+				}
+
 				d.tOffset = Mathf.Ceil(thickness / 2f);
 				d.bColor = GUI.color;
 				d.rectA.x = Position.x;
 				d.rectA.y = Position.y - d.tOffset;
 				d.rectA.width = thickness;
 				d.rectA.height = thickness;
+
 				GUI.color = color;
 				GUI.DrawTexture(d.rectA, d.lineTex);
 				GUI.color = d.bColor;
@@ -96,11 +102,12 @@ namespace EmuLib.Utils.Drawing
 					GUI.Label(rect, content, d.bStyle);
 					return;
 				}
+
 				d.bContent.text = content;
 				d.vectorA.x = 1f;
 				d.vectorA.y = 1f;
-				DrawShadowed(rect, d.bContent, guiStyle, txtColor, dColors.Black, d.vectorA);
 
+				DrawShadowed(rect, d.bContent, guiStyle, txtColor, dColors.Black, d.vectorA);
 			}
 
 			public static void Draw(Rect rect, string content, Color txtColor, bool shadow = true)
@@ -112,23 +119,28 @@ namespace EmuLib.Utils.Drawing
 					GUI.Label(rect, content, d.bStyle);
 					return;
 				}
+
 				d.bContent.text = content;
 				d.vectorA.x = 1f;
 				d.vectorA.y = 1f;
+
 				DrawShadowed(rect, d.bContent, d.cStyle, txtColor, dColors.Black, d.vectorA);
 			}
 
 			public static void DrawShadowed(Rect rect, GUIContent content, GUIStyle style, Color txtColor, Color shadowColor, Vector2 direction)
 			{
 				d.bStyle = style;
+
 				style.normal.textColor = shadowColor;
 				rect.x += direction.x;
 				rect.y += direction.y;
 				GUI.Label(rect, content, style);
+
 				style.normal.textColor = txtColor;
 				rect.x -= direction.x;
 				rect.y -= direction.y;
 				GUI.Label(rect, content, style);
+
 				style = d.bStyle;
 			}
 		}
@@ -154,20 +166,31 @@ namespace EmuLib.Utils.Drawing
 				d.vectorA.y = rect.y;
 				d.vectorB.x = rect.x + rect.width;
 				d.vectorB.y = rect.y + rect.height;
+
 				Draw(d.vectorA, d.vectorB, color, width);
 			}
 
 			public static void Draw(Vector2 pointA, Vector2 pointB, Color color) { Draw(pointA, pointB, color, 1.0f); }
-			
+
 			// main drawing function
 			public static void Draw(Vector2 pointA, Vector2 pointB, Color color, float width)
 			{
 				d.i_M4x4 = GUI.matrix;
-				if (!d.lineTex) { d.lineTex = d.patternTexture; }
+
+				if (!d.lineTex)
+				{
+					d.lineTex = d.patternTexture;
+				}
+
 				d.bColor = GUI.color;
 				GUI.color = color;
 				d.Angle = Vector3.Angle(pointB - pointA, Vector2.right);
-				if (pointA.y > pointB.y) { d.Angle = -d.Angle; }
+
+				if (pointA.y > pointB.y)
+				{
+					d.Angle = -d.Angle;
+				}
+
 				d.vectorA.x = (pointB - pointA).magnitude;
 				d.vectorA.y = width;
 				d.vectorB.x = pointA.x;
@@ -199,12 +222,15 @@ namespace EmuLib.Utils.Drawing
 				d.vectorB.x = x + w;
 				d.vectorB.y = y;
 				Line.Draw(d.vectorA, d.vectorA, color);
+
 				d.vectorB.x = x;
 				d.vectorB.y = y + h;
 				Line.Draw(d.vectorA, d.vectorA, color);
+
 				d.vectorA.x = x + w;
 				d.vectorB.x = x + w;
 				Line.Draw(d.vectorA, d.vectorA, color);
+
 				d.vectorA.x = x;
 				d.vectorA.y = y + h;
 				Line.Draw(d.vectorA, d.vectorA, color);

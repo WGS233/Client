@@ -55,6 +55,7 @@ namespace EmuLib.Utils.HTTP
 					uploadHandler = new UploadHandlerRaw(sendData),
 					downloadHandler = new DownloadHandlerBuffer()
 				};
+
 				request.SetRequestHeader("Content-Type", "application/json");
 				request.certificateHandler = new CertificateCheck();
 
@@ -76,13 +77,14 @@ namespace EmuLib.Utils.HTTP
 					using (HttpWebResponse webResponse = (HttpWebResponse)webRequest.EndGetResponse(asyncResult))
 					{
 						byte[] buffer = new byte[1024];
-
 						MemoryStream output = new MemoryStream();
+
 						using (Stream input = webResponse.GetResponseStream())
 						{
 							if (input != null)
 							{
 								int size = input.Read(buffer, 0, buffer.Length);
+
 								while (size > 0)
 								{
 									output.Write(buffer, 0, size);
@@ -96,7 +98,6 @@ namespace EmuLib.Utils.HTTP
 
 						output.Flush();
 						output.Close();
-
 						_onResponse?.Invoke(buffer);
 					}
 				}

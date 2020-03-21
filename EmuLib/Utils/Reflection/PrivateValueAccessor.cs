@@ -6,10 +6,14 @@ namespace EmuLib.Utils.Reflection
 {
 	public static class PrivateValueAccessor
 	{
-		public const BindingFlags Flags = BindingFlags.GetProperty | BindingFlags.SetProperty |
-										  BindingFlags.GetField | BindingFlags.SetField |
-										  BindingFlags.NonPublic | BindingFlags.Public |
-										  BindingFlags.FlattenHierarchy | BindingFlags.IgnoreCase;
+		public const BindingFlags Flags = BindingFlags.GetProperty
+										| BindingFlags.SetProperty
+										| BindingFlags.GetField
+										| BindingFlags.SetField
+										| BindingFlags.NonPublic
+										| BindingFlags.Public
+										| BindingFlags.FlattenHierarchy
+										| BindingFlags.IgnoreCase;
 
 		public static PropertyInfo GetPrivatePropertyInfo(Type type, string propertyName)
 		{

@@ -1,6 +1,6 @@
 ﻿using Comfort.Common;
 using EFT;
-using EmuLib.Utils.Profile;
+using EmuLib.Utils.Player;
 using EmuLib.Utils.Reflection;
 using System;
 using System.Reflection;
@@ -18,11 +18,20 @@ namespace EmuLib.Monitors
 		{
 			FieldInfo callBackField = LocalGameUtils.GetFinishCallBack(game);
 
-			if (callBackField == null) return;
+			if (callBackField == null)
+			{
+				return;
+			}
 
-			if (!(callBackField.GetValue(game) is Callback<ExitStatus, TimeSpan, GClass_GameFinish> finishCallBack)) return;
+			if (!(callBackField.GetValue(game) is Callback<ExitStatus, TimeSpan, GClass_GameFinish> finishCallBack))
+			{
+				return;
+			}
 
-			if (finishCallBack.Method.Name == "OnGameFinish") return;
+			if (finishCallBack.Method.Name == "OnGameFinish")
+			{
+				return;
+			}
 
 			_gameCallBack = finishCallBack;
 			callBackField.SetValue(game, new Callback<ExitStatus, TimeSpan, GClass_GameFinish>(OnGameFinish));
@@ -30,9 +39,6 @@ namespace EmuLib.Monitors
 
 		private static void OnGameFinish(Result<ExitStatus, TimeSpan, GClass_GameFinish> result)
 		{
-
-
-
 			SessionInterface backend = ClientAppUtils.GetBackendSession();
 
 			MainApplication mainApplication = MainAppUtils.GetMainApp();
@@ -42,10 +48,10 @@ namespace EmuLib.Monitors
 				return;
 			}
 
-			ESideType? eSideType = PrivateValueAccessor.GetPrivateFieldValue(mainApplication.GetType(),
-					"esideType_0", mainApplication) as ESideType?;
+			ESideType? eSideType = PrivateValueAccessor.GetPrivateFieldValue(mainApplication.GetType(), "esideType_0", mainApplication) as ESideType?;
 			Profile profile = backend.Profile;
 			bool isPlayerScav = false;
+
 			if (eSideType != null && eSideType.GetValueOrDefault() == ESideType.Savage)
 			{
 				profile = backend.ProfileOfPet;

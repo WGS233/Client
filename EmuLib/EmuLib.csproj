@@ -98,15 +98,14 @@
     <Compile Include="Utils\Profile\ProfileSaveUtil.cs" />
     <Compile Include="Utils\Reflection\ClientAppUtils.cs" />
     <Compile Include="Utils\Reflection\ConfigUtils.cs" />
-    <Compile Include="Utils\Reflection\EFTTarget.cs" />
-    <Compile Include="Utils\Reflection\Loader.cs" />
+    <Compile Include="Hooks\EFTTarget.cs" />
+    <Compile Include="Hooks\Loader.cs" />
     <Compile Include="Utils\Reflection\MainAppUtils.cs" />
     <Compile Include="Utils\Reflection\PrivateMethodAccessor.cs" />
     <Compile Include="Utils\Reflection\PrivateValueAccessor.cs" />
     <Compile Include="Utils\Reflection\LocalGameUtils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="NLog.dll" />
     <Content Include="Utils\Scene Dumps\dealer\!settings--902865920.txt" />
     <Content Include="Utils\Scene Dumps\dealer\!wires_light--834636544.txt" />
     <Content Include="Utils\Scene Dumps\dealer\%40scene - bunker_2.txt" />
@@ -303,6 +302,14 @@
     <Content Include="Utils\Scene Dumps\real raid\wire_spline_floor_dungeon-597206528.txt" />
     <Content Include="Utils\Scene Dumps\real raid\[DOTween]--2098075904.txt" />
     <Content Include="Utils\Scene Dumps\real raid\___Input--683882752.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Hooks\NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NLog\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

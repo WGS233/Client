@@ -8,7 +8,7 @@ namespace Launcher
 		private LauncherConfig launcherConfig;
 		private ProcessMonitor monitor;
 		private ServerManager serverManager;
-		private AccountManager accountManager;
+		private Account accountManager;
 		private GameStarter gameStarter;
 
 		public Main()
@@ -22,7 +22,7 @@ namespace Launcher
 			launcherConfig = JsonHandler.LoadLauncherConfig();
 			monitor = new ProcessMonitor("EscapeFromTarkov", 1000, aliveCallback: null, exitCallback: GameExitCallback);
 			serverManager = new ServerManager(launcherConfig.Servers);
-			accountManager = new AccountManager(launcherConfig);
+			accountManager = new Account(launcherConfig);
 			gameStarter = new GameStarter();
 
 			serverManager.SelectServer(0);
@@ -155,7 +155,7 @@ namespace Launcher
 
 		private void LoginButton_Click(object sender, EventArgs e)
 		{
-			int status = accountManager.LoginAccount(LoginEmail.Text, LoginPassword.Text);
+			int status = accountManager.Login(LoginEmail.Text, LoginPassword.Text);
 
 			switch (status)
 			{
@@ -176,7 +176,7 @@ namespace Launcher
 
 		private void RegisterButton_Click(object sender, EventArgs e)
 		{
-			int status = accountManager.RegisterAccount(RegisterEmail.Text, RegisterPassword.Text, (string)RegisterEdition.SelectedItem);
+			int status = accountManager.Register(RegisterEmail.Text, RegisterPassword.Text, (string)RegisterEdition.SelectedItem);
 
 			switch (status)
 			{

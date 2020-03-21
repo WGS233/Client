@@ -1,28 +1,28 @@
 ﻿namespace Launcher
 {
-	public class AccountManager
+	public class Account
 	{
 		private LauncherConfig launcherConfig;
 		public AccountInfo SelectedAccount { get; private set; }
 
-		public AccountManager(LauncherConfig launcherConfig)
+		public Account(LauncherConfig launcherConfig)
 		{
 			this.launcherConfig = launcherConfig;
 			SelectedAccount = null;
 		}
 
-		public int LoginAccount(string email, string password)
+		public int Login(string email, string password)
 		{
-			LoginRequestData loginData = new LoginRequestData(email, password);
-			string accountId = "";
-			string accountJson = "";
+			LoginRequestData data = new LoginRequestData(email, password);
+			string id = "";
+			string json = "";
 
 			try
 			{
-				accountId = RequestHandler.RequestLogin(loginData);
-				accountJson = RequestHandler.RequestAccount(loginData);
+				id = RequestHandler.RequestLogin(data);
+				json = RequestHandler.RequestAccount(data);
 
-				if (accountId == "0")
+				if (id == "")
 					return -1;
 			}
             catch
@@ -30,7 +30,7 @@
                 return -2;
             }
 
-			SelectedAccount = Json.Deserialize<AccountInfo>(accountJson);
+			SelectedAccount = Json.Deserialize<AccountInfo>(json);
 
 			launcherConfig.Email = email;
 			launcherConfig.Password = password;
@@ -39,14 +39,14 @@
 			return 1;
 		}
 
-		public int RegisterAccount(string email, string password, string edition)
+		public int Register(string email, string password, string edition)
 		{
-			RegisterRequestData registerData = new RegisterRequestData(email, password, edition);
+			RegisterRequestData data = new RegisterRequestData(email, password, edition);
 			string registerStatus = "";
 
 			try
 			{
-				registerStatus = RequestHandler.RequestRegister(registerData);
+				registerStatus = RequestHandler.RequestRegister(data);
 
 				if (registerStatus != "OK")
 					return -1;
@@ -56,7 +56,7 @@
 				return -2;
 			}
 
-			int loginStatus = LoginAccount(email, password);
+			int loginStatus = Login(email, password);
 			
 			if (loginStatus != 1)
 			{
@@ -70,6 +70,101 @@
 				}
 			}
 
+			return 1;
+		}
+
+		public int Remove()
+		{
+			LoginRequestData data = new LoginRequestData(SelectedAccount.email, SelectedAccount.password);
+			string json = "";
+
+			try
+			{
+				json = RequestHandler.RequestAccount(data);
+
+				if (json != "OK")
+					return -1;
+			}
+			catch
+			{
+				return -1;
+			}
+
+			SelectedAccount = null;
+
+			launcherConfig.Email = "";
+			launcherConfig.Password = "";
+			JsonHandler.SaveLauncherConfig(launcherConfig);
+
+			return 1;
+		}
+
+		public int ChangeEmail(string email)
+		{
+			ChangeRequestData data = new ChangeRequestData(SelectedAccount.email, SelectedAccount.password, email);
+			string json = "";
+
+			try
+			{
+				json = RequestHandler.RequestChangeEmail(data);
+
+				if (json != "OK")
+					return -1;
+			}
+			catch
+			{
+				return -2;
+			}
+
+			launcherConfig.Email = email;
+			SelectedAccount.email = email;
+			JsonHandler.SaveLauncherConfig(launcherConfig);
+
+			return 1;
+		}
+
+		public int ChangePassword(string password)
+		{
+			ChangeRequestData data = new ChangeRequestData(SelectedAccount.email, SelectedAccount.password, password);
+			string json = "";
+
+			try
+			{
+				json = RequestHandler.RequestChangePassword(data);
+
+				if (json != "OK")
+					return -1;
+			}
+			catch
+			{
+				return -2;
+			}
+
+			SelectedAccount.password = password;
+			launcherConfig.Password = password;
+			JsonHandler.SaveLauncherConfig(launcherConfig);
+
+			return 1;
+		}
+
+		public int Wipe(string edition)
+		{
+			RegisterRequestData data = new RegisterRequestData(SelectedAccount.email, SelectedAccount.password, edition);
+			string json = "";
+
+			try
+			{
+				json = RequestHandler.RequestWipe(data);
+
+				if (json != "OK")
+					return -1;
+			}
+			catch
+			{
+				return -2;
+			}
+
+			SelectedAccount.edition = edition;
 			return 1;
 		}
 	}

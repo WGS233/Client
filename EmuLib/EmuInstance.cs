@@ -23,6 +23,7 @@ namespace EmuLib
             GClass_Config.LoadApplicationConfig();
             
             Debug.LogError("EmuInstance Start() method.");
+
         }
 
         private void Update()
@@ -38,6 +39,7 @@ namespace EmuLib
             // run monitoring utils
             RunMonitoringWithPeriod(game);
             CreatePlayerOwnerMonitor.CheckCreatePlayerOwnerCallBack(game);
+            Debug.LogError("EmuInstance Start() method.");
         }
 
         private void RunMonitoringWithPeriod(AbstractGame game)

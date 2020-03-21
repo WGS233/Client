@@ -5,32 +5,38 @@ using SessionInterface = GInterface23;
 
 namespace EmuLib.Utils.Reflection
 {
-    internal static class ClientAppUtils
-    {
-        public static ClientApplication GetClientApp()
-        {
-            ClientApplication clientApp = Singleton<ClientApplication>.Instance;
-            if (clientApp != null) return clientApp;
+	internal static class ClientAppUtils
+	{
+		public static ClientApplication GetClientApp()
+		{
+			ClientApplication clientApp = Singleton<ClientApplication>.Instance;
 
-            Debug.LogError("ClientAppUtils GetClientApp() method. clientApp is null");
-            return null;
-        }
+			if (clientApp != null)
+			{
+				return clientApp;
+			}
 
-        public static SessionInterface GetBackendSession()
-        {
+			Debug.LogError("ClientAppUtils GetClientApp() method. clientApp is null");
+			return null;
+		}
+
+		public static SessionInterface GetBackendSession()
+		{
 			SessionInterface session = GetClientApp()?.GetClientBackEndSession();
-            if (session != null) return session;
 
-            Debug.LogError("ClientAppUtils GetBackendSession() method. BackEndSession is null");
-            return null;
-        }
+			if (session != null)
+			{
+				return session;
+			}
 
-        public static string GetSessionId()
-        {
+			Debug.LogError("ClientAppUtils GetBackendSession() method. BackEndSession is null");
+			return null;
+		}
 
+		public static string GetSessionId()
+		{
 			SessionInterface backend = GetBackendSession();
-
-            return backend?.Profile == null ? "-1" : backend.GetPhpSessionId();
-        }
-    }
+			return backend?.Profile == null ? "-1" : backend.GetPhpSessionId();
+		}
+	}
 }

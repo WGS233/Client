@@ -7,7 +7,7 @@ namespace Launcher
 	{
 		private const string launcherConfig = "launcher.config.json";
 		private const string clientConfig = "client.config.json";
-		private static string filepath;
+		private static readonly string filepath;
 
 		static JsonHandler()
 		{

@@ -104,7 +104,7 @@ namespace Launcher
 			RegisterButton.Visible = true;
 			LoginInsteadButton.Visible = true;
 
-			foreach (String edition in serverManager.SelectedServer.editions)
+			foreach (string edition in serverManager.SelectedServer.editions)
 			{
 				RegisterEdition.Items.Add(edition);
 			}

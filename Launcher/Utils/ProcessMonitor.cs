@@ -7,9 +7,9 @@ namespace Launcher
 	public class ProcessMonitor
 	{
 		private Timer monitor;
-		private string processName;
-		private Action<ProcessMonitor> aliveCallback;
-		private Action<ProcessMonitor> exitCallback;
+		private readonly string processName;
+		private readonly Action<ProcessMonitor> aliveCallback;
+		private readonly Action<ProcessMonitor> exitCallback;
 
 		public ProcessMonitor(string processName, double interval, Action<ProcessMonitor> aliveCallback, Action<ProcessMonitor> exitCallback)
 		{

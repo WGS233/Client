@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using EFT;
+﻿using EFT;
 using EFT.HealthSystem;
 using EFT.InventoryLogic;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using static EmuLib.Utils.Reflection.PrivateValueAccessor;
-using Object = UnityEngine.Object;
+using BodyPartStruct = GStruct185;
 using HealthControllerInterface = GInterface139;
 using HealthEffectInterface = GInterface107;
-using BodyPartStruct = GStruct185;
+using HealthEffects = GClass1302;
+using Object = UnityEngine.Object;
 using PlayerStatesInterface = GInterface107;
 using StimulatorBuffEventInterface = GInterface106;
-using HealthEffects = GClass1302;
 
 namespace EmuLib.Utils.Camera
 {
@@ -22,7 +22,10 @@ namespace EmuLib.Utils.Camera
 
 		public static void CheckSwitchCameraCombination()
 		{
-			if (!EmuInstance.Player) return;
+			if (!EmuInstance.Player)
+			{
+				return;
+			}
 
 			if (Input.GetKeyDown(KeyCode.LeftShift))
 			{
@@ -47,11 +50,11 @@ namespace EmuLib.Utils.Camera
 
 		private static void SwitchCamera<T>() where T : FreeCamera
 		{
-			var disabled = EmuInstance.Player.PointOfView == EPointOfView.FirstPerson;
+			bool disabled = EmuInstance.Player.PointOfView == EPointOfView.FirstPerson;
 
 			EmuInstance.Player.PointOfView = disabled ? EPointOfView.FreeCamera : EPointOfView.FirstPerson;
-			var playerCameraController = EmuInstance.Player.gameObject.GetComponent<PlayerCameraController>();
-			var freeCamera = playerCameraController.Camera.gameObject.GetOrAddComponent<T>();
+			PlayerCameraController playerCameraController = EmuInstance.Player.gameObject.GetComponent<PlayerCameraController>();
+			T freeCamera = playerCameraController.Camera.gameObject.GetOrAddComponent<T>();
 
 			if (!disabled)
 			{
@@ -64,7 +67,11 @@ namespace EmuLib.Utils.Camera
 		private static void ReplaceHealthController()
 		{
 			FieldInfo healthControllerInfo = GetPrivateFieldInfo(EmuInstance.Player.GetType(), "_healthController");
-			if (!(healthControllerInfo.GetValue(EmuInstance.Player) is HealthControllerInterface healthController)) return;
+
+			if (!(healthControllerInfo.GetValue(EmuInstance.Player) is HealthControllerInterface healthController))
+			{
+				return;
+			}
 
 			if (Math.Abs(healthController.GetBodyPartHealth(EBodyPart.Chest).Current - float.MaxValue) <= 0f)
 			{
@@ -155,52 +162,28 @@ namespace EmuLib.Utils.Camera
 			//Does nothing???
 		}
 
-		public bool IsAlive
-		{
-			get { return true; }
-		}
+		public bool IsAlive => true;
 
 		public BodyPartStruct Energy => new BodyPartStruct() { Current = float.MaxValue, Maximum = float.MaxValue };
 
-		public BodyPartStruct Hydration
-		{
-			get { return new BodyPartStruct() { Current = float.MaxValue, Maximum = float.MaxValue }; }
-		}
+		public BodyPartStruct Hydration => new BodyPartStruct() { Current = float.MaxValue, Maximum = float.MaxValue };
 
 		//Don't really know what to do with FallSafeHeight so meh hopefully this works
 		public float FallSafeHeight { get; set; }
 
-		public float HealthRate
-		{
-			get { return float.MaxValue; }
-		}
+		public float HealthRate => float.MaxValue;
 
-		public float EnergyRate
-		{
-			get { return float.MaxValue; }
-		}
+		public float EnergyRate => float.MaxValue;
 
-		public float HydrationRate
-		{
-			get { return float.MaxValue; }
-		}
+		public float HydrationRate => float.MaxValue;
 
-		public float DamageCoeff
-		{
-			get { return float.MaxValue; }
-		}
+		public float DamageCoeff => float.MaxValue;
 
-		public int UpdateTime
-		{
-			get { return GClass768.UtcNowUnixInt; }
-		}
+		public int UpdateTime => GClass768.UtcNowUnixInt;
 
 		public EFT.Player Player => EmuInstance.Player;
 
-		public HealthEffects BodyPartEffects
-		{
-			get { return new HealthEffects(); }
-		}
+		public HealthEffects BodyPartEffects => new HealthEffects();
 
 		public event Action<HealthEffectInterface> EffectAddedEvent;
 		public event Action<HealthEffectInterface> EffectStartedEvent;

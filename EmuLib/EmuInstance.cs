@@ -8,47 +8,47 @@ using GClass_Config = GClass266;
 
 namespace EmuLib
 {
-    public class EmuInstance : MonoBehaviour
-    {
-        private const float MonitorPeriod = 1f;
-        private float _monitorNextTime;
-        public static Player Player;
+	public class EmuInstance : MonoBehaviour
+	{
+		private const float MonitorPeriod = 1f;
+		private float _monitorNextTime;
+		public static Player Player;
 
-        public void Start()
-        {
-            if (!Singleton<EmuInstance>.Instantiated)
-                Singleton<EmuInstance>.Create(this);
+		public void Start()
+		{
+			if (!Singleton<EmuInstance>.Instantiated)
+				Singleton<EmuInstance>.Create(this);
 
-            ConfigUtils.ResetConfig();
-            GClass_Config.LoadApplicationConfig();
-            
-            Debug.LogError("EmuInstance Start() method.");
+			ConfigUtils.ResetConfig();
+			GClass_Config.LoadApplicationConfig();
 
-        }
+			Debug.LogError("EmuInstance Start() method.");
 
-        private void Update()
-        {
-            CameraUtils.CheckSwitchCameraCombination();
-        }
+		}
 
-        public void FixedUpdate()
-        {
-            AbstractGame game = Singleton<AbstractGame>.Instance;
-            if (game == null) return;
+		private void Update()
+		{
+			CameraUtils.CheckSwitchCameraCombination();
+		}
 
-            // run monitoring utils
-            RunMonitoringWithPeriod(game);
-            CreatePlayerOwnerMonitor.CheckCreatePlayerOwnerCallBack(game);
-            Debug.LogError("EmuInstance Start() method.");
-        }
+		public void FixedUpdate()
+		{
+			AbstractGame game = Singleton<AbstractGame>.Instance;
+			if (game == null) return;
 
-        private void RunMonitoringWithPeriod(AbstractGame game)
-        {
-            if (Time.time < _monitorNextTime) return;
-            _monitorNextTime = Time.time + MonitorPeriod;
+			// run monitoring utils
+			RunMonitoringWithPeriod(game);
+			CreatePlayerOwnerMonitor.CheckCreatePlayerOwnerCallBack(game);
+			Debug.LogError("EmuInstance Start() method.");
+		}
 
-            // saving profile progress
-            GameFinishCallBackMonitor.CheckFinishCallBack(game);
-        }
-    }
+		private void RunMonitoringWithPeriod(AbstractGame game)
+		{
+			if (Time.time < _monitorNextTime) return;
+			_monitorNextTime = Time.time + MonitorPeriod;
+
+			// saving profile progress
+			GameFinishCallBackMonitor.CheckFinishCallBack(game);
+		}
+	}
 }

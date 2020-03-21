@@ -23,7 +23,9 @@
 				json = RequestHandler.RequestAccount(data);
 
 				if (id == "FAILED")
+				{
 					return -1;
+				}
 			}
 			catch
 			{
@@ -48,7 +50,9 @@
 				registerStatus = RequestHandler.RequestRegister(data);
 
 				if (registerStatus != "OK")
+				{
 					return -1;
+				}
 			}
 			catch
 			{
@@ -82,7 +86,9 @@
 				json = RequestHandler.RequestAccount(data);
 
 				if (json != "OK")
+				{
 					return -1;
+				}
 			}
 			catch
 			{
@@ -107,7 +113,9 @@
 				json = RequestHandler.RequestChangeEmail(data);
 
 				if (json != "OK")
+				{
 					return -1;
+				}
 			}
 			catch
 			{
@@ -130,7 +138,9 @@
 				json = RequestHandler.RequestChangePassword(data);
 
 				if (json != "OK")
+				{
 					return -1;
+				}
 			}
 			catch
 			{
@@ -153,7 +163,9 @@
 				json = RequestHandler.RequestWipe(data);
 
 				if (json != "OK")
+				{
 					return -1;
+				}
 			}
 			catch
 			{

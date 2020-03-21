@@ -20,10 +20,13 @@ namespace Launcher
 			clientConfig.BackendUrl = server.backendUrl;
 			JsonHandler.SaveClientConfig(clientConfig);
 
-			ProcessStartInfo clientProcess = new ProcessStartInfo(clientExecutable);
-			clientProcess.Arguments = "-bC5vLmcuaS5u=" + GenerateToken(account) + " -token=" + account.id + " -screenmode=fullscreen -window-mode=borderless";
-			clientProcess.UseShellExecute = false;
-			clientProcess.WorkingDirectory = Environment.CurrentDirectory;
+			ProcessStartInfo clientProcess = new ProcessStartInfo(clientExecutable)
+			{
+				Arguments = "-bC5vLmcuaS5u=" + GenerateToken(account) + " -token=" + account.id + " -screenmode=fullscreen -window-mode=borderless",
+				UseShellExecute = false,
+				WorkingDirectory = Environment.CurrentDirectory
+			};
+
 			Process.Start(clientProcess);
 
 			return 1;

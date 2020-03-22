@@ -8,7 +8,7 @@ namespace Launcher
 {
 	public class GameStarter
 	{
-		public int LaunchGame(ServerInfo server, AccountInfo account)
+		public bool LaunchGame(ServerInfo server, AccountInfo account)
 		{
 			string clientExecutable = "EscapeFromTarkov.exe";
 
@@ -20,7 +20,7 @@ namespace Launcher
 
 			if (!File.Exists(clientExecutable))
 			{
-				return -1;
+				return false;
 			}
 
 			ClientConfig clientConfig = JsonHandler.LoadClientConfig();
@@ -35,8 +35,7 @@ namespace Launcher
 			};
 
 			Process.Start(clientProcess);
-
-			return 1;
+			return true;
 		}
 
 		private void RemoveRegisteryKeys()

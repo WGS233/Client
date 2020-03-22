@@ -248,47 +248,21 @@ namespace Launcher
 
 		private void LoginButton_Click(object sender, EventArgs e)
 		{
-			int status = accountManager.Login(LoginEmail.Text, LoginPassword.Text);
+			string errmsg = accountManager.Login(LoginEmail.Text, LoginPassword.Text);
 
-			switch (status)
+			if (errmsg != null)
 			{
-				case 1:
-					HideLoginView();
-					ShowProfileView();
-					break;
-
-				case -1:
-					MessageBox.Show("Wrong email and/or password");
-					return;
-
-				case -2:
-					MessageBox.Show("Cannot establish a connection to the server");
-					return;
+				MessageBox.Show(errmsg);
 			}
 		}
 
 		private void RegisterButton_Click(object sender, EventArgs e)
 		{
-			int status = accountManager.Register(RegisterEmail.Text, RegisterPassword.Text, (string)RegisterEdition.SelectedItem);
+			string errmsg = accountManager.Register(RegisterEmail.Text, RegisterPassword.Text, (string)RegisterEdition.SelectedItem);
 
-			switch (status)
+			if (errmsg != null)
 			{
-				case 1:
-					HideRegisterView();
-					ShowProfileView();
-					break;
-
-				case -1:
-					MessageBox.Show("Account already exists");
-					return;
-
-				case -2:
-					MessageBox.Show("Cannot establish a connection to the server");
-					return;
-
-				case -3:
-					MessageBox.Show("Wrong email and/or password");
-					return;
+				MessageBox.Show(errmsg);
 			}
 		}
 
@@ -306,24 +280,21 @@ namespace Launcher
 
 		private void StartGame_Click(object sender, EventArgs e)
 		{
-			int status = gameStarter.LaunchGame(serverManager.SelectedServer, accountManager.SelectedAccount);
+			bool success = gameStarter.LaunchGame(serverManager.SelectedServer, accountManager.SelectedAccount);
 
-			switch (status)
+			if (!success)
 			{
-				case 1:
-					monitor.Start();
-
-					if (launcherConfig.MinimizeToTray)
-					{
-						TrayIcon.Visible = true;
-						Hide();
-					}
-					break;
-
-				case -1:
-					MessageBox.Show("The launcher is not running from the game directory");
-					return;
+				MessageBox.Show("The launcher is not running from the game directory");
+				return;
 			}
+
+			if (launcherConfig.MinimizeToTray)
+			{
+				TrayIcon.Visible = true;
+				Hide();
+			}
+
+			monitor.Start();
 		}
 
 		private void BackToLoginButton_Click(object sender, EventArgs e)
@@ -360,64 +331,31 @@ namespace Launcher
 
 		private void ChangeEmailButton_Click(object sender, EventArgs e)
 		{
-			int status = accountManager.ChangeEmail(ChangeEmail.Text);
+			string errmsg = accountManager.ChangeEmail(ChangeEmail.Text);
 
-			switch (status)
+			if (errmsg != null)
 			{
-				case 1:
-					HideChangeEmailView();
-					ShowProfileView();
-					break;
-
-				case -1:
-					MessageBox.Show("Login failed");
-					return;
-
-				case -2:
-					MessageBox.Show("Cannot establish a connection to the server");
-					return;
+				MessageBox.Show(errmsg);
 			}
 		}
 
 		private void ChangePasswordButton_Click(object sender, EventArgs e)
 		{
-			int status = accountManager.ChangePassword(ChangePassword.Text);
+			string errmsg = accountManager.ChangePassword(ChangePassword.Text);
 
-			switch (status)
+			if (errmsg != null)
 			{
-				case 1:
-					HideChangePasswordView();
-					ShowProfileView();
-					break;
-
-				case -1:
-					MessageBox.Show("Login failed");
-					return;
-
-				case -2:
-					MessageBox.Show("Cannot establish a connection to the server");
-					return;
+				MessageBox.Show(errmsg);
 			}
 		}
 
 		private void WipeButton_Click(object sender, EventArgs e)
 		{
-			int status = accountManager.Wipe((string)WipeEdition.SelectedItem);
+			string errmsg = accountManager.Wipe((string)WipeEdition.SelectedItem);
 
-			switch (status)
+			if (errmsg != null)
 			{
-				case 1:
-					HideWipeView();
-					ShowProfileView();
-					break;
-
-				case -1:
-					MessageBox.Show("Login failed");
-					return;
-
-				case -2:
-					MessageBox.Show("Cannot establish a connection to the server");
-					return;
+				MessageBox.Show(errmsg);
 			}
 		}
 

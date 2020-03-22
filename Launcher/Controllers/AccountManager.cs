@@ -11,169 +11,128 @@
 			SelectedAccount = null;
 		}
 
-		public int Login(string email, string password)
+		public string Login(string email, string password)
 		{
 			LoginRequestData data = new LoginRequestData(email, password);
-			string id = "FAILED";
-			string json = "";
+			string loginErrmsg = RequestHandler.GetEmptyResponse(RequestHandler.RequestLogin, data);
+			ResponseData<AccountInfo> getResponseData = null;
+
+			if (loginErrmsg != null)
+			{
+				return loginErrmsg;
+			}
 
 			try
 			{
-				id = RequestHandler.RequestLogin(data);
-				json = RequestHandler.RequestAccount(data);
+				getResponseData = RequestHandler.RequestAccount(data);
 
-				if (id == "FAILED")
+				if (getResponseData == null)
 				{
-					return -1;
+					return RequestHandler.InvalidError;
+				}
+
+				if (getResponseData.err > 0)
+				{
+					return getResponseData.errmsg;
 				}
 			}
 			catch
 			{
-				return -2;
+				return RequestHandler.ConnectionError;
 			}
-
-			SelectedAccount = Json.Deserialize<AccountInfo>(json);
 
 			launcherConfig.Email = email;
 			launcherConfig.Password = password;
 			JsonHandler.SaveLauncherConfig(launcherConfig);
-			return 1;
+
+			SelectedAccount = getResponseData.data;
+			return null;
 		}
 
-		public int Register(string email, string password, string edition)
+		public string Register(string email, string password, string edition)
 		{
-			RegisterRequestData data = new RegisterRequestData(email, password, edition);
-			string registerStatus = "FAILED";
+			RegisterRequestData registerData = new RegisterRequestData(email, password, edition);
+			LoginRequestData loginData = new LoginRequestData(email, password);
+			string registerErrmsg = RequestHandler.GetEmptyResponse(RequestHandler.RequestRegister, registerData);
+			string loginErrmsg = RequestHandler.GetEmptyResponse(RequestHandler.RequestLogin, loginData);
 
-			try
+			if (registerErrmsg != null)
 			{
-				registerStatus = RequestHandler.RequestRegister(data);
-
-				if (registerStatus != "OK")
-				{
-					return -1;
-				}
-			}
-			catch
-			{
-				return -2;
+				return registerErrmsg;
 			}
 
-			int loginStatus = Login(email, password);
-
-			if (loginStatus != 1)
+			if (loginErrmsg != null)
 			{
-				switch (loginStatus)
-				{
-					case -1:
-						return -3;
-
-					case -2:
-						return -2;
-				}
+				return loginErrmsg;
 			}
 
-			return 1;
+			return null;
 		}
 
-		public int Remove()
+		public string Remove()
 		{
 			LoginRequestData data = new LoginRequestData(SelectedAccount.email, SelectedAccount.password);
-			string json = "FAILED";
+			string errmsg = RequestHandler.GetEmptyResponse(RequestHandler.RequestRemove, data);
 
-			try
+			if (errmsg != null)
 			{
-				json = RequestHandler.RequestAccount(data);
-
-				if (json != "OK")
-				{
-					return -1;
-				}
+				return errmsg;
 			}
-			catch
-			{
-				return -1;
-			}
-
-			SelectedAccount = null;
 
 			launcherConfig.Email = "";
 			launcherConfig.Password = "";
 			JsonHandler.SaveLauncherConfig(launcherConfig);
-			return 1;
+
+			SelectedAccount = null;
+			return null;
 		}
 
-		public int ChangeEmail(string email)
+		public string ChangeEmail(string email)
 		{
 			ChangeRequestData data = new ChangeRequestData(SelectedAccount.email, SelectedAccount.password, email);
-			string json = "FAILED";
+			string errmsg = RequestHandler.GetEmptyResponse(RequestHandler.RequestChangeEmail, data);
 
-			try
+			if (errmsg != null)
 			{
-				json = RequestHandler.RequestChangeEmail(data);
-
-				if (json != "OK")
-				{
-					return -1;
-				}
-			}
-			catch
-			{
-				return -2;
+				return errmsg;
 			}
 
 			launcherConfig.Email = email;
-			SelectedAccount.email = email;
 			JsonHandler.SaveLauncherConfig(launcherConfig);
-			return 1;
+
+			SelectedAccount.email = email;
+			return null;
 		}
 
-		public int ChangePassword(string password)
+		public string ChangePassword(string password)
 		{
 			ChangeRequestData data = new ChangeRequestData(SelectedAccount.email, SelectedAccount.password, password);
-			string json = "FAILED";
+			string errmsg = RequestHandler.GetEmptyResponse(RequestHandler.RequestChangePassword, data);
 
-			try
+			if (errmsg != null)
 			{
-				json = RequestHandler.RequestChangePassword(data);
-
-				if (json != "OK")
-				{
-					return -1;
-				}
-			}
-			catch
-			{
-				return -2;
+				return errmsg;
 			}
 
-			SelectedAccount.password = password;
 			launcherConfig.Password = password;
 			JsonHandler.SaveLauncherConfig(launcherConfig);
-			return 1;
+
+			SelectedAccount.password = password;
+			return null;
 		}
 
-		public int Wipe(string edition)
+		public string Wipe(string edition)
 		{
 			RegisterRequestData data = new RegisterRequestData(SelectedAccount.email, SelectedAccount.password, edition);
-			string json = "FAILED";
+			string errmsg = RequestHandler.GetEmptyResponse(RequestHandler.RequestWipe, data);
 
-			try
+			if (errmsg != null)
 			{
-				json = RequestHandler.RequestWipe(data);
-
-				if (json != "OK")
-				{
-					return -1;
-				}
-			}
-			catch
-			{
-				return -2;
+				return errmsg;
 			}
 
 			SelectedAccount.edition = edition;
-			return 1;
+			return null;
 		}
 	}
 }

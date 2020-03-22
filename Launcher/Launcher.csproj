@@ -58,6 +58,7 @@
     <Compile Include="Controllers\JsonHandler.cs" />
     <Compile Include="Controllers\RequestHandler.cs" />
     <Compile Include="Controllers\ServerManager.cs" />
+    <Compile Include="Models\EFT\ResponseData.cs" />
     <Compile Include="Models\EmuTarkov\AccountInfo.cs" />
     <Compile Include="Models\EmuTarkov\ChangeRequestData.cs" />
     <Compile Include="Models\EmuTarkov\LoginRequestData.cs" />

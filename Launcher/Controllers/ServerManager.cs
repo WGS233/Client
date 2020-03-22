@@ -13,6 +13,12 @@ namespace Launcher
 			AvailableServers = new List<ServerInfo>();
 		}
 
+		public static ResponseData<ServerInfo> RequestConnect()
+		{
+			string json = request.Send("/launcher/server/connect", "");
+			return Json.Deserialize<ResponseData<ServerInfo>>(json);
+		}
+
 		public void SelectServer(int index)
 		{
 			if (index < 0 || index >= AvailableServers.Count)
@@ -26,19 +32,25 @@ namespace Launcher
 
 		public void LoadServer(string backendUrl)
 		{
-			string json = "";
+			RequestHandler.ChangeBackendUrl(backendUrl);
+			ResponseData<ServerInfo> responseData = RequestHandler.GetDataResponse<ServerInfo>(RequestHandler.Request<ServerInfo>("/launcher/server/connect"));
 
 			try
 			{
-				RequestHandler.ChangeBackendUrl(backendUrl);
-				json = RequestHandler.RequestConnect();
+				
+				responseData = ();
+
+				if (responseData == null)
+				{
+					return;
+				}
 			}
 			catch
 			{
 				return;
 			}
 
-			AvailableServers.Add(Json.Deserialize<ServerInfo>(json));
+			AvailableServers.Add(responseData.data);
 		}
 
 		public void LoadServers(string[] servers)

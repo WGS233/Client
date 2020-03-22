@@ -1,31 +1,36 @@
 ﻿using System.Reflection;
 using UnityEngine;
-using IniConfig = GClass412;
 using GameConfig = GClass266;
+using IniConfig = GClass412;
 
 namespace EmuLib.Utils.Reflection
 {
-    internal static class ConfigUtils
-    {
-        public static IniConfig GetConfig()
-        {
-            object config = PrivateValueAccessor.GetStaticPropertyValue(typeof(GameConfig), "Config");
-            if (config != null) return config as IniConfig;
+	internal static class ConfigUtils
+	{
+		public static IniConfig GetConfig()
+		{
+			object config = PrivateValueAccessor.GetStaticPropertyValue(typeof(GameConfig), "Config");
 
-            Debug.LogError("ConfigUtils GetConfig() method. config is null");
-            return null;
-        }
+			if (config != null)
+			{
+				return config as IniConfig;
+			}
 
-        public static void ResetConfig()
-        {
-            PropertyInfo config = PrivateValueAccessor.GetStaticPropertyInfo(typeof(GameConfig), "Config");
-            if (config == null)
-            {
-                Debug.LogError("ConfigUtils GetConfig() method. config is null");
-                return;
-            }
+			Debug.LogError("ConfigUtils GetConfig() method. config is null");
+			return null;
+		}
 
-            config.SetValue(null, null);
-        }
-    }
+		public static void ResetConfig()
+		{
+			PropertyInfo config = PrivateValueAccessor.GetStaticPropertyInfo(typeof(GameConfig), "Config");
+
+			if (config == null)
+			{
+				Debug.LogError("ConfigUtils GetConfig() method. config is null");
+				return;
+			}
+
+			config.SetValue(null, null);
+		}
+	}
 }

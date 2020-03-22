@@ -4,54 +4,47 @@ namespace Launcher
 {
 	public class ServerManager
 	{
-		public List<Server> availableServers { get; private set; }
+		public List<ServerInfo> AvailableServers { get; private set; }
+		public ServerInfo SelectedServer { get; private set; }
 
-		public ServerManager(string[] servers)
+		public ServerManager()
 		{
-			availableServers = new List<Server>();
-			LoadServers(servers);
+			SelectedServer = null;
+			AvailableServers = new List<ServerInfo>();
 		}
 
-		public Server GetServer(int index)
+		public void SelectServer(int index)
 		{
-			if (index < 0 || index > availableServers.Count)
+			if (index < 0 || index >= AvailableServers.Count)
 			{
-				// value out of range
-				return null;
+				SelectedServer = null;
+				return;
 			}
 
-			return availableServers[index];
+			SelectedServer = AvailableServers[index];
 		}
 
-		public bool LoadServer(string backendUrl)
+		public void LoadServer(string backendUrl)
 		{
 			string json = "";
 
-			// get server information
 			try
 			{
 				RequestHandler.ChangeBackendUrl(backendUrl);
 				json = RequestHandler.RequestConnect();
-
-				if (json == "" || json == null)
-				{
-					// data is corrupted
-					return false;
-				}
 			}
 			catch
 			{
-				// connection to remote end point failed
-				return false;
+				return;
 			}
 
-			// add server
-			availableServers.Add(Json.Deserialize<Server>(json));
-			return true;
+			AvailableServers.Add(Json.Deserialize<ServerInfo>(json));
 		}
 
 		public void LoadServers(string[] servers)
 		{
+			AvailableServers.Clear();
+
 			foreach (string backendUrl in servers)
 			{
 				LoadServer(backendUrl);

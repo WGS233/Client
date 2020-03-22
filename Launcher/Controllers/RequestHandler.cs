@@ -34,7 +34,7 @@
 			return request.Send("/launcher/profile/remove", Json.Serialize(data));
 		}
 
-		public static string RequestGet(LoginRequestData data)
+		public static string RequestAccount(LoginRequestData data)
 		{
 			return request.Send("/launcher/profile/get", Json.Serialize(data));
 		}

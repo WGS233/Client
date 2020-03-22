@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Launcher
 {
 	public class LauncherConfig
 	{
-		public string[] Servers;
+		public List<string> Servers;
 		public string Email;
 		public string Password;
 		public string GamePath;
@@ -12,9 +13,9 @@ namespace Launcher
 
 		public LauncherConfig()
 		{
-			Servers = new string[1] { "https://127.0.0.1" };
-			Email = "user@emutarkov.com";
-			Password = "password";
+			Servers = new List<string>();
+			Email = "";
+			Password = "";
 			GamePath = Environment.CurrentDirectory;
 			MinimizeToTray = true;
 		}

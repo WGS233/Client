@@ -1,62 +1,77 @@
-﻿using System;
-using System.IO;
+﻿using Microsoft.Win32;
+using System;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 
 namespace Launcher
 {
-    public class GameStarter
-    {
-		public int LaunchGame(Server server, LoginRequestData loginData)
-        {
-			string accountId = "";
+	public class GameStarter
+	{
+		public int LaunchGame(ServerInfo server, AccountInfo account)
+		{
+			string clientExecutable = "EscapeFromTarkov.exe";
 
-			// get profile ID
-			try
+			if (account.wipe)
 			{
-				accountId = RequestHandler.RequestLogin(loginData);
-
-				if (accountId == "0")
-				{
-					// account is not found
-					return -1;
-				}
+				RemoveRegisteryKeys();
+				CleanTempFiles();
 			}
-            catch
-            {
-				// cannot connect to remote end point
-                return -2;
-            }
-			
-            if (!File.Exists("EscapeFromTarkov.exe"))
-            {
-				// executable to start is not found
-                return -3;
-            }
 
-			// set launch location
-			string filepath = Environment.CurrentDirectory;
+			if (!File.Exists(clientExecutable))
+			{
+				return -1;
+			}
 
-			// set backend url
 			ClientConfig clientConfig = JsonHandler.LoadClientConfig();
 			clientConfig.BackendUrl = server.backendUrl;
 			JsonHandler.SaveClientConfig(clientConfig);
 
-			// start game
-			ProcessStartInfo clientProcess = new ProcessStartInfo("EscapeFromTarkov.exe");
-            clientProcess.Arguments = "-bC5vLmcuaS5u=" + GenerateToken(loginData) + " -token=" + accountId + " -screenmode=fullscreen -window-mode=borderless";
-            clientProcess.UseShellExecute = false;
-			clientProcess.WorkingDirectory = filepath;
-            Process.Start(clientProcess);
+			ProcessStartInfo clientProcess = new ProcessStartInfo(clientExecutable)
+			{
+				Arguments = "-bC5vLmcuaS5u=" + GenerateToken(account) + " -token=" + account.id + " -screenmode=fullscreen -window-mode=borderless",
+				UseShellExecute = false,
+				WorkingDirectory = Environment.CurrentDirectory
+			};
+
+			Process.Start(clientProcess);
 
 			return 1;
-        }
+		}
 
-        private string GenerateToken(LoginRequestData data)
-        {
-            LoginToken token = new LoginToken(data.email, data.password);
-            string serialized = Json.Serialize(token);
-            return Convert.ToBase64String(Encoding.UTF8.GetBytes(serialized)) + "=";
-        }
-    }
+		private void RemoveRegisteryKeys()
+		{
+			RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Battlestate Games\EscapeFromTarkov", true);
+
+			foreach (string value in key.GetValueNames())
+			{
+				if (!value.Contains("Screenmanager"))
+				{
+					key.DeleteValue(value);
+				}
+			}
+		}
+
+		private void CleanTempFiles()
+		{
+			DirectoryInfo directoryInfo = new DirectoryInfo(Path.Combine(Path.GetTempPath(), @"Battlestate Games\EscapeFromTarkov"));
+
+			foreach (FileInfo file in directoryInfo.GetFiles())
+			{
+				file.Delete();
+			}
+
+			foreach (DirectoryInfo directory in directoryInfo.GetDirectories())
+			{
+				directory.Delete(true);
+			}
+		}
+
+		private string GenerateToken(AccountInfo data)
+		{
+			LoginToken token = new LoginToken(data.email, data.password);
+			string serialized = Json.Serialize(token);
+			return Convert.ToBase64String(Encoding.UTF8.GetBytes(serialized)) + "=";
+		}
+	}
 }

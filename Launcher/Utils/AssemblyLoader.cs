@@ -6,7 +6,7 @@ namespace Launcher
 {
 	public class AssemblyLoader
 	{
-		private string filepath;
+		private readonly string filepath;
 
 		public AssemblyLoader(string filepath)
 		{

@@ -48,7 +48,7 @@
 			this.RegisterInsteadButton = new System.Windows.Forms.Button();
 			this.LoginInsteadButton = new System.Windows.Forms.Button();
 			this.ConnectButton = new System.Windows.Forms.Button();
-			this.BackToLoginButton = new System.Windows.Forms.Button();
+			this.LogoutButton = new System.Windows.Forms.Button();
 			this.BackToProfileView = new System.Windows.Forms.Button();
 			this.RefreshServerListButton = new System.Windows.Forms.Button();
 			this.ServerLabel = new System.Windows.Forms.Label();
@@ -58,6 +58,18 @@
 			this.UrlLabel = new System.Windows.Forms.Label();
 			this.AddServer = new System.Windows.Forms.TextBox();
 			this.AddServerButton = new System.Windows.Forms.Button();
+			this.ChangeEmailButton = new System.Windows.Forms.Button();
+			this.ChangePasswordButton = new System.Windows.Forms.Button();
+			this.ChangeEmail = new System.Windows.Forms.TextBox();
+			this.ChangeEmailLabel = new System.Windows.Forms.Label();
+			this.ChangePassword = new System.Windows.Forms.TextBox();
+			this.ChangePasswordLabel = new System.Windows.Forms.Label();
+			this.ChangePasswordViewButton = new System.Windows.Forms.Button();
+			this.ChangeEmailViewButton = new System.Windows.Forms.Button();
+			this.WipeViewButton = new System.Windows.Forms.Button();
+			this.WipeButton = new System.Windows.Forms.Button();
+			this.WipeLabel = new System.Windows.Forms.Label();
+			this.WipeEdition = new System.Windows.Forms.ComboBox();
 			((System.ComponentModel.ISupportInitialize)(this.Background)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -299,20 +311,20 @@
 			this.ConnectButton.Visible = false;
 			this.ConnectButton.Click += new System.EventHandler(this.ConnectButton_Click);
 			// 
-			// BackToLoginButton
+			// LogoutButton
 			// 
-			this.BackToLoginButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-			this.BackToLoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.BackToLoginButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.BackToLoginButton.ForeColor = System.Drawing.Color.WhiteSmoke;
-			this.BackToLoginButton.Location = new System.Drawing.Point(221, 0);
-			this.BackToLoginButton.Name = "BackToLoginButton";
-			this.BackToLoginButton.Size = new System.Drawing.Size(101, 23);
-			this.BackToLoginButton.TabIndex = 20;
-			this.BackToLoginButton.Text = "Logout";
-			this.BackToLoginButton.UseVisualStyleBackColor = false;
-			this.BackToLoginButton.Visible = false;
-			this.BackToLoginButton.Click += new System.EventHandler(this.BackToLoginButton_Click);
+			this.LogoutButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.LogoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.LogoutButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.LogoutButton.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.LogoutButton.Location = new System.Drawing.Point(591, 344);
+			this.LogoutButton.Name = "LogoutButton";
+			this.LogoutButton.Size = new System.Drawing.Size(110, 23);
+			this.LogoutButton.TabIndex = 20;
+			this.LogoutButton.Text = "Logout";
+			this.LogoutButton.UseVisualStyleBackColor = false;
+			this.LogoutButton.Visible = false;
+			this.LogoutButton.Click += new System.EventHandler(this.BackToLoginButton_Click);
 			// 
 			// BackToProfileView
 			// 
@@ -320,7 +332,7 @@
 			this.BackToProfileView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.BackToProfileView.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.BackToProfileView.ForeColor = System.Drawing.Color.WhiteSmoke;
-			this.BackToProfileView.Location = new System.Drawing.Point(221, 0);
+			this.BackToProfileView.Location = new System.Drawing.Point(387, 225);
 			this.BackToProfileView.Name = "BackToProfileView";
 			this.BackToProfileView.Size = new System.Drawing.Size(101, 23);
 			this.BackToProfileView.TabIndex = 21;
@@ -445,22 +457,206 @@
 			this.AddServerButton.Visible = false;
 			this.AddServerButton.Click += new System.EventHandler(this.AddServerButton_Click);
 			// 
+			// ChangeEmailButton
+			// 
+			this.ChangeEmailButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.ChangeEmailButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+			this.ChangeEmailButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.ChangeEmailButton.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ChangeEmailButton.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.ChangeEmailButton.Location = new System.Drawing.Point(405, 391);
+			this.ChangeEmailButton.Name = "ChangeEmailButton";
+			this.ChangeEmailButton.Size = new System.Drawing.Size(151, 38);
+			this.ChangeEmailButton.TabIndex = 29;
+			this.ChangeEmailButton.Text = "Change";
+			this.ChangeEmailButton.UseVisualStyleBackColor = false;
+			this.ChangeEmailButton.Visible = false;
+			this.ChangeEmailButton.Click += new System.EventHandler(this.ChangeEmailButton_Click);
+			// 
+			// ChangePasswordButton
+			// 
+			this.ChangePasswordButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.ChangePasswordButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+			this.ChangePasswordButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.ChangePasswordButton.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ChangePasswordButton.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.ChangePasswordButton.Location = new System.Drawing.Point(405, 391);
+			this.ChangePasswordButton.Name = "ChangePasswordButton";
+			this.ChangePasswordButton.Size = new System.Drawing.Size(151, 38);
+			this.ChangePasswordButton.TabIndex = 30;
+			this.ChangePasswordButton.Text = "Change";
+			this.ChangePasswordButton.UseVisualStyleBackColor = false;
+			this.ChangePasswordButton.Visible = false;
+			this.ChangePasswordButton.Click += new System.EventHandler(this.ChangePasswordButton_Click);
+			// 
+			// ChangeEmail
+			// 
+			this.ChangeEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.ChangeEmail.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ChangeEmail.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.ChangeEmail.Location = new System.Drawing.Point(387, 182);
+			this.ChangeEmail.Name = "ChangeEmail";
+			this.ChangeEmail.Size = new System.Drawing.Size(230, 29);
+			this.ChangeEmail.TabIndex = 34;
+			this.ChangeEmail.Visible = false;
+			// 
+			// ChangeEmailLabel
+			// 
+			this.ChangeEmailLabel.AutoSize = true;
+			this.ChangeEmailLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.ChangeEmailLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ChangeEmailLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.ChangeEmailLabel.Location = new System.Drawing.Point(333, 185);
+			this.ChangeEmailLabel.Name = "ChangeEmailLabel";
+			this.ChangeEmailLabel.Size = new System.Drawing.Size(48, 21);
+			this.ChangeEmailLabel.TabIndex = 32;
+			this.ChangeEmailLabel.Text = "Email";
+			this.ChangeEmailLabel.Visible = false;
+			// 
+			// ChangePassword
+			// 
+			this.ChangePassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.ChangePassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ChangePassword.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.ChangePassword.Location = new System.Drawing.Point(387, 182);
+			this.ChangePassword.Name = "ChangePassword";
+			this.ChangePassword.Size = new System.Drawing.Size(230, 29);
+			this.ChangePassword.TabIndex = 36;
+			this.ChangePassword.Visible = false;
+			// 
+			// ChangePasswordLabel
+			// 
+			this.ChangePasswordLabel.AutoSize = true;
+			this.ChangePasswordLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.ChangePasswordLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ChangePasswordLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.ChangePasswordLabel.Location = new System.Drawing.Point(305, 185);
+			this.ChangePasswordLabel.Name = "ChangePasswordLabel";
+			this.ChangePasswordLabel.Size = new System.Drawing.Size(76, 21);
+			this.ChangePasswordLabel.TabIndex = 35;
+			this.ChangePasswordLabel.Text = "Password";
+			this.ChangePasswordLabel.Visible = false;
+			// 
+			// ChangePasswordViewButton
+			// 
+			this.ChangePasswordViewButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.ChangePasswordViewButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.ChangePasswordViewButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ChangePasswordViewButton.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.ChangePasswordViewButton.Location = new System.Drawing.Point(475, 344);
+			this.ChangePasswordViewButton.Name = "ChangePasswordViewButton";
+			this.ChangePasswordViewButton.Size = new System.Drawing.Size(110, 23);
+			this.ChangePasswordViewButton.TabIndex = 37;
+			this.ChangePasswordViewButton.Text = "Change password";
+			this.ChangePasswordViewButton.UseVisualStyleBackColor = false;
+			this.ChangePasswordViewButton.Visible = false;
+			this.ChangePasswordViewButton.Click += new System.EventHandler(this.ChangePasswordViewButton_Click);
+			// 
+			// ChangeEmailViewButton
+			// 
+			this.ChangeEmailViewButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.ChangeEmailViewButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.ChangeEmailViewButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ChangeEmailViewButton.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.ChangeEmailViewButton.Location = new System.Drawing.Point(359, 344);
+			this.ChangeEmailViewButton.Name = "ChangeEmailViewButton";
+			this.ChangeEmailViewButton.Size = new System.Drawing.Size(110, 23);
+			this.ChangeEmailViewButton.TabIndex = 38;
+			this.ChangeEmailViewButton.Text = "Change email";
+			this.ChangeEmailViewButton.UseVisualStyleBackColor = false;
+			this.ChangeEmailViewButton.Visible = false;
+			this.ChangeEmailViewButton.Click += new System.EventHandler(this.ChangeEmailView_Click);
+			// 
+			// WipeViewButton
+			// 
+			this.WipeViewButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.WipeViewButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.WipeViewButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.WipeViewButton.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.WipeViewButton.Location = new System.Drawing.Point(243, 344);
+			this.WipeViewButton.Name = "WipeViewButton";
+			this.WipeViewButton.Size = new System.Drawing.Size(110, 23);
+			this.WipeViewButton.TabIndex = 39;
+			this.WipeViewButton.Text = "Wipe";
+			this.WipeViewButton.UseVisualStyleBackColor = false;
+			this.WipeViewButton.Visible = false;
+			this.WipeViewButton.Click += new System.EventHandler(this.WipeViewButton_Click);
+			// 
+			// WipeButton
+			// 
+			this.WipeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.WipeButton.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+			this.WipeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.WipeButton.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.WipeButton.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.WipeButton.Location = new System.Drawing.Point(405, 391);
+			this.WipeButton.Name = "WipeButton";
+			this.WipeButton.Size = new System.Drawing.Size(151, 38);
+			this.WipeButton.TabIndex = 40;
+			this.WipeButton.Text = "Wipe";
+			this.WipeButton.UseVisualStyleBackColor = false;
+			this.WipeButton.Visible = false;
+			this.WipeButton.Click += new System.EventHandler(this.WipeButton_Click);
+			// 
+			// WipeLabel
+			// 
+			this.WipeLabel.AutoSize = true;
+			this.WipeLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.WipeLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.WipeLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.WipeLabel.Location = new System.Drawing.Point(323, 185);
+			this.WipeLabel.Name = "WipeLabel";
+			this.WipeLabel.Size = new System.Drawing.Size(58, 21);
+			this.WipeLabel.TabIndex = 42;
+			this.WipeLabel.Text = "Edition";
+			this.WipeLabel.Visible = false;
+			// 
+			// WipeEdition
+			// 
+			this.WipeEdition.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+			this.WipeEdition.DropDownHeight = 107;
+			this.WipeEdition.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.WipeEdition.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.WipeEdition.ForeColor = System.Drawing.Color.WhiteSmoke;
+			this.WipeEdition.FormattingEnabled = true;
+			this.WipeEdition.IntegralHeight = false;
+			this.WipeEdition.ItemHeight = 21;
+			this.WipeEdition.Location = new System.Drawing.Point(387, 182);
+			this.WipeEdition.Name = "WipeEdition";
+			this.WipeEdition.Size = new System.Drawing.Size(230, 29);
+			this.WipeEdition.TabIndex = 41;
+			this.WipeEdition.Text = "No edition available";
+			this.WipeEdition.Visible = false;
+			// 
 			// Main
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(720, 441);
+			this.Controls.Add(this.WipeLabel);
+			this.Controls.Add(this.WipeEdition);
+			this.Controls.Add(this.ServerLabel);
+			this.Controls.Add(this.ServerList);
+			this.Controls.Add(this.WipeButton);
+			this.Controls.Add(this.StartGame);
+			this.Controls.Add(this.WipeViewButton);
+			this.Controls.Add(this.ChangeEmailViewButton);
+			this.Controls.Add(this.ChangePasswordViewButton);
+			this.Controls.Add(this.ChangePassword);
+			this.Controls.Add(this.ChangePasswordLabel);
+			this.Controls.Add(this.ChangeEmail);
+			this.Controls.Add(this.ChangeEmailLabel);
+			this.Controls.Add(this.ChangePasswordButton);
+			this.Controls.Add(this.ChangeEmailButton);
 			this.Controls.Add(this.AddServerButton);
 			this.Controls.Add(this.AddServer);
 			this.Controls.Add(this.ViewServersInsteadButton);
 			this.Controls.Add(this.UrlLabel);
 			this.Controls.Add(this.RefreshServerListButton);
 			this.Controls.Add(this.AddServerInsteadButton);
-			this.Controls.Add(this.ServerList);
-			this.Controls.Add(this.ServerLabel);
 			this.Controls.Add(this.ConnectButton);
 			this.Controls.Add(this.BackToProfileView);
-			this.Controls.Add(this.BackToLoginButton);
+			this.Controls.Add(this.LogoutButton);
 			this.Controls.Add(this.LoginPassword);
 			this.Controls.Add(this.RegisterInsteadButton);
 			this.Controls.Add(this.RegisterEdition);
@@ -475,7 +671,6 @@
 			this.Controls.Add(this.LoginPasswordLabel);
 			this.Controls.Add(this.LoginEmail);
 			this.Controls.Add(this.LoginButton);
-			this.Controls.Add(this.StartGame);
 			this.Controls.Add(this.Background);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
@@ -509,7 +704,7 @@
 		private System.Windows.Forms.Button RegisterInsteadButton;
 		private System.Windows.Forms.Button LoginInsteadButton;
 		private System.Windows.Forms.Button ConnectButton;
-		private System.Windows.Forms.Button BackToLoginButton;
+		private System.Windows.Forms.Button LogoutButton;
 		private System.Windows.Forms.Button BackToProfileView;
 		private System.Windows.Forms.Button RefreshServerListButton;
 		private System.Windows.Forms.Label ServerLabel;
@@ -519,6 +714,18 @@
 		private System.Windows.Forms.Label UrlLabel;
 		private System.Windows.Forms.TextBox AddServer;
 		private System.Windows.Forms.Button AddServerButton;
+		private System.Windows.Forms.Button ChangeEmailButton;
+		private System.Windows.Forms.Button ChangePasswordButton;
+		private System.Windows.Forms.TextBox ChangeEmail;
+		private System.Windows.Forms.Label ChangeEmailLabel;
+		private System.Windows.Forms.TextBox ChangePassword;
+		private System.Windows.Forms.Label ChangePasswordLabel;
+		private System.Windows.Forms.Button ChangePasswordViewButton;
+		private System.Windows.Forms.Button ChangeEmailViewButton;
+		private System.Windows.Forms.Button WipeViewButton;
+		private System.Windows.Forms.Button WipeButton;
+		private System.Windows.Forms.Label WipeLabel;
+		private System.Windows.Forms.ComboBox WipeEdition;
 	}
 }
 

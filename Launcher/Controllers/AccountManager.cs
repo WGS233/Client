@@ -43,7 +43,7 @@
 		public int Register(string email, string password, string edition)
 		{
 			RegisterRequestData data = new RegisterRequestData(email, password, edition);
-			string registerStatus = "";
+			string registerStatus = "FAILED";
 
 			try
 			{
@@ -79,7 +79,7 @@
 		public int Remove()
 		{
 			LoginRequestData data = new LoginRequestData(SelectedAccount.email, SelectedAccount.password);
-			string json = "";
+			string json = "FAILED";
 
 			try
 			{
@@ -106,7 +106,7 @@
 		public int ChangeEmail(string email)
 		{
 			ChangeRequestData data = new ChangeRequestData(SelectedAccount.email, SelectedAccount.password, email);
-			string json = "";
+			string json = "FAILED";
 
 			try
 			{
@@ -131,7 +131,7 @@
 		public int ChangePassword(string password)
 		{
 			ChangeRequestData data = new ChangeRequestData(SelectedAccount.email, SelectedAccount.password, password);
-			string json = "";
+			string json = "FAILED";
 
 			try
 			{
@@ -156,7 +156,7 @@
 		public int Wipe(string edition)
 		{
 			RegisterRequestData data = new RegisterRequestData(SelectedAccount.email, SelectedAccount.password, edition);
-			string json = "";
+			string json = "FAILED";
 
 			try
 			{

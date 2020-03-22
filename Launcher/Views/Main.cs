@@ -127,13 +127,74 @@ namespace Launcher
 		private void ShowProfileView()
 		{
 			StartGame.Visible = true;
-			BackToLoginButton.Visible = true;
+			WipeViewButton.Visible = true;
+			ChangeEmailViewButton.Visible = true;
+			ChangePasswordViewButton.Visible = true;
+			LogoutButton.Visible = true;
 		}
 
 		private void HideProfileView()
 		{
 			StartGame.Visible = false;
-			BackToLoginButton.Visible = false;
+			WipeViewButton.Visible = false;
+			ChangeEmailViewButton.Visible = false;
+			ChangePasswordViewButton.Visible = false;
+			LogoutButton.Visible = false;
+		}
+
+		private void ShowChangeEmailView()
+		{
+			ChangeEmailLabel.Visible = true;
+			ChangeEmail.Visible = true;
+			ChangeEmailButton.Visible = true;
+			BackToProfileView.Visible = true;
+		}
+
+		private void HideChangeEmailView()
+		{
+			ChangeEmailLabel.Visible = false;
+			ChangeEmail.Visible = false;
+			ChangeEmailButton.Visible = false;
+			BackToProfileView.Visible = false;
+		}
+
+		private void ShowChangePasswordView()
+		{
+			ChangePasswordLabel.Visible = true;
+			ChangePassword.Visible = true;
+			ChangePasswordButton.Visible = true;
+			BackToProfileView.Visible = true;
+		}
+
+		private void HideChangePasswordView()
+		{
+			ChangePasswordLabel.Visible = false;
+			ChangePassword.Visible = false;
+			ChangePasswordButton.Visible = false;
+			BackToProfileView.Visible = false;
+		}
+
+		private void ShowWipeView()
+		{
+			WipeLabel.Visible = true;
+			WipeEdition.Visible = true;
+			WipeButton.Visible = true;
+			BackToProfileView.Visible = true;
+
+			foreach (string edition in serverManager.SelectedServer.editions)
+			{
+				WipeEdition.Items.Add(edition);
+			}
+
+			WipeEdition.SelectedIndex = 0;
+		}
+
+		private void HideWipeView()
+		{
+			WipeLabel.Visible = false;
+			WipeEdition.Visible = false;
+			WipeButton.Visible = false;
+			BackToProfileView.Visible = false;
 		}
 
 		private void ConnectButton_Click(object sender, EventArgs e)
@@ -267,9 +328,93 @@ namespace Launcher
 			ShowLoginView();
 		}
 
+		private void ChangeEmailView_Click(object sender, EventArgs e)
+		{
+			HideProfileView();
+			ShowChangeEmailView();
+		}
+
+		private void ChangePasswordViewButton_Click(object sender, EventArgs e)
+		{
+			HideProfileView();
+			ShowChangePasswordView();
+		}
+
+		private void WipeViewButton_Click(object sender, EventArgs e)
+		{
+			HideProfileView();
+			ShowWipeView();
+		}
+
 		private void BackToProfileView_Click(object sender, EventArgs e)
 		{
-			// code here
+			HideChangeEmailView();
+			HideChangePasswordView();
+			HideWipeView();
+			ShowProfileView();
+		}
+
+		private void ChangeEmailButton_Click(object sender, EventArgs e)
+		{
+			int status = accountManager.ChangeEmail(ChangeEmail.Text);
+
+			switch (status)
+			{
+				case 1:
+					HideChangeEmailView();
+					ShowProfileView();
+					break;
+
+				case -1:
+					MessageBox.Show("Login failed");
+					return;
+
+				case -2:
+					MessageBox.Show("Cannot establish a connection to the server");
+					return;
+			}
+		}
+
+		private void ChangePasswordButton_Click(object sender, EventArgs e)
+		{
+			int status = accountManager.ChangePassword(ChangePassword.Text);
+
+			switch (status)
+			{
+				case 1:
+					HideChangePasswordView();
+					ShowProfileView();
+					break;
+
+				case -1:
+					MessageBox.Show("Login failed");
+					return;
+
+				case -2:
+					MessageBox.Show("Cannot establish a connection to the server");
+					return;
+			}
+		}
+
+		private void WipeButton_Click(object sender, EventArgs e)
+		{
+			int status = accountManager.Wipe((string)WipeEdition.SelectedItem);
+
+			switch (status)
+			{
+				case 1:
+					HideWipeView();
+					ShowProfileView();
+					break;
+
+				case -1:
+					MessageBox.Show("Login failed");
+					return;
+
+				case -2:
+					MessageBox.Show("Cannot establish a connection to the server");
+					return;
+			}
 		}
 
 		private void RefreshServerList()

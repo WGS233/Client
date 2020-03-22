@@ -577,7 +577,7 @@
 			this.WipeViewButton.Name = "WipeViewButton";
 			this.WipeViewButton.Size = new System.Drawing.Size(110, 23);
 			this.WipeViewButton.TabIndex = 39;
-			this.WipeViewButton.Text = "Wipe";
+			this.WipeViewButton.Text = "Wipe profile";
 			this.WipeViewButton.UseVisualStyleBackColor = false;
 			this.WipeViewButton.Visible = false;
 			this.WipeViewButton.Click += new System.EventHandler(this.WipeViewButton_Click);

@@ -106,11 +106,10 @@
     <Compile Include="Utils\Reflection\LocalGameUtils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Hooks\NLog.config">
+    <None Include="NLog.dll.nlog">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

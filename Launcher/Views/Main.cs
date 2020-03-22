@@ -104,6 +104,8 @@ namespace Launcher
 			RegisterButton.Visible = true;
 			LoginInsteadButton.Visible = true;
 
+			RegisterEdition.Items.Clear();
+
 			foreach (string edition in serverManager.SelectedServer.editions)
 			{
 				RegisterEdition.Items.Add(edition);
@@ -180,6 +182,8 @@ namespace Launcher
 			WipeEdition.Visible = true;
 			WipeButton.Visible = true;
 			BackToProfileView.Visible = true;
+
+			WipeEdition.Items.Clear();
 
 			foreach (string edition in serverManager.SelectedServer.editions)
 			{

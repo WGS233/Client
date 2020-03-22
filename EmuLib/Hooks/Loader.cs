@@ -8,11 +8,11 @@ namespace EmuLib.Hooks
 		{
 			get
 			{
-				GameObject result = GameObject.Find("Application (Main Client)");
+				GameObject result = GameObject.Find("EmuTarkov");
 
 				if (result == null)
 				{
-					result = new GameObject("EmuInstance");
+					result = new GameObject("EmuTarkov");
 					Object.DontDestroyOnLoad(result);
 				}
 

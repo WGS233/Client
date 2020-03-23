@@ -3,10 +3,10 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<targets>
-		<target name="EmuLib" xsi:type="EmuLibTarget" />
+		<target name="EmuLibTarget" xsi:type="EmuLibTarget" />
 	</targets>
 
 	<rules>
-		<logger name="*" minlevel="Debug" writeTo="EmuLib" />
+		<logger name="*" minlevel="Debug" writeTo="EmuLibTarget" />
 	</rules>
 </nlog>

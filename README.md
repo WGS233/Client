@@ -2,7 +2,7 @@
 All client-related projects (Launcher, EmuLib, Assembly-CSharp)
 
 ## Requirements
-- Escape From Tarkov 0.12.3.5985
+- Escape From Tarkov 0.12.4.6297
 - Visual Studio 2017
 - .NET Framework 4.6.1
 

@@ -54,7 +54,13 @@ namespace Launcher
 
 		private void CleanTempFiles()
 		{
-			DirectoryInfo directoryInfo = new DirectoryInfo(Path.Combine(Path.GetTempPath(), @"Battlestate Games\EscapeFromTarkov"));
+			string tempDir = @"Battlestate Games\EscapeFromTarkov";
+			DirectoryInfo directoryInfo = new DirectoryInfo(Path.Combine(Path.GetTempPath(), tempDir));
+
+			if (!Directory.Exists(tempDir))
+			{
+				return;
+			}
 
 			foreach (FileInfo file in directoryInfo.GetFiles())
 			{

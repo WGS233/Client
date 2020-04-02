@@ -45,10 +45,7 @@ namespace Launcher
 
 			foreach (string value in key.GetValueNames())
 			{
-				if (!value.Contains("Screenmanager"))
-				{
-					key.DeleteValue(value);
-				}
+				key.DeleteValue(value);
 			}
 		}
 

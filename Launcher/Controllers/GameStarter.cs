@@ -41,11 +41,18 @@ namespace Launcher
 
 		private void RemoveRegisteryKeys()
 		{
-			RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Battlestate Games\EscapeFromTarkov", true);
-
-			foreach (string value in key.GetValueNames())
+			try
 			{
-				key.DeleteValue(value);
+				RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Battlestate Games\EscapeFromTarkov", true);
+
+				foreach (string value in key.GetValueNames())
+				{
+					key.DeleteValue(value);
+				}
+			}
+			catch
+			{
+				// very first time launching tarkov, maybe display a message that one should buy the game to support the devs?
 			}
 		}
 
